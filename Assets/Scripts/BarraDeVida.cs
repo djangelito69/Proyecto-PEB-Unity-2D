@@ -5,6 +5,10 @@ public class BarraDeVida : MonoBehaviour
 {
     private Slider slider;
 
+    void Awake()
+    {
+        slider = GetComponent<Slider>();
+    }
     void Start()
     {
         slider = GetComponent<Slider>();

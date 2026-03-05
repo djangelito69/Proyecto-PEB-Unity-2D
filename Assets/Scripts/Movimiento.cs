@@ -11,6 +11,9 @@ public class Movimiento : MonoBehaviour
     public float VidaMax;
     public BarraDeVida BarraDeVida;
 
+    public AudioSource MuerteSfx;
+    private bool muerto = false;
+
     float Daño = 1f;
     float Curar = 1f;
 
@@ -25,7 +28,8 @@ public class Movimiento : MonoBehaviour
         Vida = VidaMax;
         if (BarraDeVida != null)
         {
-            BarraDeVida.InicializarBarra(Vida);
+            BarraDeVida.VidaMax(VidaMax);
+            BarraDeVida.ActualizarVida(Vida);
         }
     }
 
@@ -49,28 +53,55 @@ public class Movimiento : MonoBehaviour
         rb.linearVelocity = mover.normalized * velocidad;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.name == "Enemigo")
+        if (collision.gameObject.CompareTag("Enemigo"))
         {
+            Debug.Log("Colisionando con enemigo");
             DañoVida(Daño);
+
         }
-        if (collision.collider.name == "Curar")
+
+        if (collision.gameObject.CompareTag("Curar"))
         {
             CurarVida(Curar);
         }
-
     }
 
     public void DañoVida(float daño)
     {
+        if (muerto) return;
+
         Vida -= daño;
+        Vida = Mathf.Clamp(Vida, 0, VidaMax);
+
         BarraDeVida.ActualizarVida(Vida);
+
+        if (Vida <= 0)
+        {
+            Muerte();
+        }
+    }
+
+    void Muerte()
+    {
+        muerto = true;
+
+        if (MuerteSfx != null)
+        {
+            MuerteSfx.Play();
+        }
+
+        Debug.Log("Player ha muerto");
     }
 
     public void CurarVida(float curar)
     {
+        if (muerto) return;
+
         Vida += curar;
+        Vida = Mathf.Clamp(Vida, 0, VidaMax);
+
         BarraDeVida.ActualizarVida(Vida);
     }
 }
