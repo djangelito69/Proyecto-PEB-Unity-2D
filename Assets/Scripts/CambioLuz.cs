@@ -7,7 +7,7 @@ public class CambioLuz : MonoBehaviour
     public Color colorInicio = Color.white;
     public Color colorFinal = Color.purple;
 
-    public float duracion = 10f;
+    public float duracion = 5f;
 
     private float tiempo;
 

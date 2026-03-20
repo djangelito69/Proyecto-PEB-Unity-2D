@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Movimiento : MonoBehaviour
@@ -11,8 +12,14 @@ public class Movimiento : MonoBehaviour
     public float VidaMax;
     public BarraDeVida BarraDeVida;
 
+    public EncenderLuz EncenderLuz;
+
     public AudioSource MuerteSfx;
     private bool muerto = false;
+
+    int NumComida = 0;
+    public TextMeshProUGUI TextoUGUI;
+    public TextMeshPro TextoComida;
 
     float Daño = 1f;
     float Curar = 1f;
@@ -62,10 +69,26 @@ public class Movimiento : MonoBehaviour
 
         }
 
-        if (collision.gameObject.CompareTag("Curar"))
+        //if (collision.gameObject.CompareTag("Curar"))
+        //{
+        //    CurarVida(Curar);
+        //}
+
+        if (collision.gameObject.CompareTag("Poste"))
         {
-            CurarVida(Curar);
+            EncenderLuz.ActivarLuz();
         }
+
+        if (collision.gameObject.CompareTag("Comida"))
+        {
+            NumComida++;
+            TextoUGUI.text="Pollos: "+NumComida.ToString();
+
+            Debug.Log(NumComida);
+
+            Destroy(collision.gameObject);
+        }
+
     }
 
     public void DañoVida(float daño)
@@ -104,4 +127,6 @@ public class Movimiento : MonoBehaviour
 
         BarraDeVida.ActualizarVida(Vida);
     }
+
+
 }

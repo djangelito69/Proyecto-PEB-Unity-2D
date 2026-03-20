@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{22231EDD-55FB-FDCA-B071-49C97C844569}</ProjectGuid>
+    <ProjectGuid>{8ED0E6C2-5215-7918-B3F5-D151A143CC13}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -62,14 +62,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CambioLuz.cs" />
-    <Compile Include="Assets\Scripts\PosteLuz.cs" />
     <Compile Include="Assets\Scripts\BarraDeVida.cs" />
     <Compile Include="Assets\Scripts\Colisiones.cs" />
     <Compile Include="Assets\Scripts\MusicaFondo.cs" />
     <Compile Include="Assets\Scripts\CambiarPJ.cs" />
     <Compile Include="Assets\Scripts\Enemy Move.cs" />
     <Compile Include="Assets\Scripts\Camera Move.cs" />
+    <Compile Include="Assets\Scripts\ComidaManager.cs" />
     <Compile Include="Assets\Scripts\Movimiento.cs" />
+    <Compile Include="Assets\Scripts\EncenderLuz.cs" />
     <Compile Include="Assets\Scripts\MenuPJS.cs" />
   </ItemGroup>
   <ItemGroup>
