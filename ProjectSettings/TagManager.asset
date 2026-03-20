@@ -8,6 +8,7 @@ TagManager:
   - Suelo
   - Comida
   - Enemigo
+  - Poste
   layers:
   - Default
   - TransparentFX

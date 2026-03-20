@@ -3,7 +3,6 @@ using UnityEngine;
 public class Colisiones : MonoBehaviour
 {
     public CameraFollow camaraFollow;
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Capsule"))
@@ -16,6 +15,19 @@ public class Colisiones : MonoBehaviour
             if (camaraFollow != null)
                 camaraFollow.seguir = false;
         }
+
+        if (collision.gameObject.CompareTag("Poste"))
+        {
+            Animator anim = collision.gameObject.GetComponent<Animator>();
+
+            if (anim != null)
+            {
+                anim.SetTrigger("Encender");
+            }
+
+            Debug.Log("Entro");
+        }
+
     }
 
     private void OnCollisionStay2D(Collision2D collision)
