@@ -9,6 +9,8 @@ TagManager:
   - Comida
   - Enemigo
   - Poste
+  - Billetes
+  - Palomas
   layers:
   - Default
   - TransparentFX

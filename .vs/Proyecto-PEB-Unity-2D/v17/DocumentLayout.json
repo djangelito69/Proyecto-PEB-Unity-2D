@@ -3,28 +3,36 @@
   "WorkspaceRootPath": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|e:\\proyectos_progra\\juegounity2d\\proyecto-peb-unity-2d\\assets\\scripts\\movimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\movimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\movimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\encenderluz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\encenderluz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|e:\\proyectos_progra\\juegounity2d\\proyecto-peb-unity-2d\\assets\\scripts\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\enemy move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|e:\\proyectos_progra\\juegounity2d\\proyecto-peb-unity-2d\\assets\\scripts\\menupjs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\menupjs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\barradevida.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\barradevida.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\enemy move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\colisiones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\colisiones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\menupjs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\menupjs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\camera move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\camera move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\encenderluz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\encenderluz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -44,11 +52,36 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Movimiento.cs",
               "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Movimiento.cs",
               "RelativeToolTip": "Assets\\Scripts\\Movimiento.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAowFgAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAIwG0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-02T21:33:15.907Z",
               "IsPinned": true,
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Inventario.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Inventario.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Inventario.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Inventario.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Inventario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T23:40:10.773Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Camera Move.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Camera Move.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Camera Move.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Camera Move.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Camera Move.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-20T18:25:26.296Z"
             },
             {
               "$type": "Document",
@@ -58,13 +91,13 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\BarraDeVida.cs",
               "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\BarraDeVida.cs",
               "RelativeToolTip": "Assets\\Scripts\\BarraDeVida.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-20T05:47:29.256Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Enemy Move.cs",
               "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Enemy Move.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy Move.cs",
@@ -76,7 +109,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "EncenderLuz.cs",
               "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\EncenderLuz.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\EncenderLuz.cs",
@@ -84,30 +117,30 @@
               "RelativeToolTip": "Assets\\Scripts\\EncenderLuz.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-20T05:42:11.339Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-20T05:42:11.339Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "MenuPJS.cs",
               "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\MenuPJS.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MenuPJS.cs",
               "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\MenuPJS.cs",
               "RelativeToolTip": "Assets\\Scripts\\MenuPJS.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-20T05:42:26.969Z"
+              "WhenOpened": "2026-03-20T05:42:26.969Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Colisiones.cs",
               "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Colisiones.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Colisiones.cs",
               "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Colisiones.cs",
               "RelativeToolTip": "Assets\\Scripts\\Colisiones.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAgwBoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwDAAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-20T05:41:16.929Z"
             }

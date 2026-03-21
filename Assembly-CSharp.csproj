@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\CambioLuz.cs" />
     <Compile Include="Assets\Scripts\BarraDeVida.cs" />
     <Compile Include="Assets\Scripts\Colisiones.cs" />
+    <Compile Include="Assets\Scripts\Inventario.cs" />
     <Compile Include="Assets\Scripts\MusicaFondo.cs" />
     <Compile Include="Assets\Scripts\CambiarPJ.cs" />
     <Compile Include="Assets\Scripts\Enemy Move.cs" />

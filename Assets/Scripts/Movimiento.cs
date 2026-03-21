@@ -18,11 +18,16 @@ public class Movimiento : MonoBehaviour
     private bool muerto = false;
 
     int NumComida = 0;
-    public TextMeshProUGUI TextoUGUI;
-    public TextMeshPro TextoComida;
+    int NumBilletes = 0;
+    int NumPalomas = 0;
+
+    public TextMeshProUGUI TextoComida;
+    public TextMeshProUGUI TextoPalomas;
+    public TextMeshProUGUI TextoBilletes;
+
 
     float Daño = 1f;
-    float Curar = 1f;
+    float Curar = 2f;
 
 
     private Vector3 escalaOriginal;
@@ -82,11 +87,35 @@ public class Movimiento : MonoBehaviour
         if (collision.gameObject.CompareTag("Comida"))
         {
             NumComida++;
-            TextoUGUI.text="Pollos: "+NumComida.ToString();
+            TextoComida.text = "Comida: " + NumComida.ToString();
 
-            Debug.Log(NumComida);
+            CurarVida(Curar);
 
             Destroy(collision.gameObject);
+
+            Debug.Log("Comida recogida: " + NumComida);
+        }
+
+        if (collision.gameObject.CompareTag("Billetes"))
+        {
+            NumBilletes++;
+            TextoBilletes.text = "Billetes: " + NumBilletes.ToString();
+
+            Destroy(collision.gameObject);
+
+            Debug.Log("Billetes recogidos: " + NumBilletes);
+        }
+
+        if (collision.gameObject.CompareTag("Palomas"))
+        {
+            NumPalomas++;
+            TextoPalomas.text = "Palomas: " + NumPalomas.ToString();
+
+            DañoVida(Daño);
+
+            Destroy(collision.gameObject);
+
+            Debug.Log("Palomas recogidas: " + NumPalomas);
         }
 
     }
