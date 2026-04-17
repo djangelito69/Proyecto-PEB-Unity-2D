@@ -1,8 +1,12 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Movimiento : MonoBehaviour
 {
+    public GameObject canvas;
+    public GameObject canvasdialogo;
+
     public float velocidad = 5f;
 
     public Rigidbody2D rb;
@@ -31,7 +35,9 @@ public class Movimiento : MonoBehaviour
 
 
     float Daño = 1f;
-    float Curar = 2f;
+    //float Curar = 2f;
+
+    public int estado = 0;
 
 
     private Vector3 escalaOriginal;
@@ -53,6 +59,8 @@ public class Movimiento : MonoBehaviour
 
     void Update()
     {
+        if (estado != 0) return;
+
         mover.x = Input.GetAxisRaw("Horizontal");
         mover.y = Input.GetAxisRaw("Vertical");
 
@@ -68,11 +76,27 @@ public class Movimiento : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (estado != 0)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         rb.linearVelocity = mover.normalized * velocidad;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Perro"))
+        {
+            estado = 1;
+            Debug.Log("Colisionando con perro");
+            canvas.SetActive(false);
+            canvasdialogo.SetActive(true);
+
+        }
+
+
         if (collision.gameObject.CompareTag("Enemigo"))
         {
             Debug.Log("Colisionando con enemigo");

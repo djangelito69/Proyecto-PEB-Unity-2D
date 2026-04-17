@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CambioLuz.cs" />
+    <Compile Include="Assets\Scripts\Dialogo.cs" />
     <Compile Include="Assets\Scripts\CambioObjetos.cs" />
     <Compile Include="Assets\Scripts\BarraDeVida.cs" />
     <Compile Include="Assets\Scripts\Colisiones.cs" />
