@@ -14,16 +14,20 @@ public class Movimiento : MonoBehaviour
 
     public EncenderLuz EncenderLuz;
 
+    public Temporizador Tempo;
+
     public AudioSource MuerteSfx;
     private bool muerto = false;
 
     int NumComida = 0;
     int NumBilletes = 0;
     int NumPalomas = 0;
+    int NumPuntaje = 0;
 
     public TextMeshProUGUI TextoComida;
     public TextMeshProUGUI TextoPalomas;
     public TextMeshProUGUI TextoBilletes;
+    public TextMeshProUGUI TextoPuntaje;
 
 
     float Daño = 1f;
@@ -36,6 +40,8 @@ public class Movimiento : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         escalaOriginal = transform.localScale;
+
+        Tempo = FindObjectOfType<Temporizador>();
 
         Vida = VidaMax;
         if (BarraDeVida != null)
@@ -74,22 +80,31 @@ public class Movimiento : MonoBehaviour
 
         }
 
-        //if (collision.gameObject.CompareTag("Curar"))
-        //{
-        //    CurarVida(Curar);
-        //}
+
+
+
 
         if (collision.gameObject.CompareTag("Poste"))
         {
             EncenderLuz.ActivarLuz();
         }
 
+
+
         if (collision.gameObject.CompareTag("Comida"))
         {
             NumComida++;
             TextoComida.text = "Comida: " + NumComida.ToString();
 
-            CurarVida(Curar);
+            NumPuntaje += 10;
+            TextoPuntaje.text = "Puntaje: " + NumPuntaje.ToString();
+            Debug.Log("Puntaje sumado: " + NumPuntaje);
+
+            //CurarVida(Curar);
+
+
+            Tempo.SumarPuntos(10);
+
 
             Destroy(collision.gameObject);
 
@@ -100,6 +115,13 @@ public class Movimiento : MonoBehaviour
         {
             NumBilletes++;
             TextoBilletes.text = "Billetes: " + NumBilletes.ToString();
+            NumPuntaje += 20;
+            TextoPuntaje.text = "Puntaje: " + NumPuntaje.ToString();
+            Debug.Log("Puntaje sumado: " + NumPuntaje);
+
+
+            Tempo.SumarPuntos(20);
+
 
             Destroy(collision.gameObject);
 
@@ -111,7 +133,15 @@ public class Movimiento : MonoBehaviour
             NumPalomas++;
             TextoPalomas.text = "Palomas: " + NumPalomas.ToString();
 
-            DañoVida(Daño);
+            NumPuntaje += 30;
+            TextoPuntaje.text = "Puntaje: " + NumPuntaje.ToString();
+            Debug.Log("Puntaje sumado: " + NumPuntaje);
+
+            //DañoVida(Daño);
+
+
+            Tempo.SumarPuntos(30);
+
 
             Destroy(collision.gameObject);
 
