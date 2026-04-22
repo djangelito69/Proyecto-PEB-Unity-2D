@@ -23,10 +23,11 @@ public class Movimiento : MonoBehaviour
     public AudioSource MuerteSfx;
     private bool muerto = false;
 
-    int NumComida = 0;
-    int NumBilletes = 0;
-    int NumPalomas = 0;
-    int NumPuntaje = 0;
+    public int NumComida = 0;
+    public int NumBilletes = 0;
+    public int NumPalomas = 0;
+    public int NumPuntaje = 0;
+    public int CantObj = 0;
 
     public TextMeshProUGUI TextoComida;
     public TextMeshProUGUI TextoPalomas;
@@ -124,6 +125,9 @@ public class Movimiento : MonoBehaviour
             TextoPuntaje.text = "Puntaje: " + NumPuntaje.ToString();
             Debug.Log("Puntaje sumado: " + NumPuntaje);
 
+            CantObj +=1;
+            Debug.Log("Cantidad de Objetos: " + CantObj);
+
             //CurarVida(Curar);
 
 
@@ -143,6 +147,8 @@ public class Movimiento : MonoBehaviour
             TextoPuntaje.text = "Puntaje: " + NumPuntaje.ToString();
             Debug.Log("Puntaje sumado: " + NumPuntaje);
 
+            CantObj += 1;
+            Debug.Log("Cantidad de Objetos: " + CantObj);
 
             Tempo.SumarPuntos(20);
 
@@ -160,6 +166,9 @@ public class Movimiento : MonoBehaviour
             NumPuntaje += 30;
             TextoPuntaje.text = "Puntaje: " + NumPuntaje.ToString();
             Debug.Log("Puntaje sumado: " + NumPuntaje);
+
+            CantObj += 1;
+            Debug.Log("Cantidad de Objetos: " + CantObj);
 
             //DañoVida(Daño);
 
@@ -210,6 +219,8 @@ public class Movimiento : MonoBehaviour
 
         BarraDeVida.ActualizarVida(Vida);
     }
+
+    
 
 
 }

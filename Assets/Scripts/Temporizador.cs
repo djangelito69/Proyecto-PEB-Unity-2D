@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Temporizador : MonoBehaviour
 {
-    public float tiempoTotal = 45f;
+    public float tiempoTotal = 120f;
     private float tiempoActual;
 
     public int puntaje = 0;
