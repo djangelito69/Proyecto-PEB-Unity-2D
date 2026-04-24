@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class GestorSelectorPersonaje : MonoBehaviour
 {
-    public string nombreEscenaCombate = "Combate";
 
     private DatosPersonaje.TipoPersonaje seleccionActual = DatosPersonaje.TipoPersonaje.Gato;
 
@@ -29,8 +28,8 @@ public class GestorSelectorPersonaje : MonoBehaviour
     public void Confirmar()
     {
         DatosPersonaje.ElegirPersonaje(seleccionActual);
-        Debug.Log($"Confirmado: {seleccionActual} → cargando {nombreEscenaCombate}");
-        SceneManager.LoadScene(nombreEscenaCombate);
+        Debug.Log($"Confirmado: {seleccionActual} → cargando siguiente escena");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Volver()

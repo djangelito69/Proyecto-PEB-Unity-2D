@@ -46,11 +46,11 @@ public static class DatosEnemigos
                 return new DatosCombate
                 {
                     nombre = "Bolsa de Basura Negra",
-                    sprite = null,
-                    vida = 25,
+                    sprite = Resources.Load<Sprite>("Sprites/Enemigos/BolsaBasuraNegra"),
+                    vida = 5,
                     pa = 10,
                     dañoBasico = 5,
-                    dañoEspecial = 9,
+                    dañoEspecial = 6,
                     costoBasico = 3,
                     costoEspecial = 6,
                     recuperacionPA = 1

@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{22231EDD-55FB-FDCA-B071-49C97C844569}</ProjectGuid>
+    <ProjectGuid>{8ED0E6C2-5215-7918-B3F5-D151A143CC13}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,29 +63,39 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\VaciarInventario.cs" />
     <Compile Include="Assets\Scripts\CambioLuz.cs" />
+    <Compile Include="Assets\Scripts\Combate\ControlMapa.cs" />
+    <Compile Include="Assets\Scripts\Musica\MusicaEscena.cs" />
     <Compile Include="Assets\Scripts\Menu Principal\MenuPrincipal.cs" />
     <Compile Include="Assets\Scripts\Dialogo.cs" />
     <Compile Include="Assets\Scripts\Combate\DatosCombate.cs" />
     <Compile Include="Assets\Scripts\CambioObjetos.cs" />
+    <Compile Include="Assets\Scripts\Items\Consumible.cs" />
     <Compile Include="Assets\Scripts\Personaje\GestorSelectorPersonaje.cs" />
+    <Compile Include="Assets\Scripts\Enemigos\Enemigo.cs" />
     <Compile Include="Assets\Scripts\Personaje\DatosPersonaje.cs" />
+    <Compile Include="Assets\Scripts\Personaje\PlayerVisual.cs" />
     <Compile Include="Assets\Scripts\BarraDeVida.cs" />
     <Compile Include="Assets\Scripts\Personaje\UISelectorPersonaje.cs" />
     <Compile Include="Assets\Scripts\Combate\Combate.cs" />
     <Compile Include="Assets\Scripts\Colisiones.cs" />
-    <Compile Include="Assets\Scripts\Inventario.cs" />
+    <Compile Include="Assets\Scripts\Musica\MusicManager.cs" />
     <Compile Include="Assets\Scripts\MusicaFondo.cs" />
     <Compile Include="Assets\Scripts\CambiarPJ.cs" />
     <Compile Include="Assets\Scripts\Enemy Move.cs" />
-    <Compile Include="Assets\Scripts\Camera Move.cs" />
+    <Compile Include="Assets\Scripts\Enemigos\GestorEnemigos.cs" />
     <Compile Include="Assets\Scripts\Combate\GestorDeCombate.cs" />
     <Compile Include="Assets\Scripts\ComidaManager.cs" />
-    <Compile Include="Assets\Scripts\Movimiento.cs" />
+    <Compile Include="Assets\Scripts\HUD\UIManager.cs" />
+    <Compile Include="Assets\Scripts\Items\Inventario.cs" />
     <Compile Include="Assets\Scripts\Combate\UICombate.cs" />
     <Compile Include="Assets\Scripts\EncenderLuz.cs" />
     <Compile Include="Assets\Scripts\Temporizador.cs" />
     <Compile Include="Assets\Scripts\MenuPJS.cs" />
+    <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Enemigos\DatosEnemigo.cs" />
+    <Compile Include="Assets\Scripts\Items\RecogerItem.cs" />
+    <Compile Include="Assets\Scripts\HUD\UIInventario.cs" />
+    <Compile Include="Assets\Scripts\Personaje\MovimientoPersonaje.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

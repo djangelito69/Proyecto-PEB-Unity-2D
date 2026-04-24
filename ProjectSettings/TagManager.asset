@@ -16,10 +16,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Suelo
+  - Fondo
   - Water
   - UI
-  - Personaje
+  - Personajes
   - 
   - 
   - 
@@ -55,7 +55,7 @@ TagManager:
   - name: Edificios
     uniqueID: 1854381763
     locked: 0
-  - name: Jugador
+  - name: Personajes
     uniqueID: 4266768037
     locked: 0
   m_RenderingLayers:

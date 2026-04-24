@@ -62,8 +62,8 @@ public class UISelectorPersonaje : MonoBehaviour
         textoNombre.text = datos.nombre;
 
         textoStats.text =
-            $"Vida: {datos.vida}   PA: {datos.pa}\n" +
-            $"Ataque básico: {datos.dañoBasico} (costo {datos.costoBasico})\n" +
-            $"Ataque especial: {datos.dañoEspecial} (costo {datos.costoEspecial})";
+            $"Vida: {datos.vida}\nPA: {datos.pa}\n\n" +
+            $"Ataque básico: {datos.dañoBasico}\n(costo {datos.costoBasico})\n\n" +
+            $"Ataque especial: {datos.dañoEspecial}\n(costo {datos.costoEspecial})";
     }
 }

@@ -28,16 +28,11 @@ public class UICombate : MonoBehaviour
     [Header("Imagen enemigo")]
     public Image imagenEnemigo;
 
-    [Header("Log de batalla")]
-    public TextMeshProUGUI textoLog;
-    public ScrollRect scrollLog;
-
     private List<string> historialLog = new List<string>();
     private const int MAX_LINEAS = 20;
 
     void Start()
     {
-        gestordecombate.OnMensajeCombate += AgregarLog;
 
         botonAtaqueBasico.onClick.AddListener(OnBasico);
         botonAtaqueEspecial.onClick.AddListener(OnEspecial);
@@ -59,21 +54,6 @@ public class UICombate : MonoBehaviour
         ActualizarUI();
     }
 
-    void AgregarLog(string mensaje)
-    {
-        historialLog.Add(mensaje);
-
-        if (historialLog.Count > MAX_LINEAS)
-            historialLog.RemoveAt(0);
-
-        textoLog.text = string.Join("\n", historialLog);
-
-        // Scroll automático al último mensaje
-        Canvas.ForceUpdateCanvases();
-        if (scrollLog != null)
-            scrollLog.verticalNormalizedPosition = 0f;
-    }
-
     public void ActualizarUI()
     {
         var j = gestordecombate.jugador;
@@ -91,8 +71,8 @@ public class UICombate : MonoBehaviour
         barraPAEnemigo.maxValue = e.PA_Maxima;
         barraPAEnemigo.value = e.PA_Actual;
 
-        textoStatsJugador.text = $"{j.Nombre}\nVida: {j.vidaActual}/{j.vidaMaxima}\nPA: {j.PA_Actual}/{j.PA_Maxima}";
-        textoStatsEnemigo.text = $"{e.Nombre}\nVida: {e.vidaActual}/{e.vidaMaxima}\nPA: {e.PA_Actual}/{e.PA_Maxima}";
+        textoStatsJugador.text = $"{j.Nombre}\nVida: {j.vidaActual}/{j.vidaMaxima}\n\nPA: {j.PA_Actual}/{j.PA_Maxima}";
+        textoStatsEnemigo.text = $"{e.Nombre}\nVida: {e.vidaActual}/{e.vidaMaxima}\n\nPA: {e.PA_Actual}/{e.PA_Maxima}";
 
         botonAtaqueBasico.interactable = j.TienePAParaBasico() && !gestordecombate.combateTerminado;
         botonAtaqueEspecial.interactable = j.TienePAParaEspecial() && !gestordecombate.combateTerminado;
