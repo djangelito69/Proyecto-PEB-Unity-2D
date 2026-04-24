@@ -17,6 +17,17 @@ public class UICombate : MonoBehaviour
     public TextMeshProUGUI textoStatsEnemigo;
     public TextMeshProUGUI textoMensaje;
 
+    [Header("Barras de vida")]
+    public Slider barraVidaJugador;
+    public Slider barraVidaEnemigo;
+
+    [Header("Barras de PA")]
+    public Slider barraPAJugador;
+    public Slider barraPAEnemigo;
+
+    [Header("Imagen enemigo")]
+    public Image imagenEnemigo;
+
     [Header("Log de batalla")]
     public TextMeshProUGUI textoLog;
     public ScrollRect scrollLog;
@@ -26,77 +37,26 @@ public class UICombate : MonoBehaviour
 
     void Start()
     {
+        gestordecombate.OnMensajeCombate += AgregarLog;
+
         botonAtaqueBasico.onClick.AddListener(OnBasico);
         botonAtaqueEspecial.onClick.AddListener(OnEspecial);
-        AgregarLog("=== Comienza el combate ===");
-        AgregarLog($"{gestordecombate.enemigo.Nombre} aparece!");
+
+        ActualizarUI();
     }
 
     void OnBasico()
     {
-        var j = gestordecombate.jugador;
-        var e = gestordecombate.enemigo;
-
-        if (!j.TienePAParaBasico())
-        {
-            AgregarLog("No tienes PA suficiente.");
-            return;
-        }
-
-        int vidaAntes = e.vidaActual;
-        int vidaJugadorAntes = j.vidaActual;
         gestordecombate.AtaqueBasicoJugador();
-
-        AgregarLog($"{j.Nombre} usó Ataque Básico → {vidaAntes - e.vidaActual} daño");
-
-        if (!e.EstaVivo)
-            AgregarLog($"¡{e.Nombre} fue derrotado!");
-        else
-            RegistrarTurnoEnemigo(vidaJugadorAntes);
 
         ActualizarUI();
     }
 
     void OnEspecial()
     {
-        var j = gestordecombate.jugador;
-        var e = gestordecombate.enemigo;
-
-        if (!j.TienePAParaEspecial())
-        {
-            AgregarLog("No tienes PA suficiente.");
-            return;
-        }
-
-        int vidaAntes = e.vidaActual;
-        int vidaJugadorAntes = j.vidaActual;
         gestordecombate.AtaqueEspecialJugador();
 
-        AgregarLog($"{j.Nombre} usó Ataque Especial → {vidaAntes - e.vidaActual} daño");
-
-        if (!e.EstaVivo)
-            AgregarLog($"¡{e.Nombre} fue derrotado!");
-        else
-            RegistrarTurnoEnemigo(vidaJugadorAntes);
-
         ActualizarUI();
-    }
-
-    // Recibe la vida del jugador ANTES de que el enemigo atacara
-    void RegistrarTurnoEnemigo(int vidaJugadorAntes)
-    {
-        var j = gestordecombate.jugador;
-        var e = gestordecombate.enemigo;
-
-        int daño = vidaJugadorAntes - j.vidaActual;
-
-        if (daño > 0)
-            AgregarLog($"{e.Nombre} atacó → {daño} daño a {j.Nombre}");
-        else
-            AgregarLog($"{e.Nombre} recuperó stamina.");
-
-        if (!j.EstaVivo)
-            AgregarLog($"¡{j.Nombre} fue derrotado!");
     }
 
     void AgregarLog(string mensaje)
@@ -119,6 +79,18 @@ public class UICombate : MonoBehaviour
         var j = gestordecombate.jugador;
         var e = gestordecombate.enemigo;
 
+        barraVidaJugador.maxValue = j.vidaMaxima;
+        barraVidaJugador.value = j.vidaActual;
+
+        barraVidaEnemigo.maxValue = e.vidaMaxima;
+        barraVidaEnemigo.value = e.vidaActual;
+
+        barraPAJugador.maxValue = j.PA_Maxima;
+        barraPAJugador.value = j.PA_Actual;
+
+        barraPAEnemigo.maxValue = e.PA_Maxima;
+        barraPAEnemigo.value = e.PA_Actual;
+
         textoStatsJugador.text = $"{j.Nombre}\nVida: {j.vidaActual}/{j.vidaMaxima}\nPA: {j.PA_Actual}/{j.PA_Maxima}";
         textoStatsEnemigo.text = $"{e.Nombre}\nVida: {e.vidaActual}/{e.vidaMaxima}\nPA: {e.PA_Actual}/{e.PA_Maxima}";
 
@@ -129,5 +101,7 @@ public class UICombate : MonoBehaviour
             textoMensaje.text = j.EstaVivo ? "¡Ganaste!" : "Perdiste...";
         else
             textoMensaje.text = "Tu turno";
+
+        imagenEnemigo.sprite = e.sprite;
     }
 }

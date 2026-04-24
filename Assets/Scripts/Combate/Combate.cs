@@ -5,6 +5,8 @@ public class Combate
 {
     public string Nombre;
 
+    public Sprite sprite;
+
     public int vidaMaxima;
     public int vidaActual;
 

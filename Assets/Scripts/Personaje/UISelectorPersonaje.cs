@@ -57,20 +57,13 @@ public class UISelectorPersonaje : MonoBehaviour
 
     void MostrarStats(DatosPersonaje.TipoPersonaje tipo)
     {
-        switch (tipo)
-        {
-            case DatosPersonaje.TipoPersonaje.Gato:
-                textoNombre.text = "Gato";
-                textoStats.text = "Vida: 15   PA: 10\nAtaque básico: 3 (costo 2)\nAtaque especial: 6 (costo 5)";
-                break;
-            case DatosPersonaje.TipoPersonaje.Perro:
-                textoNombre.text = "Perro";
-                textoStats.text = "Vida: 20   PA: 7\nAtaque básico: 4 (costo 2)\nAtaque especial: 7 (costo 5)";
-                break;
-            case DatosPersonaje.TipoPersonaje.Raton:
-                textoNombre.text = "Ratón";
-                textoStats.text = "Vida: 10   PA: 15\nAtaque básico: 2 (costo 1)\nAtaque especial: 8 (costo 4)";
-                break;
-        }
+        DatosCombate datos = DatosPersonaje.ObtenerDatos(tipo);
+
+        textoNombre.text = datos.nombre;
+
+        textoStats.text =
+            $"Vida: {datos.vida}   PA: {datos.pa}\n" +
+            $"Ataque básico: {datos.dañoBasico} (costo {datos.costoBasico})\n" +
+            $"Ataque especial: {datos.dañoEspecial} (costo {datos.costoEspecial})";
     }
 }
