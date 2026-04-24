@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\hud\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\hud\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\enemigos\\enemigo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemigos\\enemigo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|e:\\proyectos_progra\\juegounity2d\\proyecto-peb-unity-2d\\assets\\scripts\\hud\\uiinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\hud\\uiinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\hud\\uiinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\hud\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\hud\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\items\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,8 +34,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 296,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Enemigo.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Enemigos\\Enemigo.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemigos\\Enemigo.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Enemigos\\Enemigo.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemigos\\Enemigo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T21:50:54.087Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -42,12 +59,11 @@
               "RelativeToolTip": "Assets\\Scripts\\HUD\\UIInventario.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T20:53:52.191Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-24T20:53:52.191Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Inventario.cs",
               "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\Inventario.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\Inventario.cs",
@@ -59,20 +75,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "UIManager.cs",
               "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\HUD\\UIManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\HUD\\UIManager.cs",
               "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\HUD\\UIManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\HUD\\UIManager.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAAADgAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T20:41:25.232Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-24T20:41:25.232Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "MusicaEscena.cs",
               "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Musica\\MusicaEscena.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Musica\\MusicaEscena.cs",
@@ -84,7 +99,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "MusicManager.cs",
               "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Musica\\MusicManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Musica\\MusicManager.cs",
