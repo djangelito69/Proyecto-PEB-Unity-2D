@@ -1186,6 +1186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicaEscena
       objectReference: {fileID: 0}
+    - target: {fileID: 7408305671048944660, guid: 99f46f510e28d7948bdd2e6cd8bde4fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

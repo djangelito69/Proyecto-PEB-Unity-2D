@@ -61,26 +61,37 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.9f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Musica\MapMusicLoader.cs" />
+    <Compile Include="Assets\Scripts\HUD\ElementoConsumibleUI.cs" />
     <Compile Include="Assets\Scripts\Musica\MusicaEscena.cs" />
+    <Compile Include="Assets\Scripts\Musica\BatlleMusicLoader.cs" />
     <Compile Include="Assets\Scripts\Menu Principal\MenuPrincipal.cs" />
     <Compile Include="Assets\Scripts\Combate\DatosCombate.cs" />
-    <Compile Include="Assets\Scripts\Items\Consumible.cs" />
+    <Compile Include="Assets\Scripts\Items\PanelInventario.cs" />
     <Compile Include="Assets\Scripts\Personaje\GestorSelectorPersonaje.cs" />
     <Compile Include="Assets\Scripts\Enemigos\Enemigo.cs" />
     <Compile Include="Assets\Scripts\Personaje\DatosPersonaje.cs" />
     <Compile Include="Assets\Scripts\Personaje\PlayerVisual.cs" />
     <Compile Include="Assets\Scripts\Personaje\UISelectorPersonaje.cs" />
+    <Compile Include="Assets\Scripts\Items\GestorInventario.cs" />
+    <Compile Include="Assets\Scripts\HUD\ElementoObjetoUI.cs" />
     <Compile Include="Assets\Scripts\Combate\Combate.cs" />
+    <Compile Include="Assets\Scripts\HUD\UIMenuConsumible.cs" />
+    <Compile Include="Assets\Scripts\Experiencia\GestorExperiencia.cs" />
     <Compile Include="Assets\Scripts\Musica\MusicManager.cs" />
+    <Compile Include="Assets\Scripts\Experiencia\UIExperiencia.cs" />
     <Compile Include="Assets\Scripts\Enemigos\GestorEnemigos.cs" />
     <Compile Include="Assets\Scripts\Combate\GestorDeCombate.cs" />
+    <Compile Include="Assets\Scripts\Items\RecogerObjeto.cs" />
     <Compile Include="Assets\Scripts\HUD\UIManager.cs" />
     <Compile Include="Assets\Scripts\Items\Inventario.cs" />
+    <Compile Include="Assets\Scripts\Items\ObjetoColeccionableData.cs" />
+    <Compile Include="Assets\Scripts\Items\ConsumibleData.cs" />
     <Compile Include="Assets\Scripts\Combate\UICombate.cs" />
+    <Compile Include="Assets\Scripts\Items\EstadisticasJugador.cs" />
+    <Compile Include="Assets\Scripts\Items\RecogerConsumible.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Enemigos\DatosEnemigo.cs" />
-    <Compile Include="Assets\Scripts\Items\RecogerItem.cs" />
-    <Compile Include="Assets\Scripts\HUD\UIInventario.cs" />
     <Compile Include="Assets\Scripts\Personaje\MovimientoPersonaje.cs" />
   </ItemGroup>
   <ItemGroup>

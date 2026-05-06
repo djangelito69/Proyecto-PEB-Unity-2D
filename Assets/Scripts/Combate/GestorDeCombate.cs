@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Gestor de combate actualizado que integra:
+/// - Sistema de experiencia
+/// - Persistencia de vida
+/// - Mejoras dinámicas de stats
+/// </summary>
 public class GestorDeCombate : MonoBehaviour
 {
     public Combate jugador;
@@ -49,23 +55,36 @@ public class GestorDeCombate : MonoBehaviour
 
     void ConfigurarJugador()
     {
-        DatosCombate datos = DatosPersonaje.ObtenerDatos(DatosPersonaje.PersonajeSeleccionado);
-        jugador = CrearCombatiente(datos);
+        if (GestorExperiencia.instancia != null)
+        {
+            DatosCombate datosActualizados = GestorExperiencia.instancia.ObtenerDatosActuales();
+            jugador = CrearCombatiente(datosActualizados);
+
+            jugador.vidaActual = GestorExperiencia.instancia.ObtenerVidaActual();
+            jugador.PA_Actual = GestorExperiencia.instancia.ObtenerPAActual();
+
+            Debug.Log($"[COMBATE] Jugador configurado: {jugador.Nombre} (Nivel {GestorExperiencia.instancia.ObtenerNivel()}) | Vida: {jugador.vidaActual}/{jugador.vidaMaxima} | PA: {jugador.PA_Actual}/{jugador.PA_Maxima}");
+        }
+        else
+        {
+            DatosCombate datos = DatosPersonaje.ObtenerDatos(DatosPersonaje.PersonajeSeleccionado);
+            jugador = CrearCombatiente(datos);
+            Debug.LogWarning("[COMBATE] GestorExperiencia no encontrado, usando datos base");
+        }
     }
 
     void ConfigurarEnemigo()
     {
-        // Intentar obtener el enemigo del EnemyManager
         if (GestorEnemigos.instancia != null && GestorEnemigos.instancia.HayEnemigo())
         {
             DatosCombate datos = GestorEnemigos.instancia.ObtenerDatosEnemigo();
             tipoEnemigo = GestorEnemigos.instancia.ObtenerTipoEnemigo();
             enemigo = CrearCombatiente(datos);
+            Debug.Log($"[COMBATE] Enemigo: {enemigo.Nombre}");
         }
         else
         {
-            // Fallback: usar el tipo de enemigo del Inspector (para testing)
-            Debug.LogWarning("No se encontró enemigo en EnemyManager, usando tipo del Inspector");
+            Debug.LogWarning("[COMBATE] No se encontró enemigo, usando tipo del Inspector");
             DatosCombate datos = DatosEnemigos.ObtenerDatos(tipoEnemigo);
             enemigo = CrearCombatiente(datos);
         }
@@ -84,8 +103,8 @@ public class GestorDeCombate : MonoBehaviour
         jugador.GastarPA(jugador.PA_costoBasico);
         enemigo.RecibirDaño(jugador.dañoBasico);
         EnviarMensaje($"{jugador.Nombre} usó ataque básico → {jugador.dañoBasico} daño a {enemigo.Nombre}");
-        if (RevisarGanador()) return;
 
+        if (RevisarGanador()) return;
         PasarTurnoAlEnemigo();
     }
 
@@ -104,7 +123,6 @@ public class GestorDeCombate : MonoBehaviour
         EnviarMensaje($"{jugador.Nombre} usó ataque especial → {jugador.dañoEspecial} daño a {enemigo.Nombre}");
 
         if (RevisarGanador()) return;
-
         PasarTurnoAlEnemigo();
     }
 
@@ -121,7 +139,6 @@ public class GestorDeCombate : MonoBehaviour
 
         int decision = Random.Range(0, 100);
 
-        // Intentar ataque especial
         if (enemigo.TienePAParaEspecial() && decision < 30)
         {
             enemigo.GastarPA(enemigo.PA_costoEspecial);
@@ -129,7 +146,6 @@ public class GestorDeCombate : MonoBehaviour
             EnviarMensaje($"{enemigo.Nombre} usó ataque especial → {enemigo.dañoEspecial} daño");
             enemigo.RecuperarPA();
         }
-        // Ataque básico
         else if (enemigo.TienePAParaBasico())
         {
             enemigo.GastarPA(enemigo.PA_costoBasico);
@@ -137,7 +153,6 @@ public class GestorDeCombate : MonoBehaviour
             EnviarMensaje($"{enemigo.Nombre} usó ataque básico → {enemigo.dañoBasico} daño");
             enemigo.RecuperarPA();
         }
-        // Recuperar PA
         else
         {
             EnviarMensaje($"{enemigo.Nombre} recuperó stamina.");
@@ -150,9 +165,17 @@ public class GestorDeCombate : MonoBehaviour
         MostrarStats();
         EnviarMensaje("─── Tu turno ───");
     }
+
     void VolverAlMapa()
     {
-        SceneManager.LoadScene("Ciudad_S1");
+        // ✅ Detener música de combate
+        if (MusicManager.instancia != null)
+        {
+            MusicManager.instancia.DetenerMusica();
+        }
+
+        // ✅ Descargar escena de combate (mantiene el mapa activo)
+        SceneManager.UnloadSceneAsync("Combate");
     }
 
     bool RevisarGanador()
@@ -160,11 +183,29 @@ public class GestorDeCombate : MonoBehaviour
         if (!enemigo.EstaVivo)
         {
             combateTerminado = true;
-
             EnviarMensaje("¡Ganaste!");
 
-            GestorEnemigos.instancia.EnemigoDerrotado = true;
+            // ✅ Guardar vida actual del jugador ANTES de volver al mapa
+            if (GestorExperiencia.instancia != null)
+            {
+                GestorExperiencia.instancia.EstablecerVidaActual(jugador.vidaActual);
+                GestorExperiencia.instancia.EstablecerPAActual(jugador.PA_Actual);
+            }
 
+            // ✅ Otorgar experiencia y destruir enemigo
+            if (GestorEnemigos.instancia != null)
+            {
+                int expGanada = DatosEnemigos.ObtenerExperiencia(tipoEnemigo);
+                EnviarMensaje($"¡Ganaste {expGanada} XP!");
+
+                if (GestorExperiencia.instancia != null)
+                {
+                    GestorExperiencia.instancia.AñadirExperiencia(expGanada);
+                }
+
+                GestorEnemigos.instancia.DestruirEnemigoDelMapa();
+                GestorEnemigos.instancia.LimpiarEnemigo();
+            }
 
             Invoke("VolverAlMapa", 1.5f);
             return true;
@@ -176,14 +217,24 @@ public class GestorDeCombate : MonoBehaviour
             MostrarStats();
             EnviarMensaje("Perdiste... El jugador fue derrotado.");
 
+            // ✅ Guardar vida actual incluso si pierdes (para revivir o intentar de nuevo)
+            if (GestorExperiencia.instancia != null)
+            {
+                GestorExperiencia.instancia.EstablecerVidaActual(jugador.vidaActual);
+                GestorExperiencia.instancia.EstablecerPAActual(jugador.PA_Actual);
+            }
+
+            if (GestorEnemigos.instancia != null)
+            {
+                GestorEnemigos.instancia.LimpiarEnemigo();
+            }
+
             Invoke("VolverAlMapa", 1.5f);
             return true;
         }
 
         return false;
     }
-
-
 
     void MostrarStats()
     {

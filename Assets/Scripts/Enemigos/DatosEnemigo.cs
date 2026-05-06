@@ -74,4 +74,16 @@ public static class DatosEnemigos
         return null;
 
     }
+
+    public static int ObtenerExperiencia(TipoEnemigo tipo)
+    {
+        return tipo switch
+        {
+            TipoEnemigo.BoteBasura => 25,
+            TipoEnemigo.BolsaBasuraBlanca => 50,
+            TipoEnemigo.BolsaBasuraNegra => 75,
+            TipoEnemigo.CajaCarton => 100,
+            _ => 10
+        };
+    }
 }

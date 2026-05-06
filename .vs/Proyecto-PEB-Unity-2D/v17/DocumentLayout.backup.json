@@ -3,8 +3,72 @@
   "WorkspaceRootPath": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|e:\\proyectos_progra\\juegounity2d\\proyecto-peb-unity-2d\\assets\\scripts\\personaje\\datospersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\personaje\\datospersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\items\\consumible.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\items\\consumible.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|e:\\proyectos_progra\\juegounity2d\\proyecto-peb-unity-2d\\assets\\scripts\\items\\consumibledata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\items\\consumibledata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|e:\\proyectos_progra\\juegounity2d\\proyecto-peb-unity-2d\\assets\\scripts\\items\\gestorinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\items\\gestorinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|e:\\proyectos_progra\\juegounity2d\\proyecto-peb-unity-2d\\assets\\scripts\\items\\panelinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\items\\panelinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|e:\\proyectos_progra\\juegounity2d\\proyecto-peb-unity-2d\\assets\\scripts\\items\\elementoconsumibleui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\items\\elementoconsumibleui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\items\\elementoobjetoui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\items\\elementoobjetoui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\items\\recogeritem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\items\\recogeritem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\items\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\items\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\experiencia\\gestorexperiencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\experiencia\\gestorexperiencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\combate\\combate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\combate\\combate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\combate\\gestordecombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\combate\\gestordecombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\experiencia\\uiexperiencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\experiencia\\uiexperiencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\hud\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\hud\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\combate\\uicombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\combate\\uicombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\musica\\musicaescena.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\musica\\musicaescena.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\personaje\\playervisual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\personaje\\playervisual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\assets\\scripts\\enemigos\\datosenemigo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ED0E6C2-5215-7918-B3F5-D151A143CC13}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemigos\\datosenemigo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -13,26 +77,223 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 296,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 255,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DatosPersonaje.cs",
-              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\DatosPersonaje.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Personaje\\DatosPersonaje.cs",
-              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\DatosPersonaje.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Personaje\\DatosPersonaje.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ConsumibleData.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\ConsumibleData.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\ConsumibleData.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\ConsumibleData.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Items\\ConsumibleData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T22:57:13.474Z",
+              "WhenOpened": "2026-05-06T16:41:43.793Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GestorInventario.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\GestorInventario.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\GestorInventario.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\GestorInventario.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Items\\GestorInventario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T16:05:58.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ElementoConsumibleUI.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\ElementoConsumibleUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\ElementoConsumibleUI.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\ElementoConsumibleUI.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Items\\ElementoConsumibleUI.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAYwB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T15:29:08.772Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PanelInventario.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\PanelInventario.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\PanelInventario.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\PanelInventario.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Items\\PanelInventario.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAYwGcAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T04:19:08.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ElementoObjetoUI.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\ElementoObjetoUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\ElementoObjetoUI.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\ElementoObjetoUI.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Items\\ElementoObjetoUI.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAACgAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T04:13:13.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RecogerItem.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\RecogerItem.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\RecogerItem.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\RecogerItem.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Items\\RecogerItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-05T22:02:53.727Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Inventario.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\Inventario.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\Inventario.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\Inventario.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Items\\Inventario.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAIwLUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-05T22:02:49.797Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Consumible.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\Consumible.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\Consumible.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\Consumible.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Items\\Consumible.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-05T22:02:45.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Combate.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\Combate.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Combate\\Combate.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\Combate.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Combate\\Combate.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAIBJwBsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T17:33:17.447Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "MusicaEscena.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Musica\\MusicaEscena.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Musica\\MusicaEscena.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Musica\\MusicaEscena.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Musica\\MusicaEscena.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T03:02:20.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UICombate.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\UICombate.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Combate\\UICombate.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\UICombate.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Combate\\UICombate.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T02:49:06.593Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PlayerVisual.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\PlayerVisual.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Personaje\\PlayerVisual.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\PlayerVisual.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Personaje\\PlayerVisual.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T02:49:02.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UIManager.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\HUD\\UIManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\HUD\\UIManager.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\HUD\\UIManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\HUD\\UIManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T02:48:52.952Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UIExperiencia.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Experiencia\\UIExperiencia.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Experiencia\\UIExperiencia.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Experiencia\\UIExperiencia.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Experiencia\\UIExperiencia.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAkwH0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T04:43:54.373Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "GestorDeCombate.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\GestorDeCombate.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Combate\\GestorDeCombate.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\GestorDeCombate.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Combate\\GestorDeCombate.cs",
+              "ViewState": "AgIAAMgAAAAAAAAAAAAgwNgAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T04:43:05.878Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GestorExperiencia.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Experiencia\\GestorExperiencia.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Experiencia\\GestorExperiencia.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Experiencia\\GestorExperiencia.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Experiencia\\GestorExperiencia.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAwwF8AAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T04:38:48.915Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "DatosEnemigo.cs",
+              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
+              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAFcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T04:37:01.626Z"
             }
           ]
         },
         {
-          "DockedWidth": 104,
+          "DockedWidth": 145,
           "SelectedChildIndex": -1,
           "Children": [
             {
