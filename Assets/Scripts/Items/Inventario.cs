@@ -5,58 +5,73 @@ public class Inventario : MonoBehaviour
 {
     public static Inventario instancia;
 
-    private Dictionary<string, int> items =
-        new Dictionary<string, int>();
+    public List<Consumible> consumibles = new List<Consumible>();
 
-    void Awake()
+    private void Awake()
     {
         if (instancia == null)
-        {
             instancia = this;
-            DontDestroyOnLoad(gameObject);
+    }
+
+    public void AgregarItem(Consumible nuevoConsumible, int cantidad)
+    {
+        Consumible existente = consumibles.Find(
+            c => c.nombre == nuevoConsumible.nombre
+        );
+
+        if (existente != null)
+        {
+            existente.cantidad += cantidad;
         }
         else
         {
-            Destroy(gameObject);
+            Consumible copia = new Consumible();
+
+            copia.nombre = nuevoConsumible.nombre;
+            copia.descripcion = nuevoConsumible.descripcion;
+            copia.icono = nuevoConsumible.icono;
+            copia.curacionVida = nuevoConsumible.curacionVida;
+            copia.recuperacionPA = nuevoConsumible.recuperacionPA;
+            copia.cantidad = cantidad;
+
+            consumibles.Add(copia);
         }
+
+        UIInventario.instancia.ActualizarUI();
     }
 
-    public Dictionary<string, int> ObtenerItems()
+    public void UsarConsumible(int index)
     {
-        return items;
-    }
+        if (index < 0 || index >= consumibles.Count)
+            return;
 
-    public void AgregarItem(string nombre, int cantidad = 1)
-    {
-        if (items.ContainsKey(nombre))
+        Consumible c = consumibles[index];
+
+        GestorCombate.instancia.jugador.vidaActual += c.curacionVida;
+        GestorCombate.instancia.jugador.paActual += c.recuperacionPA;
+
+        c.cantidad--;
+
+        if (c.cantidad <= 0)
         {
-            items[nombre] += cantidad;
-        }
-        else
-        {
-            items[nombre] = cantidad;
+            consumibles.RemoveAt(index);
         }
 
-        Debug.Log($"Obtuviste {nombre} x{cantidad}");
+        UIInventario.instancia.ActualizarUI();
     }
 
-    public bool TieneItem(string nombre)
+    public void TirarConsumible(int index)
     {
-        return items.ContainsKey(nombre) && items[nombre] > 0;
-    }
+        if (index < 0 || index >= consumibles.Count)
+            return;
 
-    public void UsarItem(string nombre)
-    {
-        if (TieneItem(nombre))
+        consumibles[index].cantidad--;
+
+        if (consumibles[index].cantidad <= 0)
         {
-            items[nombre]--;
-
-            Debug.Log($"Usaste {nombre}");
-
-            if (items[nombre] <= 0)
-            {
-                items.Remove(nombre);
-            }
+            consumibles.RemoveAt(index);
         }
+
+        UIInventario.instancia.ActualizarUI();
     }
 }

@@ -1,30 +1,117 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIInventario : MonoBehaviour
 {
-    public TextMeshProUGUI textoInventario;
+    public static UIInventario instancia;
 
-    void OnEnable()
+    [Header("Paneles")]
+    public GameObject panelInventario;
+    public GameObject panelConsumibles;
+    public GameObject panelObjetos;
+
+    [Header("Slots")]
+    public Button[] botonesSlots;
+
+    [Header("UI Slot")]
+    public Image[] iconos;
+    public TMP_Text[] nombres;
+    public TMP_Text[] cantidades;
+
+    private int indiceSeleccionado = -1;
+
+    private void Awake()
     {
-        ActualizarInventario();
+        instancia = this;
     }
 
-    public void ActualizarInventario()
+    private void Start()
     {
-        textoInventario.text = "";
+        panelInventario.SetActive(false);
 
-        var items = Inventario.instancia.ObtenerItems();
+        ActualizarUI();
+    }
 
-        if (items.Count == 0)
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            textoInventario.text = "Inventario vacío";
+            panelInventario.SetActive(
+                !panelInventario.activeSelf
+            );
+
+            MostrarConsumibles();
         }
+    }
 
-        foreach (var item in items)
+    public void MostrarConsumibles()
+    {
+        panelConsumibles.SetActive(true);
+        panelObjetos.SetActive(false);
+    }
+
+    public void MostrarObjetos()
+    {
+        panelConsumibles.SetActive(false);
+        panelObjetos.SetActive(true);
+    }
+
+    public void ActualizarUI()
+    {
+        var lista = Inventario.instancia.consumibles;
+
+        for (int i = 0; i < botonesSlots.Length; i++)
         {
-            textoInventario.text +=
-                item.Key + " x" + item.Value + "\n";
+            if (i < lista.Count)
+            {
+                botonesSlots[i].gameObject.SetActive(true);
+
+                nombres[i].text = lista[i].nombre;
+
+                cantidades[i].text =
+                    "x" + lista[i].cantidad.ToString();
+
+                iconos[i].sprite = lista[i].icono;
+
+                int index = i;
+
+                botonesSlots[i].onClick.RemoveAllListeners();
+
+                botonesSlots[i].onClick.AddListener(() =>
+                {
+                    SeleccionarConsumible(index);
+                });
+            }
+            else
+            {
+                botonesSlots[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void SeleccionarConsumible(int index)
+    {
+        indiceSeleccionado = index;
+    }
+
+    public void BotonUsar()
+    {
+        if (indiceSeleccionado != -1)
+        {
+            Inventario.instancia.UsarConsumible(
+                indiceSeleccionado
+            );
+        }
+    }
+
+    public void BotonTirar()
+    {
+        if (indiceSeleccionado != -1)
+        {
+            Inventario.instancia.TirarConsumible(
+                indiceSeleccionado
+            );
         }
     }
 }

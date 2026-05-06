@@ -3,56 +3,72 @@
   "WorkspaceRootPath": "C:\\Juego\\JUEGO\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\enemigos\\datosenemigo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemigos\\datosenemigo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|C:\\Juego\\JUEGO\\assets\\scripts\\combate\\gestordecombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\combate\\gestordecombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\combate\\gestordecombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\combate\\gestordecombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\hud\\uiinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\hud\\uiinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\items\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\items\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\items\\recogeritem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\items\\recogeritem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\items\\consumible.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\items\\consumible.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|C:\\Juego\\JUEGO\\assets\\scripts\\combate\\datoscombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\combate\\datoscombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|C:\\Juego\\JUEGO\\assets\\scripts\\personaje\\datospersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\personaje\\datospersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\combate\\uicombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\combate\\uicombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\combate\\combate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|C:\\Juego\\JUEGO\\assets\\scripts\\enemigos\\datosenemigo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemigos\\datosenemigo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|C:\\Juego\\JUEGO\\assets\\scripts\\combate\\combate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\combate\\combate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\personaje\\uiselectorpersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|C:\\Juego\\JUEGO\\assets\\scripts\\personaje\\uiselectorpersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\personaje\\uiselectorpersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\combate\\datoscombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\combate\\datoscombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Juego\\JUEGO\\Assets\\Scripts\\CambioLuz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\CambioLuz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\personaje\\datospersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\personaje\\datospersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Juego\\JUEGO\\Assets\\Scripts\\MusicaFondo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\MusicaFondo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|C:\\Juego\\JUEGO\\assets\\scripts\\cambioluz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cambioluz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Juego\\JUEGO\\Assets\\Scripts\\Camera Move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Camera Move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|c:\\juego\\juego\\assets\\scripts\\movimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\movimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Juego\\JUEGO\\Assets\\Scripts\\Colisiones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Colisiones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|C:\\Juego\\JUEGO\\assets\\scripts\\colisiones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\colisiones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Juego\\JUEGO\\Assets\\Scripts\\Movimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Movimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|C:\\Juego\\JUEGO\\assets\\scripts\\musicafondo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\musicafondo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|C:\\Juego\\JUEGO\\assets\\scripts\\camera move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\camera move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|C:\\Juego\\JUEGO\\assets\\scripts\\enemy move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22231EDD-55FB-FDCA-B071-49C97C844569}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Juego\\JUEGO\\Assets\\Scripts\\Enemy Move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Enemy Move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,71 +78,84 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DatosEnemigo.cs",
-              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
-              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAuAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "UIInventario.cs",
+              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\HUD\\UIInventario.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\HUD\\UIInventario.cs",
+              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\HUD\\UIInventario.cs",
+              "RelativeToolTip": "Assets\\Scripts\\HUD\\UIInventario.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAADwv3QAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T01:29:44.707Z",
+              "WhenOpened": "2026-05-06T21:37:27.509Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UISelectorPersonaje.cs",
-              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
-              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAgwEQAAAABAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "RecogerItem.cs",
+              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Items\\RecogerItem.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\RecogerItem.cs",
+              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Items\\RecogerItem.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Items\\RecogerItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T01:29:10.696Z",
+              "WhenOpened": "2026-05-06T21:35:23.131Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "UICombate.cs",
-              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Combate\\UICombate.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Combate\\UICombate.cs",
-              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Combate\\UICombate.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Combate\\UICombate.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAAAGkAAAAAAAAAAAAAAA==",
+              "Title": "Inventario.cs",
+              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Items\\Inventario.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\Inventario.cs",
+              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Items\\Inventario.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Items\\Inventario.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwDIAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T01:28:42.853Z",
+              "WhenOpened": "2026-05-06T21:35:14.33Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
+              "Title": "Consumible.cs",
+              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Items\\Consumible.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\Consumible.cs",
+              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Items\\Consumible.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Items\\Consumible.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T21:35:08.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "GestorDeCombate.cs",
               "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Combate\\GestorDeCombate.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Combate\\GestorDeCombate.cs",
               "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Combate\\GestorDeCombate.cs",
               "RelativeToolTip": "Assets\\Scripts\\Combate\\GestorDeCombate.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAkwD4AAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAJoAAAAAAAAAAAAAAK8AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-24T01:27:49.281Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Combate.cs",
-              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Combate\\Combate.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Combate\\Combate.cs",
-              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Combate\\Combate.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Combate\\Combate.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAZAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "UICombate.cs",
+              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Combate\\UICombate.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Combate\\UICombate.cs",
+              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Combate\\UICombate.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Combate\\UICombate.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAAAFYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T01:55:16.435Z",
+              "WhenOpened": "2026-04-24T01:28:42.853Z",
               "EditorCaption": ""
             },
             {
@@ -137,10 +166,34 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Combate\\DatosCombate.cs",
               "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Combate\\DatosCombate.cs",
               "RelativeToolTip": "Assets\\Scripts\\Combate\\DatosCombate.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-24T01:19:42.929Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UISelectorPersonaje.cs",
+              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
+              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAgwEQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T01:29:10.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Combate.cs",
+              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Combate\\Combate.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Combate\\Combate.cs",
+              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Combate\\Combate.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Combate\\Combate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T01:55:16.435Z"
             },
             {
               "$type": "Document",
@@ -150,14 +203,26 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Personaje\\DatosPersonaje.cs",
               "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Personaje\\DatosPersonaje.cs",
               "RelativeToolTip": "Assets\\Scripts\\Personaje\\DatosPersonaje.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAwwEEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-24T01:26:53.558Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
+              "Title": "DatosEnemigo.cs",
+              "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
+              "ToolTip": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemigos\\DatosEnemigo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T01:29:44.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "CambioLuz.cs",
               "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\CambioLuz.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CambioLuz.cs",
@@ -165,12 +230,11 @@
               "RelativeToolTip": "Assets\\Scripts\\CambioLuz.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T18:35:28.715Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-13T18:35:28.715Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "MusicaFondo.cs",
               "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\MusicaFondo.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MusicaFondo.cs",
@@ -182,7 +246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "Camera Move.cs",
               "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Camera Move.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Camera Move.cs",
@@ -194,7 +258,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "Colisiones.cs",
               "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Colisiones.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Colisiones.cs",
@@ -206,7 +270,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 15,
               "Title": "Movimiento.cs",
               "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Movimiento.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Movimiento.cs",
@@ -214,12 +278,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Movimiento.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T23:46:15.408Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T23:46:15.408Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "Enemy Move.cs",
               "DocumentMoniker": "C:\\Juego\\JUEGO\\Assets\\Scripts\\Enemy Move.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy Move.cs",

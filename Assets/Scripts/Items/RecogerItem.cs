@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class RecogerItem : MonoBehaviour
 {
-    public string nombreItem;
+    public Consumible consumible;
     public int cantidad = 1;
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             Inventario.instancia.AgregarItem(
-                nombreItem,
+                consumible,
                 cantidad
             );
 
