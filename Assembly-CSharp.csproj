@@ -78,9 +78,11 @@
     <Compile Include="Assets\Scripts\Experiencia\UIExperiencia.cs" />
     <Compile Include="Assets\Scripts\Enemigos\GestorEnemigos.cs" />
     <Compile Include="Assets\Scripts\Combate\GestorDeCombate.cs" />
+    <Compile Include="Assets\Scripts\Items\RecogerObjeto.cs" />
     <Compile Include="Assets\Scripts\HUD\UIManager.cs" />
     <Compile Include="Assets\Scripts\Items\Inventario.cs" />
     <Compile Include="Assets\Scripts\Combate\UICombate.cs" />
+    <Compile Include="Assets\Scripts\Items\ObjetoInventario.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Enemigos\DatosEnemigo.cs" />
     <Compile Include="Assets\Scripts\Items\RecogerItem.cs" />

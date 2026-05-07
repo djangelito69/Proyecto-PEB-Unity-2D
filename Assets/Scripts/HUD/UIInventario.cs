@@ -6,10 +6,21 @@ public class UIInventario : MonoBehaviour
 {
     public static UIInventario instancia;
 
+    private Button botonSeleccionado;
+
+    [SerializeField] private Color colorNormal = Color.white;
+    [SerializeField] private Color colorSeleccionado = Color.yellow;
+
     [Header("Paneles")]
     public GameObject panelInventario;
     public GameObject panelConsumibles;
     public GameObject panelObjetos;
+
+    [Header("OBJETOS")]
+
+    public Button[] botonesObjetos;
+    public Image[] iconosObjetos;
+    public TMP_Text[] nombresObjetos;
 
     [Header("Slots")]
     public Button[] botonesSlots;
@@ -53,6 +64,8 @@ public class UIInventario : MonoBehaviour
 
     public void MostrarObjetos()
     {
+        Debug.Log("ABRIENDO OBJETOS");
+
         panelConsumibles.SetActive(false);
         panelObjetos.SetActive(true);
     }
@@ -90,9 +103,45 @@ public class UIInventario : MonoBehaviour
         }
     }
 
+    public void ActualizarUIObjetos()
+    {
+        var lista = Inventario.instancia.objetos;
+
+        for (int i = 0; i < botonesObjetos.Length; i++)
+        {
+            if (lista[i] != null)
+            {
+                botonesObjetos[i].gameObject.SetActive(true);
+
+                nombresObjetos[i].text =
+                    lista[i].nombre;
+
+                iconosObjetos[i].sprite =
+                    lista[i].icono;
+            }
+            else
+            {
+                nombresObjetos[i].text = "";
+
+                iconosObjetos[i].sprite = null;
+            }
+        }
+    }
+
     public void SeleccionarConsumible(int index)
     {
         indiceSeleccionado = index;
+
+        // Restaurar anterior
+        if (botonSeleccionado != null)
+        {
+            botonSeleccionado.image.color = colorNormal;
+        }
+
+        // Nuevo seleccionado
+        botonSeleccionado = botonesSlots[index];
+
+        botonSeleccionado.image.color = colorSeleccionado;
     }
 
     public void BotonUsar()

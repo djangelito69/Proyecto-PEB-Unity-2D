@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Combate",
-    "\\Personaje"
+    "\\Experiencia",
+    "\\HUD",
+    "\\Items"
   ],
-  "SelectedNode": "\\Combate\\GestorDeCombate.cs",
+  "SelectedNode": "\\Items\\RecogerObjeto.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 44225933324355707}
   - component: {fileID: 4904923437760654754}
   - component: {fileID: 9131425631451739079}
+  - component: {fileID: 5484266779362553824}
   m_Layer: 6
   m_Name: Manzana
   m_TagString: Untagged
@@ -26,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4733310724758002008}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.63283, y: 10.26394, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.39281, y: 6.1988487, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -138,3 +139,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5484266779362553824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4733310724758002008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b125a2206827e4e9e7c5fbae8ee233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RecogerItem
+  consumible:
+    nombre: Manzana
+    descripcion: hola
+    icono: {fileID: -1389860050349794336, guid: 71323068ef3f81347a48c4a3dee38e22, type: 3}
+    cantidad: 1
+    curacionVida: 4
+    recuperacionPA: 2
+    puedeUsarseEnCombate: 1
+    puedeUsarseFueraDeCombate: 1
+  cantidad: 1

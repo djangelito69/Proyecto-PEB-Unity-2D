@@ -7,6 +7,9 @@ public class Inventario : MonoBehaviour
 
     public List<Consumible> consumibles = new List<Consumible>();
 
+    public ObjetoInventario[] objetos =
+        new ObjetoInventario[4];
+
     private void Awake()
     {
         if (instancia == null)
@@ -45,6 +48,75 @@ public class Inventario : MonoBehaviour
         }
 
         UIInventario.instancia.ActualizarUI();
+    }
+
+    int ObtenerIndicePorTipo(TipoObjeto tipo)
+    {
+        switch (tipo)
+        {
+            case TipoObjeto.Vida:
+                return 0;
+
+            case TipoObjeto.Ataque:
+                return 1;
+
+            case TipoObjeto.Velocidad:
+                return 2;
+
+            case TipoObjeto.PA:
+                return 3;
+        }
+
+        return -1;
+    }
+
+    public void AgregarObjeto(ObjetoInventario nuevoObjeto)
+    {
+        int index =
+            ObtenerIndicePorTipo(nuevoObjeto.tipo);
+
+        if (index == -1)
+            return;
+
+        // Si ya había objeto en ese slot
+        if (objetos[index] != null)
+        {
+            RemoverBonificaciones(objetos[index]);
+        }
+
+        // Guardar nuevo objeto
+        objetos[index] = nuevoObjeto;
+
+        // Aplicar bonus
+        AplicarBonificaciones(nuevoObjeto);
+
+        UIInventario.instancia.ActualizarUIObjetos();
+
+        Debug.Log($"Objeto equipado: {nuevoObjeto.nombre}");
+    }
+
+    void AplicarBonificaciones(ObjetoInventario objeto)
+    {
+        GestorExperiencia.instancia
+            .AñadirVidaMaxima(objeto.bonusVida);
+
+        GestorExperiencia.instancia
+            .AñadirPAMaximo(objeto.bonusPA);
+
+        GestorExperiencia.instancia
+            .AñadirDaño(objeto.bonusAtaque);
+    }
+
+    void RemoverBonificaciones(ObjetoInventario objeto)
+    {
+        GestorExperiencia.instancia
+            .AñadirVidaMaxima(-objeto.bonusVida);
+
+        GestorExperiencia.instancia
+            .AñadirPAMaximo(-objeto.bonusPA);
+
+        GestorExperiencia.instancia
+            .AñadirDaño(-objeto.bonusAtaque);
     }
 
     public void UsarConsumible(int index)

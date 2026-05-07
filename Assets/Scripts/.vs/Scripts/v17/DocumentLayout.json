@@ -1,21 +1,41 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\",
+  "WorkspaceRootPath": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\DatosPersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\HUD\\UIInventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HUD\\UIInventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\Inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Items\\Inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\ObjetoInventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Items\\ObjetoInventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\RecogerObjeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Items\\RecogerObjeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Experiencia\\GestorExperiencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Experiencia\\GestorExperiencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\DatosPersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Personaje\\DatosPersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\GestorDeCombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\GestorDeCombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Combate\\GestorDeCombate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Personaje\\UISelectorPersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\GestorSelectorPersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\GestorSelectorPersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Personaje\\GestorSelectorPersonaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,54 +46,116 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GestorDeCombate.cs",
-              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\GestorDeCombate.cs",
-              "RelativeDocumentMoniker": "Combate\\GestorDeCombate.cs",
-              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\GestorDeCombate.cs",
-              "RelativeToolTip": "Combate\\GestorDeCombate.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAxAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "RecogerObjeto.cs",
+              "DocumentMoniker": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\RecogerObjeto.cs",
+              "RelativeDocumentMoniker": "Items\\RecogerObjeto.cs",
+              "ToolTip": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\RecogerObjeto.cs",
+              "RelativeToolTip": "Items\\RecogerObjeto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-23T17:16:01.221Z",
+              "WhenOpened": "2026-05-07T03:22:41.402Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GestorExperiencia.cs",
+              "DocumentMoniker": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Experiencia\\GestorExperiencia.cs",
+              "RelativeDocumentMoniker": "Experiencia\\GestorExperiencia.cs",
+              "ToolTip": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Experiencia\\GestorExperiencia.cs",
+              "RelativeToolTip": "Experiencia\\GestorExperiencia.cs",
+              "ViewState": "AgIAAMMAAAAAAAAAAADwv+IAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T03:19:16.89Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Inventario.cs",
+              "DocumentMoniker": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\Inventario.cs",
+              "RelativeDocumentMoniker": "Items\\Inventario.cs",
+              "ToolTip": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\Inventario.cs",
+              "RelativeToolTip": "Items\\Inventario.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAADwv3cAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T03:18:16.407Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "UISelectorPersonaje.cs",
-              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
-              "RelativeDocumentMoniker": "Personaje\\UISelectorPersonaje.cs",
-              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
-              "RelativeToolTip": "Personaje\\UISelectorPersonaje.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAACcAAAAVAAAAAAAAAA==",
+              "Title": "ObjetoInventario.cs",
+              "DocumentMoniker": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\ObjetoInventario.cs",
+              "RelativeDocumentMoniker": "Items\\ObjetoInventario.cs",
+              "ToolTip": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Items\\ObjetoInventario.cs",
+              "RelativeToolTip": "Items\\ObjetoInventario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-23T17:14:35.296Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GestorSelectorPersonaje.cs",
-              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\GestorSelectorPersonaje.cs",
-              "RelativeDocumentMoniker": "Personaje\\GestorSelectorPersonaje.cs",
-              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\GestorSelectorPersonaje.cs",
-              "RelativeToolTip": "Personaje\\GestorSelectorPersonaje.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-23T17:13:08.266Z",
+              "WhenOpened": "2026-05-07T03:18:00.46Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UIInventario.cs",
+              "DocumentMoniker": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\HUD\\UIInventario.cs",
+              "RelativeDocumentMoniker": "HUD\\UIInventario.cs",
+              "ToolTip": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\HUD\\UIInventario.cs",
+              "RelativeToolTip": "HUD\\UIInventario.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAAEYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T02:51:35.469Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GestorDeCombate.cs",
+              "DocumentMoniker": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\GestorDeCombate.cs",
+              "RelativeDocumentMoniker": "Combate\\GestorDeCombate.cs",
+              "ToolTip": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Combate\\GestorDeCombate.cs",
+              "RelativeToolTip": "Combate\\GestorDeCombate.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T17:16:01.221Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UISelectorPersonaje.cs",
+              "DocumentMoniker": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
+              "RelativeDocumentMoniker": "Personaje\\UISelectorPersonaje.cs",
+              "ToolTip": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\UISelectorPersonaje.cs",
+              "RelativeToolTip": "Personaje\\UISelectorPersonaje.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAACcAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T17:14:35.296Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GestorSelectorPersonaje.cs",
+              "DocumentMoniker": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\GestorSelectorPersonaje.cs",
+              "RelativeDocumentMoniker": "Personaje\\GestorSelectorPersonaje.cs",
+              "ToolTip": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\GestorSelectorPersonaje.cs",
+              "RelativeToolTip": "Personaje\\GestorSelectorPersonaje.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-23T17:13:08.266Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "DatosPersonaje.cs",
-              "DocumentMoniker": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\DatosPersonaje.cs",
+              "DocumentMoniker": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\DatosPersonaje.cs",
               "RelativeDocumentMoniker": "Personaje\\DatosPersonaje.cs",
-              "ToolTip": "E:\\Proyectos_Progra\\JuegoUnity2D\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\DatosPersonaje.cs",
+              "ToolTip": "C:\\Proyectos\\PEB\\Proyecto-PEB-Unity-2D\\Assets\\Scripts\\Personaje\\DatosPersonaje.cs",
               "RelativeToolTip": "Personaje\\DatosPersonaje.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

@@ -202,6 +202,30 @@ public class GestorExperiencia : MonoBehaviour
         Debug.Log($"[VIDA] Actualizada a: {vidaActualJugador}/{statsBase.vida}");
     }
 
+    public void AñadirVidaMaxima(int cantidad)
+    {
+        statsBase.vida += cantidad;
+
+        vidaActualJugador += cantidad;
+
+        OnVidaActualizada?.Invoke();
+    }
+
+    public void AñadirPAMaximo(int cantidad)
+    {
+        statsBase.pa += cantidad;
+
+        paActualJugador += cantidad;
+
+        OnVidaActualizada?.Invoke();
+    }
+
+    public void AñadirDaño(int cantidad)
+    {
+        statsBase.dañoBasico += cantidad;
+        statsBase.dañoEspecial += cantidad;
+    }
+
     /// <summary>
     /// Obtener un DatosCombate actualizado con los stats del nivel actual
     /// </summary>
