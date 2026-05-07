@@ -12,6 +12,8 @@ public class GestorDeCombate : MonoBehaviour
     public Combate jugador;
     public Combate enemigo;
 
+    public static GestorDeCombate instancia;
+
     [Header("Enemigo actual")]
     public DatosEnemigos.TipoEnemigo tipoEnemigo;
     public GameObject enemigoEnMapa;
@@ -29,8 +31,11 @@ public class GestorDeCombate : MonoBehaviour
 
     void Awake()
     {
+        instancia = this;
+
         ConfigurarJugador();
         ConfigurarEnemigo();
+
         EnviarMensaje("=== COMIENZA EL COMBATE ===");
         MostrarStats();
     }

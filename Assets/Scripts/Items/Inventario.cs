@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,26 +5,14 @@ public class Inventario : MonoBehaviour
 {
     public static Inventario instancia;
 
-    [SerializeField] private ConsumibleData[] consumiblesDisponibles;
-    [SerializeField] private ObjetoColeccionableData[] objetosDisponibles;
+    public List<Consumible> consumibles = new List<Consumible>();
 
-    // Diccionarios para almacenar cantidades
-    private Dictionary<string, int> consumibles = new Dictionary<string, int>();
-    private Dictionary<string, int> objetos = new Dictionary<string, int>();
-
-    // Eventos para notificar cambios
-    public event Action<string, int> OnConsumibleCambiado;
-    public event Action<string, int> OnObjetoCambiado;
-    public event Action<string> OnConsumibleUsado; // Para mostrar cambios de HP/PA
-    public event Action OnInventarioActualizado;
-
-    void Awake()
+    private void Awake()
     {
         if (instancia == null)
         {
             instancia = this;
             DontDestroyOnLoad(gameObject);
-            InicializarInventario();
         }
         else
         {
@@ -33,149 +20,105 @@ public class Inventario : MonoBehaviour
         }
     }
 
-    void InicializarInventario()
+    public void AgregarItem(Consumible nuevoConsumible, int cantidad)
     {
-        // Inicializar consumibles con cantidad 0
-        foreach (var consumible in consumiblesDisponibles)
+        Consumible existente = consumibles.Find(
+            c => c.nombre == nuevoConsumible.nombre
+        );
+
+        if (existente != null)
         {
-            consumibles[consumible.id] = 0;
+            existente.cantidad += cantidad;
+        }
+        else
+        {
+            Consumible copia = new Consumible();
+
+            copia.nombre = nuevoConsumible.nombre;
+            copia.descripcion = nuevoConsumible.descripcion;
+            copia.icono = nuevoConsumible.icono;
+            copia.curacionVida = nuevoConsumible.curacionVida;
+            copia.recuperacionPA = nuevoConsumible.recuperacionPA;
+            copia.cantidad = cantidad;
+
+            consumibles.Add(copia);
         }
 
-        // Inicializar objetos con cantidad 0
-        foreach (var objeto in objetosDisponibles)
-        {
-            objetos[objeto.id] = 0;
-        }
+        UIInventario.instancia.ActualizarUI();
     }
 
-    // ==================== CONSUMIBLES ====================
-
-    public ConsumibleData[] ObtenerConsumiblesDisponibles()
+    public void UsarConsumible(int index)
     {
-        return consumiblesDisponibles;
-    }
-
-    public int ObtenerCantidadConsumible(string idConsumible)
-    {
-        return consumibles.ContainsKey(idConsumible) ? consumibles[idConsumible] : 0;
-    }
-
-    public ConsumibleData ObtenerDataConsumible(string idConsumible)
-    {
-        foreach (var consumible in consumiblesDisponibles)
-        {
-            if (consumible.id == idConsumible)
-                return consumible;
-        }
-        return null;
-    }
-
-    public void AgregarConsumible(string idConsumible, int cantidad = 1)
-    {
-        if (!consumibles.ContainsKey(idConsumible))
+        if (index < 0 || index >= consumibles.Count)
             return;
 
-        consumibles[idConsumible] += cantidad;
-        OnConsumibleCambiado?.Invoke(idConsumible, consumibles[idConsumible]);
-        OnInventarioActualizado?.Invoke();
-        Debug.Log($"Obtuviste {idConsumible} x{cantidad}. Total: {consumibles[idConsumible]}");
-    }
+        Consumible c = consumibles[index];
 
-    public bool TieneConsumible(string idConsumible, int cantidad = 1)
-    {
-        return consumibles.ContainsKey(idConsumible) && consumibles[idConsumible] >= cantidad;
-    }
-
-    public void UsarConsumible(string idConsumible)
-    {
-        if (!TieneConsumible(idConsumible))
-            return;
-
-        consumibles[idConsumible]--;
-        OnConsumibleCambiado?.Invoke(idConsumible, consumibles[idConsumible]);
-        OnConsumibleUsado?.Invoke(idConsumible);
-        OnInventarioActualizado?.Invoke();
-        Debug.Log($"Usaste {idConsumible}. Quedan: {consumibles[idConsumible]}");
-    }
-
-    public void TirarConsumible(string idConsumible)
-    {
-        if (!TieneConsumible(idConsumible))
-            return;
-
-        consumibles[idConsumible]--;
-        OnConsumibleCambiado?.Invoke(idConsumible, consumibles[idConsumible]);
-        OnInventarioActualizado?.Invoke();
-        Debug.Log($"Tiraste {idConsumible}. Quedan: {consumibles[idConsumible]}");
-    }
-
-    // ==================== OBJETOS COLECCIONABLES ====================
-
-    public ObjetoColeccionableData[] ObtenerObjetosDisponibles()
-    {
-        return objetosDisponibles;
-    }
-
-    public int ObtenerCantidadObjeto(string idObjeto)
-    {
-        return objetos.ContainsKey(idObjeto) ? objetos[idObjeto] : 0;
-    }
-
-    public ObjetoColeccionableData ObtenerDataObjeto(string idObjeto)
-    {
-        foreach (var objeto in objetosDisponibles)
+        if (GestorExperiencia.instancia == null)
         {
-            if (objeto.id == idObjeto)
-                return objeto;
+            Debug.LogError("GestorExperiencia es null");
+            return;
         }
-        return null;
+
+        // Obtener stats actuales
+        int vidaActual =
+            GestorExperiencia.instancia.ObtenerVidaActual();
+
+        int paActual =
+            GestorExperiencia.instancia.ObtenerPAActual();
+
+        DatosCombate datos =
+            GestorExperiencia.instancia.ObtenerDatosActuales();
+
+        // CURAR VIDA
+        vidaActual += c.curacionVida;
+
+        if (vidaActual > datos.vida)
+        {
+            vidaActual = datos.vida;
+        }
+
+        // RECUPERAR PA
+        paActual += c.recuperacionPA;
+
+        if (paActual > datos.pa)
+        {
+            paActual = datos.pa;
+        }
+
+        // GUARDAR NUEVOS VALORES
+        GestorExperiencia.instancia
+            .EstablecerVidaActual(vidaActual);
+
+        GestorExperiencia.instancia
+            .EstablecerPAActual(paActual);
+
+        Debug.Log($"Usaste {c.nombre}");
+
+        // REDUCIR CANTIDAD
+        c.cantidad--;
+
+        if (c.cantidad <= 0)
+        {
+            consumibles.RemoveAt(index);
+        }
+
+        // ACTUALIZAR UI
+        UIInventario.instancia.ActualizarUI();
     }
 
-    public bool ColeccionarObjeto(string idObjeto)
+    public void TirarConsumible(int index)
     {
-        if (!objetos.ContainsKey(idObjeto))
-            return false;
+        if (index < 0 || index >= consumibles.Count)
+            return;
 
-        // Los objetos solo se pueden coleccionar una vez
-        if (objetos[idObjeto] > 0)
-            return false;
+        consumibles[index].cantidad--;
 
-        objetos[idObjeto] = 1;
-        OnObjetoCambiado?.Invoke(idObjeto, 1);
-        OnInventarioActualizado?.Invoke();
-        Debug.Log($"Coleccionaste {idObjeto}");
-        return true;
-    }
+        if (consumibles[index].cantidad <= 0)
+        {
+            consumibles.RemoveAt(index);
+        }
 
-    public bool TieneObjeto(string idObjeto)
-    {
-        return objetos.ContainsKey(idObjeto) && objetos[idObjeto] > 0;
-    }
-
-    // ==================== MÉTODOS ANTIGUOS (COMPATIBILIDAD) ====================
-
-    public Dictionary<string, int> ObtenerItems()
-    {
-        var itemsCombinados = new Dictionary<string, int>();
-        foreach (var item in consumibles)
-            itemsCombinados[item.Key] = item.Value;
-        foreach (var item in objetos)
-            itemsCombinados[item.Key] = item.Value;
-        return itemsCombinados;
-    }
-
-    public void AgregarItem(string nombre, int cantidad = 1)
-    {
-        AgregarConsumible(nombre, cantidad);
-    }
-
-    public bool TieneItem(string nombre)
-    {
-        return TieneConsumible(nombre) || TieneObjeto(nombre);
-    }
-
-    public void UsarItem(string nombre)
-    {
-        UsarConsumible(nombre);
+        UIInventario.instancia.ActualizarUI();
     }
 }

@@ -1,12 +1,18 @@
 using UnityEngine;
 
 [System.Serializable]
-public class ConsumibleData
+public class Consumible
 {
-    public string id; // Identificador único (ej: "pizza", "manzana")
     public string nombre;
-    public Sprite imagen;
     public string descripcion;
+
+    public Sprite icono;
+
+    public int cantidad;
+
     public int curacionVida;
     public int recuperacionPA;
+
+    public bool puedeUsarseEnCombate;
+    public bool puedeUsarseFueraDeCombate;
 }
