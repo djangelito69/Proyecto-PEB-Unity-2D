@@ -1,0 +1,158 @@
+﻿## 📋 Sistema de Inmunidad y Control de Combate - Guía de Instalación
+
+### ✅ Qué se ha implementado
+
+1. **CombatController.cs** - Gestor centralizado que previene cargas múltiples de escenas
+2. **PlayerImmunity.cs** - Gestiona la inmunidad temporal del jugador tras combate
+3. **Enemigo.cs** (modificado) - Ahora verifica inmunidad antes de iniciar combate
+4. **MovimientoPersonaje.cs** (modificado) - Integración con el sistema de inmunidad
+5. **GestorDeCombate.cs** (modificado) - Reestablece flags cuando vuelve del combate
+
+---
+
+### 🛠️ Pasos de Configuración en Unity
+
+#### 1. **Crear scripts (ya están creados)**
+   - ✅ `Assets\Scripts\Sistema\CombatController.cs`
+   - ✅ `Assets\Scripts\Sistema\PlayerImmunity.cs`
+
+#### 2. **Añadir CombatController a la escena**
+   - Crea un **GameObject vacío** en tu escena principal (por ejemplo, "Managers")
+   - Asigna el componente `CombatController` a este GameObject
+   - Este manager persistirá entre escenas (usa `DontDestroyOnLoad`)
+
+#### 3. **Añadir PlayerImmunity al jugador**
+   - Selecciona el GameObject del jugador (aquel con el tag "Player")
+   - En el Inspector → **Add Component** → `PlayerImmunity`
+   - Configura los parámetros:
+     - **Duración Inmunidad**: 2 segundos (ajustable)
+     - **Color Inmunidad**: Rojo translúcido (RGB: 1, 0.5, 0.5, A: 1) - indica visualmente la inmunidad
+     - **Velocidad Parpadeo**: 0.1 segundos (parpadea mientras está inmune)
+
+#### 4. **Verificar referencias en Enemigo.cs**
+   - Los enemigos ya buscan automáticamente:
+     - El GameObject del jugador por tag "Player"
+     - El componente `PlayerImmunity` del jugador
+   - No requiere configuración adicional
+
+---
+
+### 🎮 Cómo funciona
+
+#### Flujo normal (jugador sin inmunidad):
+1. Jugador está en el mapa, movimiento libre
+2. Enemigo lo detecta dentro del radio
+3. Enemigo persigue al jugador
+4. Colisión: Se ejecuta `OnCollisionEnter2D`
+5. El primer enemigo llama a `CombatController.IntentarIniciarCombate()`
+6. Si no hay combate en transición, carga la escena de combate
+7. Se activa inmunidad en el jugador
+
+#### Protección contra colisiones múltiples:
+1. **Jugador A choca** con Enemigo 1 → `CombatController.combateEnTransicion = true`
+2. **Jugador A choca** con Enemigo 2 (casi simultáneamente) → `CombatController` rechaza la colisión
+3. Solo Enemigo 1 inicia combate
+
+#### Inmunidad temporal:
+1. Al iniciar combate:
+   - `PlayerImmunity.ActivarInmunidad()` es llamado
+   - El sprite comienza a parpadear (color rojo)
+   - Enemigos **no lo detectan** (`if playerImmunity.EsInmune return`)
+   - Colisiones de enemigos son ignoradas
+
+2. Después de 2 segundos:
+   - La inmunidad se desactiva automáticamente
+   - El sprite vuelve al color normal
+   - Otros enemigos pueden volver a detectarlo
+
+#### Regreso del combate:
+1. Combate termina (gana o pierde)
+2. Se llama a `VolverAlMapa()` (ya existía)
+3. Se llama a `CombatController.ReestablecerTransicion()` **nuevo**
+4. Se desactiva la escena de combate
+5. El flag `combateEnTransicion` vuelve a false
+6. Sistema listo para próximo combate
+
+---
+
+### 📊 Estados del jugador
+
+| Estado | Descripción | Enemigos actúan | Combate posible |
+|--------|-------------|-----------------|-----------------|
+| Normal | Libre, sin protección | Sí | Sí |
+| Inmune (combate iniciado) | Parpadeo rojo, 2s | No | No |
+| En combate | Escena de combate activa | No | No |
+
+---
+
+### 🔧 Personalización
+
+#### Cambiar duración de inmunidad:
+```csharp
+// En PlayerImmunity, en el Inspector:
+// "Duración Inmunidad" → Aumentar/disminuir segundos
+```
+
+#### Cambiar color durante inmunidad:
+```csharp
+// En PlayerImmunity, en el Inspector:
+// "Color Inmunidad" → Seleccionar color distinto
+```
+
+#### Cambiar velocidad de parpadeo:
+```csharp
+// En PlayerImmunity, en el Inspector:
+// "Velocidad Parpadeo" → Más bajo = más rápido, más alto = más lento
+```
+
+#### Desactivar efecto visual (si lo prefieres):
+- Comenta la corrutina en `PlayerImmunity.ActivarInmunidad()`
+- O establece `velocidadParpadeo = 0`
+
+---
+
+### 🐛 Depuración
+
+Abre la **Console** (Window → General → Console) y verás logs como:
+
+```
+CombatController: Iniciando combate con Goblin
+PlayerImmunity: Inmunidad activada
+Enemigo Orco: Jugador inmune, ignorando colisión
+PlayerImmunity: Inmunidad desactivada
+CombatController: Combate ya en transición. Enemigo Goblin ignorado.
+```
+
+---
+
+### ⚙️ Requisitos
+
+- ✅ Jugador con tag "Player"
+- ✅ `SpriteRenderer` en el jugador (o hijo) para el efecto visual
+- ✅ `CombatController` en la escena como singleton
+- ✅ `PlayerImmunity` en el GameObject del jugador
+- ✅ Enemigos con `Enemigo.cs` actualizado
+
+---
+
+### ✨ Ventajas del sistema
+
+1. **Robusto**: Previene race conditions y cargas múltiples
+2. **Visual**: El jugador ve claramente cuándo está inmune (parpadea)
+3. **Escalable**: Funciona con N enemigos sin problemas
+4. **Limpio**: Cada componente tiene una responsabilidad clara
+5. **Configurable**: Tiempos y colores ajustables desde el Inspector
+6. **Sin modificar lógica del combate**: Los sistemas existentes siguen funcionando
+
+---
+
+### 🚀 Siguiente paso
+
+Una vez configurado en Unity:
+1. Haz Play
+2. Acércate con el jugador a un enemigo
+3. Debería iniciar combate sin problemas
+4. Verifica que el sprite parpadea en rojo durante 2 segundos
+5. Si otros enemigos te persiguen, verifica que no entran en combate durante la inmunidad
+
+¡Listo para usar! 🎮

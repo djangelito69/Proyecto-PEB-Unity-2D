@@ -1,0 +1,137 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
+
+/// <summary>
+/// Gestiona la pantalla de victoria cuando el jugador gana el combate.
+/// Se muestra cuando la vida del enemigo llega a 0.
+/// </summary>
+public class UICombateVictoria : MonoBehaviour
+{
+    [Header("Panel Victoria")]
+    [SerializeField] private GameObject panelVictoria;
+
+    [Header("Textos")]
+    [SerializeField] private TextMeshProUGUI textoTitulo;
+    [SerializeField] private TextMeshProUGUI textoMensaje;
+    [SerializeField] private TextMeshProUGUI textoExpGanada;
+    [SerializeField] private TextMeshProUGUI textoNivel;
+
+    [Header("Botones")]
+    [SerializeField] private Button botonContinuar;
+
+    [Header("Sonidos")]
+    [SerializeField] private AudioClip sonidoVictoria;
+    [SerializeField] private AudioSource audioSource;
+
+    private GestorDeCombate gestorDeCombate;
+    private bool victoriaMostrada = false;
+
+    void Start()
+    {
+        // Obtener referencia al gestor de combate
+        gestorDeCombate = GestorDeCombate.instancia;
+
+        // Asegurar que el panel de Victoria está oculto al inicio
+        if (panelVictoria != null)
+        {
+            panelVictoria.SetActive(false);
+        }
+
+        // Conectar botón
+        if (botonContinuar != null)
+        {
+            botonContinuar.onClick.AddListener(Continuar);
+        }
+
+        // Suscribirse a cambios en el combate
+        if (gestorDeCombate != null)
+        {
+            gestorDeCombate.OnMensajeCombate += VerificarVictoria;
+        }
+    }
+
+    void OnDestroy()
+    {
+        // Desuscribirse al destruir
+        if (gestorDeCombate != null)
+        {
+            gestorDeCombate.OnMensajeCombate -= VerificarVictoria;
+        }
+    }
+
+    /// <summary>
+    /// Verifica si el jugador ha ganado y muestra la pantalla de Victoria.
+    /// Se llama cada vez que hay un mensaje de combate.
+    /// </summary>
+    private void VerificarVictoria(string mensaje)
+    {
+        if (victoriaMostrada) return;
+
+        if (gestorDeCombate.combateTerminado && gestorDeCombate.jugador.EstaVivo)
+        {
+            victoriaMostrada = true;
+            MostrarVictoria();
+        }
+    }
+
+    /// <summary>
+    /// Muestra la pantalla de Victoria con información del combate.
+    /// </summary>
+    private void MostrarVictoria()
+    {
+        Debug.Log("UICombateVictoria: Mostrando pantalla de victoria");
+
+        if (panelVictoria != null)
+        {
+            panelVictoria.SetActive(true);
+        }
+
+        // Reproducir sonido de victoria
+        if (audioSource != null && sonidoVictoria != null)
+        {
+            audioSource.PlayOneShot(sonidoVictoria);
+        }
+
+        // Obtener experiencia ganada
+        int expGanada = DatosEnemigos.ObtenerExperiencia(GestorDeCombate.instancia.tipoEnemigo);
+
+        // Actualizar textos
+        if (textoTitulo != null)
+        {
+            textoTitulo.text = "¡VICTORIA!";
+        }
+
+        if (textoMensaje != null)
+        {
+            textoMensaje.text = $"Derrotaste a {gestorDeCombate.enemigo.Nombre}";
+        }
+
+        if (textoExpGanada != null)
+        {
+            textoExpGanada.text = $"XP Ganada: {expGanada}";
+        }
+
+        if (textoNivel != null && GestorExperiencia.instancia != null)
+        {
+            textoNivel.text = $"Nivel: {GestorExperiencia.instancia.ObtenerNivel()}";
+        }
+
+        // Pausar el juego mientras se muestra Victoria
+        Time.timeScale = 0f;
+    }
+
+    /// <summary>
+    /// Continuar al mapa.
+    /// </summary>
+    public void Continuar()
+    {
+        Debug.Log("UICombateVictoria: Volviendo al mapa");
+
+        Time.timeScale = 1f;
+
+        // Volver al mapa (descarga escena de combate)
+        SceneManager.UnloadSceneAsync("Combate");
+    }
+}

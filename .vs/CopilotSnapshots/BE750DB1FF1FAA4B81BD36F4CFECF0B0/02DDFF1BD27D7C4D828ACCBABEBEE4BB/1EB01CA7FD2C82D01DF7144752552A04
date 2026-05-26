@@ -1,0 +1,255 @@
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
+/// <summary>
+/// Gestor de combate actualizado que integra:
+/// - Sistema de experiencia
+/// - Persistencia de vida
+/// - Mejoras dinámicas de stats
+/// </summary>
+public class GestorDeCombate : MonoBehaviour
+{
+    public Combate jugador;
+    public Combate enemigo;
+
+    public static GestorDeCombate instancia;
+
+    [Header("Enemigo actual")]
+    public DatosEnemigos.TipoEnemigo tipoEnemigo;
+    public GameObject enemigoEnMapa;
+
+    public bool combateTerminado = false;
+    private bool turnoJugador = true;
+
+    public System.Action<string> OnMensajeCombate;
+
+    void EnviarMensaje(string mensaje)
+    {
+        Debug.Log(mensaje);
+        OnMensajeCombate?.Invoke(mensaje);
+    }
+
+    void Awake()
+    {
+        instancia = this;
+
+        ConfigurarJugador();
+        ConfigurarEnemigo();
+
+        EnviarMensaje("=== COMIENZA EL COMBATE ===");
+        MostrarStats();
+    }
+
+    Combate CrearCombatiente(DatosCombate datos)
+    {
+        return new Combate
+        {
+            Nombre = datos.nombre,
+            sprite = datos.sprite,
+            vidaMaxima = datos.vida,
+            vidaActual = datos.vida,
+            PA_Maxima = datos.pa,
+            PA_Actual = datos.pa,
+            dañoBasico = datos.dañoBasico,
+            dañoEspecial = datos.dañoEspecial,
+            PA_costoBasico = datos.costoBasico,
+            PA_costoEspecial = datos.costoEspecial,
+            PA_recuperacionPorTurno = datos.recuperacionPA
+        };
+    }
+
+    void ConfigurarJugador()
+    {
+        if (GestorExperiencia.instancia != null)
+        {
+            DatosCombate datosActualizados = GestorExperiencia.instancia.ObtenerDatosActuales();
+            jugador = CrearCombatiente(datosActualizados);
+
+            jugador.vidaActual = GestorExperiencia.instancia.ObtenerVidaActual();
+            jugador.PA_Actual = GestorExperiencia.instancia.ObtenerPAActual();
+
+            Debug.Log($"[COMBATE] Jugador configurado: {jugador.Nombre} (Nivel {GestorExperiencia.instancia.ObtenerNivel()}) | Vida: {jugador.vidaActual}/{jugador.vidaMaxima} | PA: {jugador.PA_Actual}/{jugador.PA_Maxima}");
+        }
+        else
+        {
+            DatosCombate datos = DatosPersonaje.ObtenerDatos(DatosPersonaje.PersonajeSeleccionado);
+            jugador = CrearCombatiente(datos);
+            Debug.LogWarning("[COMBATE] GestorExperiencia no encontrado, usando datos base");
+        }
+    }
+
+    void ConfigurarEnemigo()
+    {
+        if (GestorEnemigos.instancia != null && GestorEnemigos.instancia.HayEnemigo())
+        {
+            DatosCombate datos = GestorEnemigos.instancia.ObtenerDatosEnemigo();
+            tipoEnemigo = GestorEnemigos.instancia.ObtenerTipoEnemigo();
+            enemigo = CrearCombatiente(datos);
+            Debug.Log($"[COMBATE] Enemigo: {enemigo.Nombre}");
+        }
+        else
+        {
+            Debug.LogWarning("[COMBATE] No se encontró enemigo, usando tipo del Inspector");
+            DatosCombate datos = DatosEnemigos.ObtenerDatos(tipoEnemigo);
+            enemigo = CrearCombatiente(datos);
+        }
+    }
+
+    public void AtaqueBasicoJugador()
+    {
+        if (combateTerminado || !turnoJugador) return;
+
+        if (!jugador.TienePAParaBasico())
+        {
+            EnviarMensaje("No tienes PA suficiente para el ataque básico.");
+            return;
+        }
+
+        jugador.GastarPA(jugador.PA_costoBasico);
+        enemigo.RecibirDaño(jugador.dañoBasico);
+        EnviarMensaje($"{jugador.Nombre} usó ataque básico → {jugador.dañoBasico} daño a {enemigo.Nombre}");
+
+        if (RevisarGanador()) return;
+        PasarTurnoAlEnemigo();
+    }
+
+    public void AtaqueEspecialJugador()
+    {
+        if (combateTerminado || !turnoJugador) return;
+
+        if (!jugador.TienePAParaEspecial())
+        {
+            EnviarMensaje("No tienes PA suficiente para el ataque especial.");
+            return;
+        }
+
+        jugador.GastarPA(jugador.PA_costoEspecial);
+        enemigo.RecibirDaño(jugador.dañoEspecial);
+        EnviarMensaje($"{jugador.Nombre} usó ataque especial → {jugador.dañoEspecial} daño a {enemigo.Nombre}");
+
+        if (RevisarGanador()) return;
+        PasarTurnoAlEnemigo();
+    }
+
+    void PasarTurnoAlEnemigo()
+    {
+        turnoJugador = false;
+        jugador.RecuperarPA();
+        TurnoEnemigo();
+    }
+
+    void TurnoEnemigo()
+    {
+        EnviarMensaje($"─── Turno de {enemigo.Nombre} ───");
+
+        int decision = Random.Range(0, 100);
+
+        if (enemigo.TienePAParaEspecial() && decision < 30)
+        {
+            enemigo.GastarPA(enemigo.PA_costoEspecial);
+            jugador.RecibirDaño(enemigo.dañoEspecial);
+            EnviarMensaje($"{enemigo.Nombre} usó ataque especial → {enemigo.dañoEspecial} daño");
+            enemigo.RecuperarPA();
+        }
+        else if (enemigo.TienePAParaBasico())
+        {
+            enemigo.GastarPA(enemigo.PA_costoBasico);
+            jugador.RecibirDaño(enemigo.dañoBasico);
+            EnviarMensaje($"{enemigo.Nombre} usó ataque básico → {enemigo.dañoBasico} daño");
+            enemigo.RecuperarPA();
+        }
+        else
+        {
+            EnviarMensaje($"{enemigo.Nombre} recuperó stamina.");
+            enemigo.RecuperarPA();
+        }
+
+        if (RevisarGanador()) return;
+
+        turnoJugador = true;
+        MostrarStats();
+        EnviarMensaje("─── Tu turno ───");
+    }
+
+    void VolverAlMapa()
+    {
+        // ✅ Reestablecer el flag de transición en el CombatController
+        if (CombatController.instancia != null)
+        {
+            CombatController.instancia.ReestablecerTransicion();
+        }
+
+        // ✅ Detener música de combate
+        if (MusicManager.instancia != null)
+        {
+            MusicManager.instancia.DetenerMusica();
+        }
+
+        // ✅ Descargar escena de combate (mantiene el mapa activo)
+        SceneManager.UnloadSceneAsync("Combate");
+    }
+
+    bool RevisarGanador()
+    {
+        if (!enemigo.EstaVivo)
+        {
+            combateTerminado = true;
+            EnviarMensaje("¡Ganaste!");
+
+            // ✅ Guardar vida actual del jugador ANTES de volver al mapa
+            if (GestorExperiencia.instancia != null)
+            {
+                GestorExperiencia.instancia.EstablecerVidaActual(jugador.vidaActual);
+                GestorExperiencia.instancia.EstablecerPAActual(jugador.PA_Actual);
+            }
+
+            // ✅ Otorgar experiencia y destruir enemigo
+            if (GestorEnemigos.instancia != null)
+            {
+                int expGanada = DatosEnemigos.ObtenerExperiencia(tipoEnemigo);
+                EnviarMensaje($"¡Ganaste {expGanada} XP!");
+
+                if (GestorExperiencia.instancia != null)
+                {
+                    GestorExperiencia.instancia.AñadirExperiencia(expGanada);
+                }
+
+                GestorEnemigos.instancia.DestruirEnemigoDelMapa();
+                GestorEnemigos.instancia.LimpiarEnemigo();
+            }
+
+            Invoke("VolverAlMapa", 1.5f);
+            return true;
+        }
+
+        if (!jugador.EstaVivo)
+        {
+            combateTerminado = true;
+            MostrarStats();
+            EnviarMensaje("Perdiste... El jugador fue derrotado.");
+
+            // ✅ Guardar vida actual incluso si pierdes (para revivir o intentar de nuevo)
+            if (GestorExperiencia.instancia != null)
+            {
+                GestorExperiencia.instancia.EstablecerVidaActual(jugador.vidaActual);
+                GestorExperiencia.instancia.EstablecerPAActual(jugador.PA_Actual);
+            }
+
+            if (GestorEnemigos.instancia != null)
+            {
+                GestorEnemigos.instancia.LimpiarEnemigo();
+            }
+
+            Invoke("VolverAlMapa", 1.5f);
+            return true;
+        }
+
+        return false;
+    }
+
+    void MostrarStats()
+    {
+        EnviarMensaje(jugador.ObtenerStats());
+        EnviarMensaje(enemigo.ObtenerStats());
+    }
+}

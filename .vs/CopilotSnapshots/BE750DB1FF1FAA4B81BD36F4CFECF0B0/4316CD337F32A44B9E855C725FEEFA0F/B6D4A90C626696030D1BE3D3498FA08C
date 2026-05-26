@@ -1,0 +1,102 @@
+﻿using UnityEngine;
+
+public class Enemigo : MonoBehaviour
+{
+    [Header("Configuración del Enemigo")]
+    [SerializeField] private DatosEnemigos.TipoEnemigo tipoEnemigo;
+    [SerializeField] private float velocidad = 2f;
+    [SerializeField] private float distanciaDeteccion = 4f;
+    private Transform jugador;
+    private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    private Collider2D col;
+    private bool enCombate = false;
+    private DatosCombate datosCombate;
+    public Enemigo enemigoActual;
+    private PlayerImmunity playerImmunity;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
+
+        datosCombate = DatosEnemigos.ObtenerDatos(tipoEnemigo);
+
+        if (datosCombate.sprite != null)
+        {
+            spriteRenderer.sprite = datosCombate.sprite;
+        }
+        else
+        {
+            Debug.LogWarning($"El sprite para {datosCombate.nombre} no está asignado en Resources");
+        }
+
+        GameObject jugadorObj = GameObject.FindGameObjectWithTag("Player");
+        if (jugadorObj != null)
+        {
+            jugador = jugadorObj.transform;
+            playerImmunity = jugadorObj.GetComponent<PlayerImmunity>();
+        }
+        else
+        {
+            Debug.LogError("No se encontró un objeto con el tag 'Player'");
+        }
+    }
+
+    void FixedUpdate()
+    {
+        // Si el jugador está inmune o ya en combate, no perseguir
+        if (enCombate || jugador == null)
+            return;
+
+        // Si el jugador tiene inmunidad, no detectarlo
+        if (playerImmunity != null && playerImmunity.EsInmune)
+            return;
+
+        float distancia = Vector2.Distance(rb.position, jugador.position);
+
+        if (distancia <= distanciaDeteccion)
+        {
+            Vector2 direccion = (jugador.position - transform.position).normalized;
+            rb.linearVelocity = direccion * velocidad;
+
+            if (direccion.x < 0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (direccion.x > 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+        }
+        else
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            enCombate = true;
+            rb.linearVelocity = Vector2.zero;
+            GestorEnemigos.instancia.enemigoEnMapa = gameObject;
+            GestorEnemigos.instancia.EstablecerEnemigo(tipoEnemigo, datosCombate);
+
+            // ✅ CAMBIO IMPORTANTE: Usar LoadSceneMode.Additive
+            SceneManager.LoadScene("Combate", LoadSceneMode.Additive);
+        }
+    }
+
+    public void EstablecerTipoEnemigo(DatosEnemigos.TipoEnemigo tipo)
+    {
+        tipoEnemigo = tipo;
+    }
+
+    public DatosCombate ObtenerDatos()
+    {
+        return datosCombate;
+    }
+}

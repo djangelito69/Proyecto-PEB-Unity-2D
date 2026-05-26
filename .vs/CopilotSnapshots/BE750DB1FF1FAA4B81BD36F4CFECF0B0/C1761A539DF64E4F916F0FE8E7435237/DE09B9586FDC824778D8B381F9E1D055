@@ -1,0 +1,115 @@
+﻿using UnityEngine;
+using System.Collections;
+
+/// <summary>
+/// Gestiona el estado de inmunidad del jugador tras entrar en combate.
+/// Mientras está inmune:
+/// - No puede ser detectado por enemigos
+/// - Su sprite cambia de color temporalmente
+/// - Ignora colisiones con enemigos
+/// </summary>
+public class PlayerImmunity : MonoBehaviour
+{
+    [Header("Configuración de Inmunidad")]
+    [SerializeField] private float duracionInmunidad = 2f;
+    [SerializeField] private Color colorInmunidad = new Color(1f, 0.5f, 0.5f, 1f); // Rojo translúcido
+    [SerializeField] private float velocidadParpadeo = 0.1f;
+
+    private SpriteRenderer spriteRenderer;
+    private Color colorOriginal;
+    private bool esInmune = false;
+    private Coroutine corrutinaPistolaje;
+
+    public bool EsInmune => esInmune;
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+
+        if (spriteRenderer != null)
+        {
+            colorOriginal = spriteRenderer.color;
+        }
+    }
+
+    /// <summary>
+    /// Activa la inmunidad del jugador por un tiempo determinado.
+    /// </summary>
+    public void ActivarInmunidad()
+    {
+        if (esInmune) return; // Ya está inmune, no reiniciar
+
+        Debug.Log("PlayerImmunity: Inmunidad activada");
+        esInmune = true;
+
+        // Cambiar color inmediatamente
+        if (spriteRenderer != null)
+        {
+            corrutinaPistolaje = StartCoroutine(ParpadearDuranteInmunidad());
+        }
+        else
+        {
+            // Fallback: simplemente esperar
+            StartCoroutine(DesactivarInmunidadEnUnTiempo());
+        }
+    }
+
+    /// <summary>
+    /// Corrutina que parpadea el sprite mientras dura la inmunidad.
+    /// </summary>
+    private IEnumerator ParpadearDuranteInmunidad()
+    {
+        float tiempoTranscurrido = 0f;
+
+        while (tiempoTranscurrido < duracionInmunidad)
+        {
+            // Alternar entre color inmunidad y color original
+            spriteRenderer.color = ((tiempoTranscurrido % (velocidadParpadeo * 2)) < velocidadParpadeo)
+                ? colorInmunidad
+                : colorOriginal;
+
+            tiempoTranscurrido += Time.deltaTime;
+            yield return null;
+        }
+
+        // Restaurar color original
+        spriteRenderer.color = colorOriginal;
+        esInmune = false;
+
+        Debug.Log("PlayerImmunity: Inmunidad desactivada");
+    }
+
+    /// <summary>
+    /// Fallback si no hay SpriteRenderer.
+    /// </summary>
+    private IEnumerator DesactivarInmunidadEnUnTiempo()
+    {
+        yield return new WaitForSeconds(duracionInmunidad);
+        esInmune = false;
+        Debug.Log("PlayerImmunity: Inmunidad desactivada (sin sprite)");
+    }
+
+    /// <summary>
+    /// Desactiva la inmunidad inmediatamente (si es necesario).
+    /// </summary>
+    public void DesactivarInmunidad()
+    {
+        if (corrutinaPistolaje != null)
+        {
+            StopCoroutine(corrutinaPistolaje);
+        }
+
+        esInmune = false;
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = colorOriginal;
+        }
+
+        Debug.Log("PlayerImmunity: Inmunidad desactivada manualmente");
+    }
+}

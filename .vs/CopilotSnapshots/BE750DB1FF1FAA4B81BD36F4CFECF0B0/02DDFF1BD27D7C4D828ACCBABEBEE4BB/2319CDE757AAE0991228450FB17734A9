@@ -1,0 +1,65 @@
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
+/// <summary>
+/// Gestor centralizado de transiciones a combate.
+/// Evita cargas múltiples de escenas si varios enemigos colisionan casi simultáneamente.
+/// </summary>
+public class CombatController : MonoBehaviour
+{
+    public static CombatController instancia { get; private set; }
+
+    private bool combateEnTransicion = false;
+
+    void Awake()
+    {
+        if (instancia != null && instancia != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instancia = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    /// <summary>
+    /// Inicia el combate si no hay una transición en proceso.
+    /// Solo el primer enemigo que llama a este método efectivamente cargará la escena.
+    /// </summary>
+    public bool IntentarIniciarCombate(DatosEnemigos.TipoEnemigo tipoEnemigo, DatosCombate datosCombate, GameObject enemigoGameObject)
+    {
+        // Si ya hay un combate en transición, rechazar
+        if (combateEnTransicion)
+        {
+            Debug.Log($"CombatController: Combate ya en transición. Enemigo {datosCombate.nombre} ignorado.");
+            return false;
+        }
+
+        Debug.Log($"CombatController: Iniciando combate con {datosCombate.nombre}");
+        combateEnTransicion = true;
+
+        // Registrar el enemigo en el gestor
+        GestorEnemigos.instancia.enemigoEnMapa = enemigoGameObject;
+        GestorEnemigos.instancia.EstablecerEnemigo(tipoEnemigo, datosCombate);
+
+        // Activar inmunidad en el jugador
+        PlayerImmunity playerImmunity = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerImmunity>();
+        if (playerImmunity != null)
+        {
+            playerImmunity.ActivarInmunidad();
+        }
+
+        // Cargar escena de combate de forma aditiva
+        SceneManager.LoadScene("Combate", LoadSceneMode.Additive);
+
+        return true;
+    }
+
+    /// <summary>
+    /// Llamar cuando se vuelve del combate al mapa principal.
+    /// </summary>
+    public void ReestablecerTransicion()
+    {
+        combateEnTransicion = false;
+    }
+}

@@ -1,0 +1,133 @@
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
+/// <summary>
+/// Gestor global de transiciones de combate.
+/// Este script es persistente y existe desde el inicio del juego.
+/// Controla que solo un combate se inicie a la vez, incluso si varios enemigos colisionan.
+/// Se sincroniza con GestorDeCombate cuando la escena de combate carga.
+/// </summary>
+public class GestorCombateGlobal : MonoBehaviour
+{
+    public static GestorCombateGlobal instancia { get; private set; }
+
+    /// <summary>
+    /// Flag que previene cargas múltiples de escenas si varios enemigos colisionan simultáneamente
+    /// </summary>
+    private bool combateEnTransicion = false;
+
+    /// <summary>
+    /// Cache de la referencia del jugador para evitar FindGameObjectWithTag() repetido
+    /// </summary>
+    private GameObject jugadorCacheado;
+    private PlayerImmunity playerImmunityCacheada;
+
+    void Awake()
+    {
+        if (instancia != null && instancia != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instancia = this;
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("GestorCombateGlobal: Inicializado como singleton persistente");
+
+        // Suscribirse a eventos de escena
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+
+        // ? OPTIMIZACIÓN: Cachear referencia del jugador al inicio
+        CachearJugador();
+    }
+
+    void OnDestroy()
+    {
+        // Desuscribirse al destruir
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+
+    /// <summary>
+    /// Cachea la referencia del jugador para evitar búsquedas repetidas.
+    /// </summary>
+    private void CachearJugador()
+    {
+        if (jugadorCacheado == null)
+        {
+            jugadorCacheado = GameObject.FindGameObjectWithTag("Player");
+            if (jugadorCacheado != null)
+            {
+                playerImmunityCacheada = jugadorCacheado.GetComponent<PlayerImmunity>();
+                Debug.Log("GestorCombateGlobal: Referencia del jugador cacheada");
+            }
+            else
+            {
+                Debug.LogWarning("GestorCombateGlobal: No se encontró GameObject con tag 'Player'");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Se llama cuando una escena se descarga.
+    /// Reestablece el flag si la escena de combate fue descargada.
+    /// </summary>
+    private void OnSceneUnloaded(Scene scene)
+    {
+        if (scene.name == "Combate")
+        {
+            Debug.Log("GestorCombateGlobal: Escena de combate descargada. Reestableciendo transición automáticamente.");
+            ReestablecerTransicion();
+        }
+    }
+
+    /// <summary>
+    /// Intenta iniciar un combate. Solo el primer enemigo que llama a este método puede iniciar.
+    /// Los demás enemigos que colisionen casi simultáneamente serán rechazados.
+    /// </summary>
+    public bool IntentarIniciarCombate(DatosEnemigos.TipoEnemigo tipoEnemigo, DatosCombate datosCombate, GameObject enemigoGameObject)
+    {
+        // Si ya hay un combate en transición, rechazar esta solicitud
+        if (combateEnTransicion)
+        {
+            Debug.Log($"GestorCombateGlobal: Combate ya en transición. Enemigo {datosCombate.nombre} ignorado.");
+            return false;
+        }
+
+        Debug.Log($"GestorCombateGlobal: Iniciando combate con {datosCombate.nombre}");
+        combateEnTransicion = true;
+
+        // Registrar el enemigo en GestorEnemigos
+        GestorEnemigos.instancia.enemigoEnMapa = enemigoGameObject;
+        GestorEnemigos.instancia.EstablecerEnemigo(tipoEnemigo, datosCombate);
+
+        // ? OPTIMIZACIÓN: Usar referencia cacheada en lugar de FindGameObjectWithTag()
+        if (playerImmunityCacheada != null)
+        {
+            playerImmunityCacheada.ActivarInmunidad();
+            Debug.Log("GestorCombateGlobal: Inmunidad del jugador activada (desde cache)");
+        }
+        else
+        {
+            Debug.LogWarning("GestorCombateGlobal: PlayerImmunity no encontrado (cache vacío, buscando...)");
+            CachearJugador();
+            if (playerImmunityCacheada != null)
+            {
+                playerImmunityCacheada.ActivarInmunidad();
+            }
+        }
+
+        // Cargar escena de combate de forma aditiva
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Combate", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+
+        return true;
+    }
+
+    /// <summary>
+    /// Restablece el flag de transición cuando se vuelve del combate.
+    /// Debe ser llamado al salir de la escena de combate.
+    /// </summary>
+    public void ReestablecerTransicion()
+    {
+        combateEnTransicion = false;
+        Debug.Log("GestorCombateGlobal: Transición reestablecida. Listo para próximo combate.");
+    }
+}

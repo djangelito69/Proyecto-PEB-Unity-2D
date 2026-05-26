@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -13,6 +13,14 @@ public class UIExperienciaManager : MonoBehaviour
     [SerializeField] private Slider sliderVida;
     [SerializeField] private TextMeshProUGUI textoVida;
 
+    [Header("UI - PA")]
+    [SerializeField] private Slider sliderPA;
+    [SerializeField] private TextMeshProUGUI textoPA;
+
+    [Header("Panel & Tecla")]
+    [SerializeField] private GameObject panelExperiencia;
+    [SerializeField] private KeyCode teclaToggle = KeyCode.X;
+
     [Header("Configuración")]
     [SerializeField] private float tiempoMaximoEspera = 10f;
 
@@ -20,7 +28,27 @@ public class UIExperienciaManager : MonoBehaviour
 
     void Start()
     {
+        if (panelExperiencia != null)
+            panelExperiencia.SetActive(false);
+
         StartCoroutine(InicializarConEspera());
+    }
+
+    void Update()
+    {
+        if (panelExperiencia == null) return;
+
+        if (Input.GetKeyDown(teclaToggle))
+        {
+            bool nuevoEstado = !panelExperiencia.activeSelf;
+            panelExperiencia.SetActive(nuevoEstado);
+
+            if (nuevoEstado)
+            {
+                // Actualiza la UI cuando se abre el panel
+                ActualizacionInicial();
+            }
+        }
     }
 
     IEnumerator InicializarConEspera()
@@ -69,12 +97,21 @@ public class UIExperienciaManager : MonoBehaviour
             sliderVida.maxValue = 1;
             sliderVida.interactable = false;
         }
+
+        if (sliderPA != null)
+        {
+            sliderPA.minValue = 0;
+            sliderPA.maxValue = 1;
+            sliderPA.interactable = false;
+        }
     }
 
     void SuscribirseEventos()
     {
         gestorExp.OnExperienciaActualizada += ActualizarUIExperiencia;
         gestorExp.OnVidaActualizada += ActualizarBarraVida;
+        // El gestor actualmente reutiliza OnVidaActualizada también para cambios de PA
+        gestorExp.OnVidaActualizada += ActualizarBarraPA;
     }
 
     void ActualizacionInicial()
@@ -86,6 +123,7 @@ public class UIExperienciaManager : MonoBehaviour
         );
 
         ActualizarBarraVida();
+        ActualizarBarraPA();
     }
 
     void ActualizarUIExperiencia(int nivel, int expActual, int expProximo)
@@ -93,10 +131,10 @@ public class UIExperienciaManager : MonoBehaviour
         if (gestorExp == null || !gestorExp.EstaInicializado()) return;
 
         if (textoNivel != null)
-            textoNivel.text = $"Nivel {nivel}";
+            textoNivel.text = $"Nivel: {nivel}";
 
         if (textoExperiencia != null)
-            textoExperiencia.text = $"{expActual} / {expProximo}";
+            textoExperiencia.text = $"XP: {expActual} / {expProximo}";
     }
 
     void ActualizarBarraVida()
@@ -109,10 +147,28 @@ public class UIExperienciaManager : MonoBehaviour
         if (vidaMax <= 0) return;
 
         if (textoVida != null)
-            textoVida.text = $"{vidaActual} / {vidaMax}";
+            textoVida.text = $"Vida: {vidaActual} / {vidaMax}";
 
         if (sliderVida != null)
             sliderVida.value = (float)vidaActual / vidaMax;
+    }
+
+    void ActualizarBarraPA()
+    {
+        if (gestorExp == null || !gestorExp.EstaInicializado()) return;
+
+        int paActual = gestorExp.ObtenerPAActual();
+
+        var datos = gestorExp.ObtenerDatosActuales();
+        int paMax = datos != null ? datos.pa : 0;
+
+        if (paMax <= 0) return;
+
+        if (textoPA != null)
+            textoPA.text = $"PA: {paActual} / {paMax}";
+
+        if (sliderPA != null)
+            sliderPA.value = (float)paActual / paMax;
     }
 
     void OnDestroy()
@@ -121,6 +177,7 @@ public class UIExperienciaManager : MonoBehaviour
         {
             gestorExp.OnExperienciaActualizada -= ActualizarUIExperiencia;
             gestorExp.OnVidaActualizada -= ActualizarBarraVida;
+            gestorExp.OnVidaActualizada -= ActualizarBarraPA;
         }
     }
 }

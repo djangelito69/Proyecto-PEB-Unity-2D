@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 /// <summary>
-/// Gestor de combate actualizado que integra:
+/// Gestor de combate que se ejecuta en la escena de combate.
+/// Integra:
 /// - Sistema de experiencia
 /// - Persistencia de vida
 /// - Mejoras dinámicas de stats
+/// Se coordina con GestorCombateGlobal para control de transiciones.
 /// </summary>
 public class GestorDeCombate : MonoBehaviour
 {
@@ -21,7 +24,11 @@ public class GestorDeCombate : MonoBehaviour
     public bool combateTerminado = false;
     private bool turnoJugador = true;
 
+    private Coroutine corrutinavolverAlMapa;
+
     public System.Action<string> OnMensajeCombate;
+    public System.Action OnDañoRecibidoEnemigo;
+    public System.Action OnDañoRecibidoJugador;
 
     void EnviarMensaje(string mensaje)
     {
@@ -38,6 +45,13 @@ public class GestorDeCombate : MonoBehaviour
 
         EnviarMensaje("=== COMIENZA EL COMBATE ===");
         MostrarStats();
+    }
+
+    void Start()
+    {
+        // Optimizado: Ya no se busca el AudioListener aquí. 
+        // El GestorCombateGlobal se encarga de apagar el del mapa antes de cargar esta escena.
+        Debug.Log("GestorDeCombate: Escena de combate iniciada. Audio configurado por el gestor global.");
     }
 
     Combate CrearCombatiente(DatosCombate datos)
@@ -76,6 +90,15 @@ public class GestorDeCombate : MonoBehaviour
             jugador = CrearCombatiente(datos);
             Debug.LogWarning("[COMBATE] GestorExperiencia no encontrado, usando datos base");
         }
+
+        // ✅ Reglas especiales de combate para el jugador:
+        // - Ataque básico gratis (0 PA de coste)
+        // - Regeneración de exactamente +1 PA por turno durante el combate
+        if (jugador != null)
+        {
+            jugador.PA_costoBasico = 0;
+            jugador.PA_recuperacionPorTurno = 1;
+        }
     }
 
     void ConfigurarEnemigo()
@@ -97,6 +120,12 @@ public class GestorDeCombate : MonoBehaviour
 
     public void AtaqueBasicoJugador()
     {
+        if (jugador == null || enemigo == null)
+        {
+            Debug.LogError("GestorDeCombate: Jugador o enemigo es null en AtaqueBasicoJugador()");
+            return;
+        }
+
         if (combateTerminado || !turnoJugador) return;
 
         if (!jugador.TienePAParaBasico())
@@ -107,6 +136,7 @@ public class GestorDeCombate : MonoBehaviour
 
         jugador.GastarPA(jugador.PA_costoBasico);
         enemigo.RecibirDaño(jugador.dañoBasico);
+        OnDañoRecibidoEnemigo?.Invoke();
         EnviarMensaje($"{jugador.Nombre} usó ataque básico → {jugador.dañoBasico} daño a {enemigo.Nombre}");
 
         if (RevisarGanador()) return;
@@ -115,6 +145,12 @@ public class GestorDeCombate : MonoBehaviour
 
     public void AtaqueEspecialJugador()
     {
+        if (jugador == null || enemigo == null)
+        {
+            Debug.LogError("GestorDeCombate: Jugador o enemigo es null en AtaqueEspecialJugador()");
+            return;
+        }
+
         if (combateTerminado || !turnoJugador) return;
 
         if (!jugador.TienePAParaEspecial())
@@ -125,6 +161,7 @@ public class GestorDeCombate : MonoBehaviour
 
         jugador.GastarPA(jugador.PA_costoEspecial);
         enemigo.RecibirDaño(jugador.dañoEspecial);
+        OnDañoRecibidoEnemigo?.Invoke();
         EnviarMensaje($"{jugador.Nombre} usó ataque especial → {jugador.dañoEspecial} daño a {enemigo.Nombre}");
 
         if (RevisarGanador()) return;
@@ -133,6 +170,12 @@ public class GestorDeCombate : MonoBehaviour
 
     void PasarTurnoAlEnemigo()
     {
+        if (jugador == null || enemigo == null)
+        {
+            Debug.LogError("GestorDeCombate: Jugador o enemigo es null en PasarTurnoAlEnemigo()");
+            return;
+        }
+
         turnoJugador = false;
         jugador.RecuperarPA();
         TurnoEnemigo();
@@ -140,6 +183,12 @@ public class GestorDeCombate : MonoBehaviour
 
     void TurnoEnemigo()
     {
+        if (jugador == null || enemigo == null)
+        {
+            Debug.LogError("GestorDeCombate: Jugador o enemigo es null en TurnoEnemigo()");
+            return;
+        }
+
         EnviarMensaje($"─── Turno de {enemigo.Nombre} ───");
 
         int decision = Random.Range(0, 100);
@@ -148,6 +197,7 @@ public class GestorDeCombate : MonoBehaviour
         {
             enemigo.GastarPA(enemigo.PA_costoEspecial);
             jugador.RecibirDaño(enemigo.dañoEspecial);
+            OnDañoRecibidoJugador?.Invoke();
             EnviarMensaje($"{enemigo.Nombre} usó ataque especial → {enemigo.dañoEspecial} daño");
             enemigo.RecuperarPA();
         }
@@ -155,6 +205,7 @@ public class GestorDeCombate : MonoBehaviour
         {
             enemigo.GastarPA(enemigo.PA_costoBasico);
             jugador.RecibirDaño(enemigo.dañoBasico);
+            OnDañoRecibidoJugador?.Invoke();
             EnviarMensaje($"{enemigo.Nombre} usó ataque básico → {enemigo.dañoBasico} daño");
             enemigo.RecuperarPA();
         }
@@ -173,14 +224,40 @@ public class GestorDeCombate : MonoBehaviour
 
     void VolverAlMapa()
     {
-        // ✅ Detener música de combate
+        Debug.Log("GestorDeCombate: VolverAlMapa() llamado");
+
+        Time.timeScale = 1f;
+
         if (MusicManager.instancia != null)
         {
             MusicManager.instancia.DetenerMusica();
         }
 
-        // ✅ Descargar escena de combate (mantiene el mapa activo)
+        // Optimizado: El GestorCombateGlobal reactivará el AudioListener automáticamente
+        // a través de su método ReestablecerTransicion().
+
+        if (GestorCombateGlobal.instancia != null)
+        {
+            GestorCombateGlobal.instancia.ReestablecerTransicion();
+            Debug.Log("GestorDeCombate: Flag de transición reestablecido");
+        }
+
         SceneManager.UnloadSceneAsync("Combate");
+    }
+
+    private IEnumerator EsperarYVolverAlMapa(float segundos)
+    {
+        yield return new WaitForSeconds(segundos);
+        VolverAlMapa();
+    }
+
+    void OnDestroy()
+    {
+        if (corrutinavolverAlMapa != null)
+        {
+            StopCoroutine(corrutinavolverAlMapa);
+            Debug.Log("GestorDeCombate: Corrutina de retorno detenida");
+        }
     }
 
     bool RevisarGanador()
@@ -190,14 +267,12 @@ public class GestorDeCombate : MonoBehaviour
             combateTerminado = true;
             EnviarMensaje("¡Ganaste!");
 
-            // ✅ Guardar vida actual del jugador ANTES de volver al mapa
             if (GestorExperiencia.instancia != null)
             {
                 GestorExperiencia.instancia.EstablecerVidaActual(jugador.vidaActual);
                 GestorExperiencia.instancia.EstablecerPAActual(jugador.PA_Actual);
             }
 
-            // ✅ Otorgar experiencia y destruir enemigo
             if (GestorEnemigos.instancia != null)
             {
                 int expGanada = DatosEnemigos.ObtenerExperiencia(tipoEnemigo);
@@ -212,7 +287,12 @@ public class GestorDeCombate : MonoBehaviour
                 GestorEnemigos.instancia.LimpiarEnemigo();
             }
 
-            Invoke("VolverAlMapa", 1.5f);
+            // Si no hay UICombateVictoria instalada en la escena, volvemos automáticamente al mapa como fallback.
+            // Si la hay, esa interfaz mostrará la pantalla de victoria y esperará a que el jugador pulse "Continuar".
+            if (FindObjectOfType<UICombateVictoria>() == null)
+            {
+                corrutinavolverAlMapa = StartCoroutine(EsperarYVolverAlMapa(1.5f));
+            }
             return true;
         }
 
@@ -222,7 +302,6 @@ public class GestorDeCombate : MonoBehaviour
             MostrarStats();
             EnviarMensaje("Perdiste... El jugador fue derrotado.");
 
-            // ✅ Guardar vida actual incluso si pierdes (para revivir o intentar de nuevo)
             if (GestorExperiencia.instancia != null)
             {
                 GestorExperiencia.instancia.EstablecerVidaActual(jugador.vidaActual);
@@ -234,7 +313,12 @@ public class GestorDeCombate : MonoBehaviour
                 GestorEnemigos.instancia.LimpiarEnemigo();
             }
 
-            Invoke("VolverAlMapa", 1.5f);
+            // Si no hay UICombateGameOver instalada en la escena, volvemos automáticamente al mapa como fallback.
+            // Si la hay, esa interfaz mostrará la pantalla de derrota y esperará a que el jugador elija Reintentar o Menú Principal.
+            if (FindObjectOfType<UICombateGameOver>() == null)
+            {
+                corrutinavolverAlMapa = StartCoroutine(EsperarYVolverAlMapa(1.5f));
+            }
             return true;
         }
 
@@ -243,6 +327,12 @@ public class GestorDeCombate : MonoBehaviour
 
     void MostrarStats()
     {
+        if (jugador == null || enemigo == null)
+        {
+            Debug.LogError("GestorDeCombate: Jugador o enemigo es null en MostrarStats()");
+            return;
+        }
+
         EnviarMensaje(jugador.ObtenerStats());
         EnviarMensaje(enemigo.ObtenerStats());
     }

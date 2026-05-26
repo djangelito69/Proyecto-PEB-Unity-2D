@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 
 /// <summary>
@@ -45,6 +45,10 @@ public class GestorExperiencia : MonoBehaviour
         }
 
         instancia = this;
+
+        // Desvincular del padre para convertirlo en un objeto raíz
+        transform.SetParent(null);
+
         DontDestroyOnLoad(gameObject);
         Debug.Log("[GestorExperiencia] Instancia singleton creada en Awake.");
     }
@@ -122,8 +126,22 @@ public class GestorExperiencia : MonoBehaviour
         Debug.Log($"[XP] +{cantidad} XP. Total: {experienciaActual}/{experienciaParaProximo}");
 
         // Verificar múltiples subidas de nivel en un golpe
+        int controlBucle = 0;
         while (experienciaActual >= experienciaParaProximo)
         {
+            if (experienciaParaProximo <= 0)
+            {
+                Debug.LogError("[GestorExperiencia] ❌ ERROR: experienciaParaProximo es <= 0. Se abortó el bucle para evitar congelamiento de Unity.");
+                break;
+            }
+
+            controlBucle++;
+            if (controlBucle > 1000)
+            {
+                Debug.LogError("[GestorExperiencia] ❌ ERROR: Bucle infinito detectado en AñadirExperiencia (más de 1000 iteraciones consecutivas).");
+                break;
+            }
+
             SubirDeNivel();
         }
 
@@ -158,7 +176,12 @@ public class GestorExperiencia : MonoBehaviour
     void CalcularExperienciaParaSiguiente()
     {
         // Fórmula: expBase × multiplicador^(nivel-1)
-        experienciaParaProximo = (int)(experienciaBase * Mathf.Pow(multiplicadorExperiencia, nivelActual - 1));
+        // Asegurar que los valores no sean cero o negativos en el Inspector por error
+        int expBaseSegura = Mathf.Max(1, experienciaBase);
+        float multSeguro = multiplicadorExperiencia <= 0f ? 1.5f : multiplicadorExperiencia;
+
+        int calculo = (int)(expBaseSegura * Mathf.Pow(multSeguro, nivelActual - 1));
+        experienciaParaProximo = Mathf.Max(1, calculo);
     }
 
     // ========== GETTERS ==========

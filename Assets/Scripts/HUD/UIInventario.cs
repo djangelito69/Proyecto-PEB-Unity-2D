@@ -30,6 +30,11 @@ public class UIInventario : MonoBehaviour
     public TMP_Text[] nombres;
     public TMP_Text[] cantidades;
 
+    [Header("Sonidos")]
+    public AudioSource audioSource;
+
+    public AudioClip sonidoAbrir;
+    public AudioClip sonidoClick;
     private int indiceSeleccionado = -1;
 
     private void Awake()
@@ -48,22 +53,39 @@ public class UIInventario : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            panelInventario.SetActive(
-                !panelInventario.activeSelf
-            );
+            bool abrir = !panelInventario.activeSelf;
 
-            MostrarConsumibles();
+            panelInventario.SetActive(abrir);
+
+            ReproducirSonido(sonidoAbrir);
+
+            if (abrir)
+            {
+                MostrarConsumibles();
+            }
+        }
+    }
+
+    private void ReproducirSonido(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
         }
     }
 
     public void MostrarConsumibles()
     {
+        ReproducirSonido(sonidoClick);
+
         panelConsumibles.SetActive(true);
         panelObjetos.SetActive(false);
     }
 
     public void MostrarObjetos()
     {
+        ReproducirSonido(sonidoClick);
+
         Debug.Log("ABRIENDO OBJETOS");
 
         panelConsumibles.SetActive(false);

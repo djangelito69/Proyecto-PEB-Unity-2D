@@ -9,6 +9,7 @@ public class MovimientoPersonaje : MonoBehaviour
     public Animator animator;
 
     private Vector3 escalaOriginal;
+    private PlayerImmunity playerImmunity;
 
     [Header("Estado")]
     public int estado = 0; // 0 = libre, 1 = bloqueado
@@ -17,6 +18,7 @@ public class MovimientoPersonaje : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         escalaOriginal = transform.localScale;
+        playerImmunity = GetComponent<PlayerImmunity>();
     }
 
     void Update()

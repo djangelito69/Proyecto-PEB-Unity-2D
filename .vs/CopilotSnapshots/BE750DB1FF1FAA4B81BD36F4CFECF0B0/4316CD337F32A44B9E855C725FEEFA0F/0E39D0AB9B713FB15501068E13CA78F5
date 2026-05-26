@@ -1,0 +1,48 @@
+﻿using UnityEngine;
+
+public class MovimientoPersonaje : MonoBehaviour
+{
+    [Header("Movimiento")]
+    public float velocidad = 5f;
+    public Rigidbody2D rb;
+    private Vector2 mover;
+    public Animator animator;
+
+    private Vector3 escalaOriginal;
+
+    [Header("Estado")]
+    public int estado = 0; // 0 = libre, 1 = bloqueado
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        escalaOriginal = transform.localScale;
+    }
+
+    void Update()
+    {
+        if (estado != 0) return;
+
+        mover.x = Input.GetAxisRaw("Horizontal");
+        mover.y = Input.GetAxisRaw("Vertical");
+
+
+        if (mover.x > 0)
+            transform.localScale = new Vector3(Mathf.Abs(escalaOriginal.x), escalaOriginal.y, escalaOriginal.z);
+        else if (mover.x < 0)
+            transform.localScale = new Vector3(-Mathf.Abs(escalaOriginal.x), escalaOriginal.y, escalaOriginal.z);
+    }
+
+    void FixedUpdate()
+    {
+        animator.SetBool("IsRunning", mover != Vector2.zero);
+
+        if (estado != 0)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        rb.linearVelocity = mover.normalized * velocidad;
+    }
+}

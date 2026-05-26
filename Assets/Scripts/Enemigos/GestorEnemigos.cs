@@ -16,6 +16,10 @@ public class GestorEnemigos : MonoBehaviour
             return;
         }
         instancia = this;
+
+        // Desvincular del padre para convertirlo en un objeto raíz
+        transform.SetParent(null);
+
         DontDestroyOnLoad(gameObject);
     }
 
