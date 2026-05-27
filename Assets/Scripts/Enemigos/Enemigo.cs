@@ -71,11 +71,11 @@ public class Enemigo : MonoBehaviour
 
             if (direccion.x < 0)
             {
-                spriteRenderer.flipX = true;
+                spriteRenderer.flipX = false;
             }
             else if (direccion.x > 0)
             {
-                spriteRenderer.flipX = false;
+                spriteRenderer.flipX = true;
             }
         }
         else

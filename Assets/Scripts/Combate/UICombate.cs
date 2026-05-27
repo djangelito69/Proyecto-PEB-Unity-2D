@@ -1,8 +1,9 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class UICombate : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class UICombate : MonoBehaviour
     [Header("Botones")]
     public Button botonAtaqueBasico;
     public Button botonAtaqueEspecial;
+    public Button botonHuir;
+
+    [Header("Estado de combate")]
+    public CanvasGroup canvasGroupBotones;
+    public TextMeshProUGUI textoTurno;
 
     [Header("Textos de stats")]
     public TextMeshProUGUI textoStatsJugador;
@@ -30,7 +36,7 @@ public class UICombate : MonoBehaviour
     public Image imagenEnemigo;
 
     [Header("Paneles de Daño")]
-    public Image panelHUD; // Arrastra el panel/fondo del HUD del jugador aquí en el Inspector
+    public Image panelHUD;
 
     private List<string> historialLog = new List<string>();
     private const int MAX_LINEAS = 20;
@@ -42,26 +48,31 @@ public class UICombate : MonoBehaviour
     {
         botonAtaqueBasico.onClick.AddListener(OnBasico);
         botonAtaqueEspecial.onClick.AddListener(OnEspecial);
+        botonHuir.onClick.AddListener(OnHuir);
 
-        // Obtener referencia al gestor de combate si no se asignó en el Inspector
         if (gestordecombate == null)
         {
             gestordecombate = GestorDeCombate.instancia;
         }
 
-        // Suscribirse a los eventos de daño para disparar la retroalimentación visual
         if (gestordecombate != null)
         {
             gestordecombate.OnDañoRecibidoEnemigo += IndicarDañoEnemigo;
             gestordecombate.OnDañoRecibidoJugador += IndicarDañoJugador;
+
+            // ✅ CRÍTICO: Suscribirse a los cambios de estado
+            gestordecombate.OnEstadoCambiado += OnCombatStateChanged;
+
+            gestordecombate.OnMensajeCombate += MostrarMensaje;
         }
 
+
         ActualizarUI();
+        ActualizarEstadoTurno(true);
     }
 
     void OnDestroy()
     {
-        // ✅ CRÍTICO: Remover listeners para evitar acumulación
         if (botonAtaqueBasico != null)
         {
             botonAtaqueBasico.onClick.RemoveListener(OnBasico);
@@ -72,18 +83,63 @@ public class UICombate : MonoBehaviour
             botonAtaqueEspecial.onClick.RemoveListener(OnEspecial);
         }
 
-        // Desuscribirse de eventos de daño
+        if (botonHuir != null)
+        {
+            botonHuir.onClick.RemoveListener(OnHuir);
+        }
+
         if (gestordecombate != null)
         {
             gestordecombate.OnDañoRecibidoEnemigo -= IndicarDañoEnemigo;
             gestordecombate.OnDañoRecibidoJugador -= IndicarDañoJugador;
+
+            gestordecombate.OnEstadoCambiado -= OnCombatStateChanged;
+
+            gestordecombate.OnMensajeCombate -= MostrarMensaje;
         }
 
-        // Detener corrutinas pendientes para evitar fallos de referencia
-        if (corrutinaDestelloEnemigo != null) StopCoroutine(corrutinaDestelloEnemigo);
-        if (corrutinaDestelloJugador != null) StopCoroutine(corrutinaDestelloJugador);
+        if (corrutinaDestelloEnemigo != null)
+            StopCoroutine(corrutinaDestelloEnemigo);
+
+        if (corrutinaDestelloJugador != null)
+            StopCoroutine(corrutinaDestelloJugador);
 
         Debug.Log("UICombate: Listeners removidos");
+    }
+
+    // ✅ NUEVO: Escuchar cambios de estado del combate
+    private void OnCombatStateChanged(CombatState previousState, CombatState newState)
+    {
+        Debug.Log($"[UI] Estado cambió: {previousState} → {newState}");
+
+        switch (newState)
+        {
+            case CombatState.PlayerTurn:
+                Debug.Log("[UI] Activando botones del jugador");
+                ActualizarEstadoTurno(true);
+                ActualizarUI();
+                break;
+
+            case CombatState.ExecutingAction:
+                Debug.Log("[UI] Desactivando botones - acción ejecutándose");
+                ActualizarEstadoTurno(false, true);
+                break;
+
+            case CombatState.EnemyTurn:
+                Debug.Log("[UI] Desactivando botones - turno enemigo");
+                ActualizarEstadoTurno(false, false);
+                break;
+
+            case CombatState.Victory:
+                Debug.Log("[UI] ¡Victoria!");
+                ActualizarEstadoTurno(false, false);
+                break;
+
+            case CombatState.Defeat:
+                Debug.Log("[UI] ¡Derrota!");
+                ActualizarEstadoTurno(false, false);
+                break;
+        }
     }
 
     void OnBasico()
@@ -94,8 +150,13 @@ public class UICombate : MonoBehaviour
             return;
         }
 
+        Debug.Log("[UI] OnBasico() llamado");
+
+        // NO LLAMAMOS A ActualizarEstadoTurno AQUÍ
+        // Lo hará automáticamente OnCombatStateChanged cuando el estado cambie a ExecutingAction
+
+        MostrarMensaje("Usaste ataque básico");
         gestordecombate.AtaqueBasicoJugador();
-        ActualizarUI();
     }
 
     void OnEspecial()
@@ -106,8 +167,28 @@ public class UICombate : MonoBehaviour
             return;
         }
 
+        Debug.Log("[UI] OnEspecial() llamado");
+
+        // NO LLAMAMOS A ActualizarEstadoTurno AQUÍ
+        // Lo hará automáticamente OnCombatStateChanged cuando el estado cambie a ExecutingAction
+
+        MostrarMensaje("Usaste ataque especial");
         gestordecombate.AtaqueEspecialJugador();
-        ActualizarUI();
+    }
+
+    void OnHuir()
+    {
+        if (gestordecombate == null)
+        {
+            Debug.LogError("UICombate: GestorDeCombate es null en OnHuir()");
+            return;
+        }
+
+        Debug.Log("[UI] OnHuir() llamado");
+
+        MostrarMensaje("Intentaste huir");
+
+        gestordecombate.IntentarHuir();
     }
 
     public void ActualizarUI()
@@ -127,7 +208,6 @@ public class UICombate : MonoBehaviour
         var j = gestordecombate.jugador;
         var e = gestordecombate.enemigo;
 
-        // ✅ Validación defensiva para evitar crashes
         if (barraVidaJugador != null)
         {
             barraVidaJugador.maxValue = j.vidaMaxima > 0 ? j.vidaMaxima : 1;
@@ -154,30 +234,40 @@ public class UICombate : MonoBehaviour
 
         if (textoStatsJugador != null)
         {
-            textoStatsJugador.text = $"{j.Nombre}\nVida: {j.vidaActual}/{j.vidaMaxima}\n\nPA: {j.PA_Actual}/{j.PA_Maxima}";
+            textoStatsJugador.text =
+                $"{j.Nombre}\n" +
+                $"Vida: {j.vidaActual}/{j.vidaMaxima}\n\n" +
+                $"PA: {j.PA_Actual}/{j.PA_Maxima}";
         }
 
         if (textoStatsEnemigo != null)
         {
-            textoStatsEnemigo.text = $"{e.Nombre}\nVida: {e.vidaActual}/{e.vidaMaxima}\n\nPA: {e.PA_Actual}/{e.PA_Maxima}";
+            textoStatsEnemigo.text =
+                $"{e.Nombre}\n" +
+                $"Vida: {e.vidaActual}/{e.vidaMaxima}\n\n" +
+                $"PA: {e.PA_Actual}/{e.PA_Maxima}";
         }
 
         if (botonAtaqueBasico != null)
         {
-            botonAtaqueBasico.interactable = j.TienePAParaBasico() && !gestordecombate.combateTerminado;
+            botonAtaqueBasico.interactable =
+                j.TienePAParaBasico() &&
+                !gestordecombate.combateTerminado;
         }
 
         if (botonAtaqueEspecial != null)
         {
-            botonAtaqueEspecial.interactable = j.TienePAParaEspecial() && !gestordecombate.combateTerminado;
+            botonAtaqueEspecial.interactable =
+                j.TienePAParaEspecial() &&
+                !gestordecombate.combateTerminado;
         }
 
         if (textoMensaje != null)
         {
             if (gestordecombate.combateTerminado)
+            {
                 textoMensaje.text = j.EstaVivo ? "¡Ganaste!" : "Perdiste...";
-            else
-                textoMensaje.text = "Tu turno";
+            }
         }
 
         if (imagenEnemigo != null && e.sprite != null)
@@ -186,7 +276,35 @@ public class UICombate : MonoBehaviour
         }
     }
 
-    // ========== RETROALIMENTACIÓN VISUAL DE DAÑO ==========
+    // =====================================================
+    // ESTADO DEL COMBATE
+    // =====================================================
+
+    public void ActualizarEstadoTurno(bool turnoJugador, bool ejecutandoAccion = false)
+    {
+        Debug.Log($"[UI] ActualizarEstadoTurno - turnoJugador: {turnoJugador}, ejecutandoAccion: {ejecutandoAccion}");
+
+        if (canvasGroupBotones != null)
+        {
+            canvasGroupBotones.alpha = turnoJugador ? 1f : 0.5f;
+            canvasGroupBotones.interactable = turnoJugador;
+            canvasGroupBotones.blocksRaycasts = turnoJugador;
+
+            Debug.Log($"[UI] CanvasGroup - interactable: {canvasGroupBotones.interactable}");
+        }
+    }
+
+    public void MostrarMensaje(string mensaje)
+    {
+        if (textoMensaje != null)
+        {
+            textoMensaje.text = mensaje;
+        }
+    }
+
+    // =====================================================
+    // RETROALIMENTACIÓN VISUAL DE DAÑO
+    // =====================================================
 
     public void IndicarDañoEnemigo()
     {
@@ -194,6 +312,7 @@ public class UICombate : MonoBehaviour
         {
             StopCoroutine(corrutinaDestelloEnemigo);
         }
+
         corrutinaDestelloEnemigo = StartCoroutine(DestellarEnemigoRojo());
     }
 
@@ -202,10 +321,11 @@ public class UICombate : MonoBehaviour
         if (imagenEnemigo != null)
         {
             Color colorOriginalEnemigo = imagenEnemigo.color;
-            // Teñir de un color rojo suave
+
             imagenEnemigo.color = new Color(1f, 0.4f, 0.4f, 1f);
+
             yield return new WaitForSeconds(1f);
-            // Restaurar color original
+
             imagenEnemigo.color = colorOriginalEnemigo;
         }
     }
@@ -216,20 +336,28 @@ public class UICombate : MonoBehaviour
         {
             StopCoroutine(corrutinaDestelloJugador);
         }
+
         corrutinaDestelloJugador = StartCoroutine(DestellarHUDJugadorRojo());
     }
 
+
     private IEnumerator DestellarHUDJugadorRojo()
     {
-        // Si no se asignó un panelHUD en el Inspector, intentamos teñir la imagen de este componente como fallback
         Image panelAUsar = panelHUD != null ? panelHUD : GetComponent<Image>();
+
         if (panelAUsar != null)
         {
             Color colorOriginalPanel = panelAUsar.color;
-            // Teñir el fondo de un rojo traslúcido
-            panelAUsar.color = new Color(1f, 0.3f, 0.3f, colorOriginalPanel.a > 0.1f ? colorOriginalPanel.a : 0.8f);
+
+            panelAUsar.color = new Color(
+                1f,
+                0.3f,
+                0.3f,
+                colorOriginalPanel.a > 0.1f ? colorOriginalPanel.a : 0.8f
+            );
+
             yield return new WaitForSeconds(1f);
-            // Restaurar color original
+
             panelAUsar.color = colorOriginalPanel;
         }
     }

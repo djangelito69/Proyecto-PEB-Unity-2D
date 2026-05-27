@@ -2,43 +2,52 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-/// <summary>
-/// Gestor de combate que se ejecuta en la escena de combate.
-/// Integra:
-/// - Sistema de experiencia
-/// - Persistencia de vida
-/// - Mejoras dinámicas de stats
-/// Se coordina con GestorCombateGlobal para control de transiciones.
-/// </summary>
+
 public class GestorDeCombate : MonoBehaviour
 {
+    [Header("=== COMBATIENTES ===")]
     public Combate jugador;
     public Combate enemigo;
 
+    [Header("=== TIMING (segundos) ===")]
+    [SerializeField] private float delayEntreAcciones = 0.5f;
+    [SerializeField] private float delayEntreAnticipoYGolpe = 0.3f;
+    [SerializeField] private float delayDespuesDeGolpe = 0.5f;
+    [SerializeField] private float delayAntesDeTurnoEnemigo = 0.8f;
+    [SerializeField] private float delayDespuesDeTurno = 0.5f;
+    [SerializeField] private float delayAntesDeTurnoJugador = 0.8f;
+
+    [Header("=== REFERENCIAS ===")]
+    public GameObject enemigoEnMapa;
+    public DatosEnemigos.TipoEnemigo tipoEnemigo;
+
+    [Header("=== HUIDA ===")]
+    [SerializeField] private int probabilidadHuir = 25;
+
     public static GestorDeCombate instancia;
 
-    [Header("Enemigo actual")]
-    public DatosEnemigos.TipoEnemigo tipoEnemigo;
-    public GameObject enemigoEnMapa;
+    // State Machine
+    private CombatStateMachine stateMachine;
 
+    // Control de flujo
     public bool combateTerminado = false;
-    private bool turnoJugador = true;
-
     private Coroutine corrutinavolverAlMapa;
 
+    // Eventos
     public System.Action<string> OnMensajeCombate;
     public System.Action OnDañoRecibidoEnemigo;
     public System.Action OnDañoRecibidoJugador;
+    public System.Action<CombatState, CombatState> OnEstadoCambiado;
 
-    void EnviarMensaje(string mensaje)
-    {
-        Debug.Log(mensaje);
-        OnMensajeCombate?.Invoke(mensaje);
-    }
+    #region === INICIALIZACIÓN ===
 
     void Awake()
     {
         instancia = this;
+
+        // Inicializar state machine
+        stateMachine = new CombatStateMachine();
+        stateMachine.OnStateChanged += OnStateMachineChanged;
 
         ConfigurarJugador();
         ConfigurarEnemigo();
@@ -49,10 +58,20 @@ public class GestorDeCombate : MonoBehaviour
 
     void Start()
     {
-        // Optimizado: Ya no se busca el AudioListener aquí. 
-        // El GestorCombateGlobal se encarga de apagar el del mapa antes de cargar esta escena.
-        Debug.Log("GestorDeCombate: Escena de combate iniciada. Audio configurado por el gestor global.");
+        // Asegurar que el combate comienza en el estado correcto
+        stateMachine.SetState(CombatState.PlayerTurn);
+        EnviarMensaje("Tu turno");
     }
+
+    private void OnStateMachineChanged(CombatState previousState, CombatState newState)
+    {
+        Debug.Log($"[STATE CHANGE] {previousState} → {newState} | CanPlayerAct: {stateMachine.CanPlayerAct()}");
+        OnEstadoCambiado?.Invoke(previousState, newState);
+    }
+
+    #endregion
+
+    #region === CONFIGURACIÓN ===
 
     Combate CrearCombatiente(DatosCombate datos)
     {
@@ -82,18 +101,14 @@ public class GestorDeCombate : MonoBehaviour
             jugador.vidaActual = GestorExperiencia.instancia.ObtenerVidaActual();
             jugador.PA_Actual = GestorExperiencia.instancia.ObtenerPAActual();
 
-            Debug.Log($"[COMBATE] Jugador configurado: {jugador.Nombre} (Nivel {GestorExperiencia.instancia.ObtenerNivel()}) | Vida: {jugador.vidaActual}/{jugador.vidaMaxima} | PA: {jugador.PA_Actual}/{jugador.PA_Maxima}");
+            Debug.Log($"[COMBATE] Jugador: {jugador.Nombre} | Vida: {jugador.vidaActual}/{jugador.vidaMaxima} | PA: {jugador.PA_Actual}/{jugador.PA_Maxima}");
         }
         else
         {
             DatosCombate datos = DatosPersonaje.ObtenerDatos(DatosPersonaje.PersonajeSeleccionado);
             jugador = CrearCombatiente(datos);
-            Debug.LogWarning("[COMBATE] GestorExperiencia no encontrado, usando datos base");
         }
 
-        // ✅ Reglas especiales de combate para el jugador:
-        // - Ataque básico gratis (0 PA de coste)
-        // - Regeneración de exactamente +1 PA por turno durante el combate
         if (jugador != null)
         {
             jugador.PA_costoBasico = 0;
@@ -108,25 +123,36 @@ public class GestorDeCombate : MonoBehaviour
             DatosCombate datos = GestorEnemigos.instancia.ObtenerDatosEnemigo();
             tipoEnemigo = GestorEnemigos.instancia.ObtenerTipoEnemigo();
             enemigo = CrearCombatiente(datos);
-            Debug.Log($"[COMBATE] Enemigo: {enemigo.Nombre}");
         }
         else
         {
-            Debug.LogWarning("[COMBATE] No se encontró enemigo, usando tipo del Inspector");
             DatosCombate datos = DatosEnemigos.ObtenerDatos(tipoEnemigo);
             enemigo = CrearCombatiente(datos);
         }
     }
 
+    #endregion
+
+    #region === ACCIONES DEL JUGADOR (BLOQUEADAS SI NO ES SU TURNO) ===
+
+    /// <summary>
+    /// El jugador intenta hacer un ataque básico.
+    /// Solo funciona si:
+    /// 1. El estado es PlayerTurn
+    /// 2. El combate no ha terminado
+    /// 3. Tiene PA suficiente
+    /// </summary>
     public void AtaqueBasicoJugador()
     {
-        if (jugador == null || enemigo == null)
+        Debug.Log($"[ATAQUE BÁSICO] Estado actual: {stateMachine.CurrentState} | CanPlayerAct: {stateMachine.CanPlayerAct()}");
+
+        if (!stateMachine.CanPlayerAct())
         {
-            Debug.LogError("GestorDeCombate: Jugador o enemigo es null en AtaqueBasicoJugador()");
             return;
         }
 
-        if (combateTerminado || !turnoJugador) return;
+        if (combateTerminado)
+            return;
 
         if (!jugador.TienePAParaBasico())
         {
@@ -134,137 +160,263 @@ public class GestorDeCombate : MonoBehaviour
             return;
         }
 
-        jugador.GastarPA(jugador.PA_costoBasico);
-        enemigo.RecibirDaño(jugador.dañoBasico);
-        OnDañoRecibidoEnemigo?.Invoke();
-        EnviarMensaje($"{jugador.Nombre} usó ataque básico → {jugador.dañoBasico} daño a {enemigo.Nombre}");
 
-        if (RevisarGanador()) return;
-        PasarTurnoAlEnemigo();
+        StartCoroutine(SecuenciaAtaqueJugador(
+            "Ataque Básico",
+            jugador.dañoBasico,
+            jugador.PA_costoBasico
+        ));
     }
 
+
+    /// <summary>
+    /// El jugador intenta hacer un ataque especial.
+    /// </summary>
     public void AtaqueEspecialJugador()
     {
-        if (jugador == null || enemigo == null)
+        if (!stateMachine.CanPlayerAct())
         {
-            Debug.LogError("GestorDeCombate: Jugador o enemigo es null en AtaqueEspecialJugador()");
             return;
         }
 
-        if (combateTerminado || !turnoJugador) return;
+        if (combateTerminado)
+            return;
 
         if (!jugador.TienePAParaEspecial())
         {
-            EnviarMensaje("No tienes PA suficiente para el ataque especial.");
+            EnviarMensaje("No tienes PA suficiente.");
             return;
         }
 
-        jugador.GastarPA(jugador.PA_costoEspecial);
-        enemigo.RecibirDaño(jugador.dañoEspecial);
+        StartCoroutine(SecuenciaAtaqueJugador(
+            "Ataque Especial",
+            jugador.dañoEspecial,
+            jugador.PA_costoEspecial
+        ));
+    }
+
+    #endregion
+
+    #region === EJECUCIÓN DE ACCIONES CON FLUJO ===
+
+    /// <summary>
+    /// Ejecuta una acción del jugador con flujo completo:
+    /// PlayerTurn → ExecutingAction → EnemyTurn → PlayerTurn
+    /// </summary>
+
+
+    private IEnumerator SecuenciaAtaqueJugador(string nombreAtaque, int daño, int costoPA)
+    {
+        stateMachine.SetState(CombatState.ExecutingAction);
+
+        // MENSAJE DEL ATAQUE
+        EnviarMensaje($"{jugador.Nombre} usó {nombreAtaque}");
+
+        yield return new WaitForSeconds(0.8f);
+
+        // GASTAR PA
+        jugador.GastarPA(costoPA);
+
+        yield return new WaitForSeconds(0.4f);
+
+        // EFECTO VISUAL
         OnDañoRecibidoEnemigo?.Invoke();
-        EnviarMensaje($"{jugador.Nombre} usó ataque especial → {jugador.dañoEspecial} daño a {enemigo.Nombre}");
 
-        if (RevisarGanador()) return;
-        PasarTurnoAlEnemigo();
+        yield return new WaitForSeconds(0.3f);
+
+        // APLICAR DAÑO
+        enemigo.RecibirDaño(daño);
+
+        // ACTUALIZAR UI
+        FindFirstObjectByType<UICombate>()?.ActualizarUI();
+
+        EnviarMensaje($"{enemigo.Nombre} recibió {daño} de daño");
+
+        yield return new WaitForSeconds(1f);
+
+        if (RevisarGanador())
+            yield break;
+
+        yield return StartCoroutine(TurnoEnemigoPK());
     }
 
-    void PasarTurnoAlEnemigo()
+    private IEnumerator SecuenciaHuir()
     {
-        if (jugador == null || enemigo == null)
+        stateMachine.SetState(CombatState.ExecutingAction);
+
+        EnviarMensaje($"{jugador.Nombre} intentó huir...");
+
+        yield return new WaitForSeconds(1f);
+
+        int tirada = Random.Range(0, 100);
+
+        bool huidaExitosa = tirada < probabilidadHuir;
+
+        if (huidaExitosa)
         {
-            Debug.LogError("GestorDeCombate: Jugador o enemigo es null en PasarTurnoAlEnemigo()");
-            return;
+            EnviarMensaje("¡Lograste huir!");
+
+            yield return new WaitForSeconds(0.8f);
+
+            // MATAR ENEMIGO PARA FORZAR VICTORIA
+            enemigo.vidaActual = 0;
+
+            FindFirstObjectByType<UICombate>()?.ActualizarUI();
+
+            RevisarGanador();
+
+            yield break;
         }
 
-        turnoJugador = false;
-        jugador.RecuperarPA();
-        TurnoEnemigo();
+        EnviarMensaje("No pudiste huir.");
+
+        yield return new WaitForSeconds(1f);
+
+        // EL TURNO PASA AL ENEMIGO
+        yield return StartCoroutine(TurnoEnemigoPK());
     }
 
-    void TurnoEnemigo()
+    private IEnumerator SecuenciaConsumible(int index)
     {
-        if (jugador == null || enemigo == null)
+        stateMachine.SetState(CombatState.ExecutingAction);
+
+        if (Inventario.instancia == null)
         {
-            Debug.LogError("GestorDeCombate: Jugador o enemigo es null en TurnoEnemigo()");
-            return;
+            stateMachine.SetState(CombatState.PlayerTurn);
+            yield break;
         }
 
-        EnviarMensaje($"─── Turno de {enemigo.Nombre} ───");
-
-        int decision = Random.Range(0, 100);
-
-        if (enemigo.TienePAParaEspecial() && decision < 30)
+        if (index < 0 ||
+            index >= Inventario.instancia.consumibles.Count)
         {
-            enemigo.GastarPA(enemigo.PA_costoEspecial);
-            jugador.RecibirDaño(enemigo.dañoEspecial);
-            OnDañoRecibidoJugador?.Invoke();
-            EnviarMensaje($"{enemigo.Nombre} usó ataque especial → {enemigo.dañoEspecial} daño");
-            enemigo.RecuperarPA();
+            stateMachine.SetState(CombatState.PlayerTurn);
+            yield break;
         }
-        else if (enemigo.TienePAParaBasico())
+
+        Consumible consumible =
+            Inventario.instancia.consumibles[index];
+
+        EnviarMensaje($"Usaste {consumible.nombre}");
+
+        yield return new WaitForSeconds(0.8f);
+
+        bool usado =
+            Inventario.instancia.UsarConsumibleEnCombate(
+                index,
+                jugador
+            );
+
+        if (!usado)
         {
-            enemigo.GastarPA(enemigo.PA_costoBasico);
-            jugador.RecibirDaño(enemigo.dañoBasico);
-            OnDañoRecibidoJugador?.Invoke();
-            EnviarMensaje($"{enemigo.Nombre} usó ataque básico → {enemigo.dañoBasico} daño");
-            enemigo.RecuperarPA();
+            stateMachine.SetState(CombatState.PlayerTurn);
+            yield break;
+        }
+
+        // GUARDAR VIDA Y PA
+        if (GestorExperiencia.instancia != null)
+        {
+            GestorExperiencia.instancia
+                .EstablecerVidaActual(jugador.vidaActual);
+
+            GestorExperiencia.instancia
+                .EstablecerPAActual(jugador.PA_Actual);
+        }
+
+        // ACTUALIZAR UI
+        FindFirstObjectByType<UICombate>()?.ActualizarUI();
+
+        FindFirstObjectByType<UIInventarioCombate>()
+            ?.ActualizarUI();
+
+        yield return new WaitForSeconds(1f);
+
+        // PASAR TURNO
+        yield return StartCoroutine(TurnoEnemigoPK());
+    }
+
+    private IEnumerator TurnoEnemigoPK()
+    {
+        stateMachine.SetState(CombatState.EnemyTurn);
+
+        yield return new WaitForSeconds(1f);
+
+        EnviarMensaje($"Turno de {enemigo.Nombre}");
+
+        yield return new WaitForSeconds(1f);
+
+        bool usarEspecial =
+            enemigo.TienePAParaEspecial() &&
+            Random.Range(0, 100) < 30;
+
+        int daño;
+        int costo;
+        string nombreAtaque;
+
+        if (usarEspecial)
+        {
+            daño = enemigo.dañoEspecial;
+            costo = enemigo.PA_costoEspecial;
+            nombreAtaque = "Ataque Especial";
         }
         else
         {
-            EnviarMensaje($"{enemigo.Nombre} recuperó stamina.");
-            enemigo.RecuperarPA();
+            daño = enemigo.dañoBasico;
+            costo = enemigo.PA_costoBasico;
+            nombreAtaque = "Ataque Básico";
         }
 
-        if (RevisarGanador()) return;
+        EnviarMensaje($"{enemigo.Nombre} usó {nombreAtaque}");
 
-        turnoJugador = true;
-        MostrarStats();
-        EnviarMensaje("─── Tu turno ───");
+        yield return new WaitForSeconds(0.8f);
+
+        enemigo.GastarPA(costo);
+
+        FindFirstObjectByType<UICombate>()?.ActualizarUI();
+
+        yield return new WaitForSeconds(0.4f);
+
+        OnDañoRecibidoJugador?.Invoke();
+
+        yield return new WaitForSeconds(0.3f);
+
+        jugador.RecibirDaño(daño);
+
+        FindFirstObjectByType<UICombate>()?.ActualizarUI();
+
+        EnviarMensaje($"{jugador.Nombre} recibió {daño} de daño");
+
+        yield return new WaitForSeconds(1f);
+
+        enemigo.RecuperarPA();
+
+        if (RevisarGanador())
+            yield break;
+
+        stateMachine.SetState(CombatState.PlayerTurn);
+
+        EnviarMensaje("Tu turno");
+
+        FindFirstObjectByType<UICombate>()?.ActualizarUI();
     }
 
-    void VolverAlMapa()
-    {
-        Debug.Log("GestorDeCombate: VolverAlMapa() llamado");
+    #endregion
 
-        Time.timeScale = 1f;
+    #region === TURNO DEL ENEMIGO ===
 
-        if (MusicManager.instancia != null)
-        {
-            MusicManager.instancia.DetenerMusica();
-        }
+    /// <summary>
+    /// Turno del enemigo con retrasos y animaciones.
+    /// </summary>
 
-        // Optimizado: El GestorCombateGlobal reactivará el AudioListener automáticamente
-        // a través de su método ReestablecerTransicion().
+    #endregion
 
-        if (GestorCombateGlobal.instancia != null)
-        {
-            GestorCombateGlobal.instancia.ReestablecerTransicion();
-            Debug.Log("GestorDeCombate: Flag de transición reestablecido");
-        }
-
-        SceneManager.UnloadSceneAsync("Combate");
-    }
-
-    private IEnumerator EsperarYVolverAlMapa(float segundos)
-    {
-        yield return new WaitForSeconds(segundos);
-        VolverAlMapa();
-    }
-
-    void OnDestroy()
-    {
-        if (corrutinavolverAlMapa != null)
-        {
-            StopCoroutine(corrutinavolverAlMapa);
-            Debug.Log("GestorDeCombate: Corrutina de retorno detenida");
-        }
-    }
+    #region === REVISIÓN DE CONDICIÓN DE VICTORIA ===
 
     bool RevisarGanador()
     {
         if (!enemigo.EstaVivo)
         {
             combateTerminado = true;
+            stateMachine.SetState(CombatState.Victory);
             EnviarMensaje("¡Ganaste!");
 
             if (GestorExperiencia.instancia != null)
@@ -287,8 +439,6 @@ public class GestorDeCombate : MonoBehaviour
                 GestorEnemigos.instancia.LimpiarEnemigo();
             }
 
-            // Si no hay UICombateVictoria instalada en la escena, volvemos automáticamente al mapa como fallback.
-            // Si la hay, esa interfaz mostrará la pantalla de victoria y esperará a que el jugador pulse "Continuar".
             if (FindObjectOfType<UICombateVictoria>() == null)
             {
                 corrutinavolverAlMapa = StartCoroutine(EsperarYVolverAlMapa(1.5f));
@@ -299,6 +449,7 @@ public class GestorDeCombate : MonoBehaviour
         if (!jugador.EstaVivo)
         {
             combateTerminado = true;
+            stateMachine.SetState(CombatState.Defeat);
             MostrarStats();
             EnviarMensaje("Perdiste... El jugador fue derrotado.");
 
@@ -313,8 +464,6 @@ public class GestorDeCombate : MonoBehaviour
                 GestorEnemigos.instancia.LimpiarEnemigo();
             }
 
-            // Si no hay UICombateGameOver instalada en la escena, volvemos automáticamente al mapa como fallback.
-            // Si la hay, esa interfaz mostrará la pantalla de derrota y esperará a que el jugador elija Reintentar o Menú Principal.
             if (FindObjectOfType<UICombateGameOver>() == null)
             {
                 corrutinavolverAlMapa = StartCoroutine(EsperarYVolverAlMapa(1.5f));
@@ -325,15 +474,96 @@ public class GestorDeCombate : MonoBehaviour
         return false;
     }
 
+    #endregion
+
+    #region === TRANSICIÓN DE ESCENA ===
+
+    void VolverAlMapa()
+    {
+        Time.timeScale = 1f;
+
+        if (MusicManager.instancia != null)
+        {
+            MusicManager.instancia.DetenerMusica();
+        }
+
+        if (GestorCombateGlobal.instancia != null)
+        {
+            GestorCombateGlobal.instancia.ReestablecerTransicion();
+        }
+
+        SceneManager.UnloadSceneAsync("Combate");
+    }
+
+    private IEnumerator EsperarYVolverAlMapa(float segundos)
+    {
+        yield return new WaitForSeconds(segundos);
+        VolverAlMapa();
+    }
+
+    #endregion
+
+    #region === UTILIDADES ===
+
+    void EnviarMensaje(string mensaje)
+    {
+        Debug.Log(mensaje);
+        OnMensajeCombate?.Invoke(mensaje);
+    }
+
+
+    public void IntentarHuir()
+    {
+        if (!stateMachine.CanPlayerAct())
+        {
+            return;
+        }
+
+        if (combateTerminado)
+            return;
+
+        StartCoroutine(SecuenciaHuir());
+    }
+
+    public void UsarConsumibleCombate(int index)
+    {
+        if (!stateMachine.CanPlayerAct())
+        {
+            return;
+        }
+
+        if (combateTerminado)
+            return;
+
+        StartCoroutine(SecuenciaConsumible(index));
+    }
+
     void MostrarStats()
     {
         if (jugador == null || enemigo == null)
-        {
-            Debug.LogError("GestorDeCombate: Jugador o enemigo es null en MostrarStats()");
             return;
-        }
 
         EnviarMensaje(jugador.ObtenerStats());
         EnviarMensaje(enemigo.ObtenerStats());
     }
+
+    void OnDestroy()
+    {
+        if (corrutinavolverAlMapa != null)
+        {
+            StopCoroutine(corrutinavolverAlMapa);
+        }
+    }
+
+    #endregion
+
+    #region === GETTERS (para UI y otros sistemas) ===
+
+    public CombatState ObtenerEstado() => stateMachine.CurrentState;
+
+    public bool PuedeJugadorActuar() => stateMachine.CanPlayerAct();
+
+    public bool EstaAccionEjecutandose() => stateMachine.IsActionExecuting();
+
+    #endregion
 }

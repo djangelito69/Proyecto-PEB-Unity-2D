@@ -179,6 +179,37 @@ public class Inventario : MonoBehaviour
         UIInventario.instancia.ActualizarUI();
     }
 
+    public bool UsarConsumibleEnCombate(int index, Combate jugador)
+    {
+        if (index < 0 || index >= consumibles.Count)
+            return false;
+
+        Consumible c = consumibles[index];
+
+        jugador.vidaActual += c.curacionVida;
+
+        if (jugador.vidaActual > jugador.vidaMaxima)
+        {
+            jugador.vidaActual = jugador.vidaMaxima;
+        }
+
+        jugador.PA_Actual += c.recuperacionPA;
+
+        if (jugador.PA_Actual > jugador.PA_Maxima)
+        {
+            jugador.PA_Actual = jugador.PA_Maxima;
+        }
+
+        c.cantidad--;
+
+        if (c.cantidad <= 0)
+        {
+            consumibles.RemoveAt(index);
+        }
+
+        return true;
+    }
+
     public void TirarConsumible(int index)
     {
         if (index < 0 || index >= consumibles.Count)

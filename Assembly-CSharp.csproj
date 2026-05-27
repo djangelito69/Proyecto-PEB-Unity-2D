@@ -9,8 +9,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{8ED0E6C2-5215-7918-B3F5-D151A143CC13}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -67,10 +66,12 @@
     <Compile Include="Assets\Scripts\Musica\BatlleMusicLoader.cs" />
     <Compile Include="Assets\Scripts\Menu Principal\MenuPrincipal.cs" />
     <Compile Include="Assets\Scripts\Combate\DatosCombate.cs" />
+    <Compile Include="Assets\Scripts\Combate\CombatState.cs" />
     <Compile Include="Assets\Scripts\Items\Consumible.cs" />
     <Compile Include="Assets\Scripts\Personaje\GestorSelectorPersonaje.cs" />
     <Compile Include="Assets\Scripts\Enemigos\Enemigo.cs" />
     <Compile Include="Assets\Scripts\Personaje\DatosPersonaje.cs" />
+    <Compile Include="Assets\Scripts\Sistema\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Personaje\PlayerVisual.cs" />
     <Compile Include="Assets\Scripts\Personaje\UISelectorPersonaje.cs" />
     <Compile Include="Assets\Scripts\Combate\Combate.cs" />
@@ -84,14 +85,14 @@
     <Compile Include="Assets\Scripts\Items\Inventario.cs" />
     <Compile Include="Assets\Scripts\Combate\UICombateGameOver.cs" />
     <Compile Include="Assets\Scripts\Combate\UICombate.cs" />
-    <Compile Include="Assets\Scripts\Sistema\PlayerImmunity.cs" />
+    <Compile Include="Assets\Scripts\Combate\GestorCombateGlobal.cs" />
     <Compile Include="Assets\Scripts\Items\ObjetoInventario.cs" />
-    <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Enemigos\DatosEnemigo.cs" />
-    <Compile Include="Assets\Scripts\Sistema\GestorCombateGlobal.cs" />
     <Compile Include="Assets\Scripts\Items\RecogerItem.cs" />
+    <Compile Include="Assets\Scripts\Personaje\PlayerImmunity.cs" />
     <Compile Include="Assets\Scripts\Combate\UICombateVictoria.cs" />
     <Compile Include="Assets\Scripts\HUD\UIInventario.cs" />
+    <Compile Include="Assets\Scripts\HUD\UIInventarioCombate.cs" />
     <Compile Include="Assets\Scripts\Personaje\MovimientoPersonaje.cs" />
   </ItemGroup>
   <ItemGroup>

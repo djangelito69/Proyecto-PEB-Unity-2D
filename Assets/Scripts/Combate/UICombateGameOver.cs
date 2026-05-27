@@ -160,18 +160,23 @@ public class UICombateGameOver : MonoBehaviour
     /// </summary>
     public void Reintentar()
     {
-        Debug.Log("UICombateGameOver: Reintentar combate");
-
         Time.timeScale = 1f;
 
-        // ? IMPORTANTE: Reestablecer el flag antes de recargar
+        // RESET VIDA EN SISTEMA DE PROGRESO
+        if (GestorExperiencia.instancia != null)
+        {
+            DatosCombate baseStats =
+                DatosPersonaje.ObtenerDatos(DatosPersonaje.PersonajeSeleccionado);
+
+            GestorExperiencia.instancia.EstablecerVidaActual(baseStats.vida);
+            GestorExperiencia.instancia.EstablecerPAActual(baseStats.pa);
+        }
+
         if (GestorCombateGlobal.instancia != null)
         {
             GestorCombateGlobal.instancia.ReestablecerTransicion();
-            Debug.Log("UICombateGameOver: Flag de transición reestablecido");
         }
 
-        // Recargar la escena de combate
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
