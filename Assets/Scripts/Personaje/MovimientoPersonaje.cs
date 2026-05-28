@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovimientoPersonaje : MonoBehaviour
 {
@@ -47,4 +48,19 @@ public class MovimientoPersonaje : MonoBehaviour
 
         rb.linearVelocity = mover.normalized * velocidad;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Casa"))
+        {
+            SceneManager.LoadScene("OutroJuego");
+        }
+
+        if (other.CompareTag("CambioEscena"))
+        {
+            SceneManager.LoadScene("Casa");
+        }
+    }
+
+
 }

@@ -12,6 +12,8 @@ TagManager:
   - Billetes
   - Palomas
   - Perro
+  - Casa
+  - CambioEscena
   layers:
   - Default
   - TransparentFX

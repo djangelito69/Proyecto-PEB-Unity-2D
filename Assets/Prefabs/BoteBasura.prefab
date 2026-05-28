@@ -181,8 +181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemigo
   tipoEnemigo: 0
-  velocidad: 10
-  distanciaDeteccion: 9
+  velocidad: 20
+  distanciaDeteccion: 10
   enemigoActual: {fileID: 0}
 --- !u!95 &8269069862260181512
 Animator:

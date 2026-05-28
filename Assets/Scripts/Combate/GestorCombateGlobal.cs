@@ -134,13 +134,23 @@ public class GestorCombateGlobal : MonoBehaviour
     {
         combateEnTransicion = false;
 
-        // Reactivar el AudioListener principal al terminar el combate
         AlternarAudioListenerPrincipal(true);
 
-        // ACTIVAR INMUNIDAD AQUÍ: Cuando el jugador vuelve al mapa, le damos 2 segundos para escapar
         if (playerImmunityCacheada != null)
         {
             playerImmunityCacheada.ActivarInmunidad();
+        }
+
+        // Restaurar música del mapa
+        ControladorMusicaEscena controlador = FindFirstObjectByType<ControladorMusicaEscena>();
+        if (controlador != null)
+        {
+            Debug.Log($"[MUSICA] Controlador encontrado en: {controlador.gameObject.scene.name}");
+            controlador.ReproducirMiMusica();
+        }
+        else
+        {
+            Debug.Log("[MUSICA] No se encontró ControladorMusicaEscena");
         }
 
         Debug.Log("GestorCombateGlobal: Transición reestablecida. Listo para próximo combate.");

@@ -12,11 +12,20 @@ EditorBuildSettings:
     path: Assets/Scenes/SeleccionDePersonaje.unity
     guid: 2529211f2c9a05a4a86f297bb5e12b65
   - enabled: 1
+    path: Assets/Scenes/IntroJuego.unity
+    guid: 760cd865b7728ed47acc9dda691bc8ce
+  - enabled: 1
     path: Assets/Scenes/Ciudad_S1.unity
     guid: 56b06a4d463aa554ebbc8d5e8dd4c0f9
   - enabled: 1
+    path: Assets/Scenes/Casa.unity
+    guid: 8ccdbbe4e3962e648b929a604fe23d30
+  - enabled: 1
     path: Assets/Scenes/Combate.unity
     guid: d38904e608556254ca4231d603a19d3c
+  - enabled: 1
+    path: Assets/Scenes/OutroJuego.unity
+    guid: 136cca93fa1954540b71318d60079210
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

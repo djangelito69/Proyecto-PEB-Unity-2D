@@ -41,6 +41,17 @@ public class GestorDeCombate : MonoBehaviour
 
     #region === INICIALIZACIÓN ===
 
+    [Header("=== AUDIO ===")]
+    [SerializeField] private AudioSource audioSource;
+
+    [SerializeField] private AudioClip sonidoAtaqueBasicoJugador;
+    [SerializeField] private AudioClip sonidoAtaqueEspecialJugador;
+
+    [SerializeField] private AudioClip sonidoAtaqueBasicoEnemigo;
+    [SerializeField] private AudioClip sonidoAtaqueEspecialEnemigo;
+
+    [SerializeField] private AudioClip sonidoMuerteJugador;
+    [SerializeField] private AudioClip sonidoMuerteEnemigo;
     void Awake()
     {
         instancia = this;
@@ -238,6 +249,15 @@ public class GestorDeCombate : MonoBehaviour
 
         yield return new WaitForSeconds(0.8f);
 
+        if (nombreAtaque == "Ataque Básico")
+        {
+            ReproducirSonido(sonidoAtaqueBasicoJugador);
+        }
+        else
+        {
+            ReproducirSonido(sonidoAtaqueEspecialJugador);
+        }
+
         // GASTAR PA
         jugador.GastarPA(costoPA);
 
@@ -407,6 +427,15 @@ public class GestorDeCombate : MonoBehaviour
 
         yield return new WaitForSeconds(0.8f);
 
+        if (usarEspecial)
+        {
+            ReproducirSonido(sonidoAtaqueEspecialEnemigo);
+        }
+        else
+        {
+            ReproducirSonido(sonidoAtaqueBasicoEnemigo);
+        }
+
         enemigo.GastarPA(costo);
 
         FindFirstObjectByType<UICombate>()?.ActualizarUI();
@@ -453,6 +482,8 @@ public class GestorDeCombate : MonoBehaviour
     {
         if (!enemigo.EstaVivo)
         {
+            ReproducirSonido(sonidoMuerteEnemigo);
+
             combateTerminado = true;
             stateMachine.SetState(CombatState.Victory);
             EnviarMensaje("¡Ganaste!");
@@ -486,6 +517,8 @@ public class GestorDeCombate : MonoBehaviour
 
         if (!jugador.EstaVivo)
         {
+            ReproducirSonido(sonidoMuerteJugador);
+
             combateTerminado = true;
             stateMachine.SetState(CombatState.Defeat);
             MostrarStats();
@@ -516,18 +549,20 @@ public class GestorDeCombate : MonoBehaviour
 
     #region === TRANSICIÓN DE ESCENA ===
 
+    // DESPUÉS (correcto):
     void VolverAlMapa()
     {
         Time.timeScale = 1f;
 
-        if (MusicManager.instancia != null)
+        ControladorMusicaEscena controlador = FindFirstObjectByType<ControladorMusicaEscena>();
+        if (controlador != null)
         {
-            MusicManager.instancia.DetenerMusica();
+            Debug.Log($"[MUSICA] Controlador encontrado en escena: {controlador.gameObject.scene.name}");
+            controlador.ReproducirMiMusica();
         }
-
-        if (GestorCombateGlobal.instancia != null)
+        else
         {
-            GestorCombateGlobal.instancia.ReestablecerTransicion();
+            Debug.Log("[MUSICA] No se encontró ningún ControladorMusicaEscena");
         }
 
         SceneManager.UnloadSceneAsync("Combate");
@@ -547,6 +582,14 @@ public class GestorDeCombate : MonoBehaviour
     {
         Debug.Log(mensaje);
         OnMensajeCombate?.Invoke(mensaje);
+    }
+
+    void ReproducirSonido(AudioClip clip)
+    {
+        if (audioSource == null || clip == null)
+            return;
+
+        audioSource.PlayOneShot(clip);
     }
 
 
