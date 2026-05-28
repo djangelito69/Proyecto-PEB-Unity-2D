@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [Header("Paneles")]
     public GameObject panelInventario;
     public GameObject panelOpciones;
+    public GameObject panelTeclas;
 
     [Header("Sonidos UI")]
     public AudioSource audioSource;
@@ -18,14 +19,14 @@ public class UIManager : MonoBehaviour
     public AudioClip sonidoCerrar;
 
     [Header("Botón Pausa")]
-    public Image botonPausaImage; // Asignar el componente Image del botón en el Inspector
-    public Sprite iconoPausar1;   // Sprite por defecto (cuando no está pausado)
-    public Sprite iconoPausar2;   // Sprite cuando está pausado
+    public Image botonPausaImage;
+    public Sprite iconoPausar1;
+    public Sprite iconoPausar2;
 
-    [Header("Botón Musica")]
-    public Image botonMusicaImage; // Asignar el componente Image del botón en el Inspector
-    public Sprite iconoMusica1;   // Sprite por defecto (cuando no está silenciada)
-    public Sprite iconoMusica2;   // Sprite cuando está silenciada
+    [Header("Botón Música")]
+    public Image botonMusicaImage;
+    public Sprite iconoMusica1;
+    public Sprite iconoMusica2;
 
     [Header("Mensaje de Pausa")]
     public GameObject textoPausa;
@@ -35,10 +36,51 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        // Garantiza el icono por defecto al iniciar
+        // Icono pausa inicial
         if (botonPausaImage != null && iconoPausar1 != null)
         {
             botonPausaImage.sprite = iconoPausar1;
+        }
+
+        // Icono música inicial
+        if (botonMusicaImage != null && iconoMusica1 != null)
+        {
+            botonMusicaImage.sprite = iconoMusica1;
+        }
+
+        // Ocultar panel teclas al iniciar
+        if (panelTeclas != null)
+        {
+            panelTeclas.SetActive(false);
+        }
+    }
+
+    private void Update()
+    {
+        // Abrir/Cerrar menú opciones
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ToggleOpciones();
+        }
+
+        // Pausar/Reanudar juego
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            TogglePausa();
+        }
+
+        // Silenciar/Activar música
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ToggleMusica();
+        }
+    }
+
+    private void ReproducirSonido(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
         }
     }
 
@@ -52,30 +94,29 @@ public class UIManager : MonoBehaviour
             abrir ? sonidoAbrir : sonidoCerrar
         );
     }
-    private void ReproducirSonido(AudioClip clip)
+
+    public void CerrarInventario()
     {
-        if (audioSource != null && clip != null)
-        {
-            audioSource.PlayOneShot(clip);
-        }
+        panelInventario.SetActive(false);
+
+        ReproducirSonido(sonidoCerrar);
     }
+
     public void TogglePausa()
     {
         ReproducirSonido(sonidoClick);
 
-        Debug.Log("El botón de pausa fue presionado. Estado: " + !juegoPausado);
-
         juegoPausado = !juegoPausado;
 
         Time.timeScale = juegoPausado ? 0f : 1f;
-        AudioListener.pause = juegoPausado;
 
-        // Mostrar u ocultar mensaje
+        // Mostrar texto pausa
         if (textoPausa != null)
         {
             textoPausa.SetActive(juegoPausado);
         }
 
+        // Cambiar icono pausa
         if (botonPausaImage != null)
         {
             botonPausaImage.sprite = juegoPausado
@@ -93,18 +134,13 @@ public class UIManager : MonoBehaviour
         AudioListener.volume =
             musicaSilenciada ? 0f : 1f;
 
-        if (botonPausaImage != null)
+        // Cambiar icono música
+        if (botonMusicaImage != null)
         {
             botonMusicaImage.sprite = musicaSilenciada
                 ? (iconoMusica2 ?? botonMusicaImage.sprite)
                 : (iconoMusica1 ?? botonMusicaImage.sprite);
         }
-    }
-    public void CerrarOpciones()
-    {
-        panelOpciones.SetActive(false);
-
-        ReproducirSonido(sonidoCerrar);
     }
 
     public void ToggleOpciones()
@@ -113,14 +149,85 @@ public class UIManager : MonoBehaviour
 
         panelOpciones.SetActive(abrir);
 
+        juegoPausado = abrir;
+
+        Time.timeScale = abrir ? 0f : 1f;
+
+        // Mostrar mensaje pausa
+        if (textoPausa != null)
+        {
+            textoPausa.SetActive(abrir);
+        }
+
+        // Cambiar icono pausa
+        if (botonPausaImage != null)
+        {
+            botonPausaImage.sprite = abrir
+                ? (iconoPausar2 ?? botonPausaImage.sprite)
+                : (iconoPausar1 ?? botonPausaImage.sprite);
+        }
+
         ReproducirSonido(
             abrir ? sonidoAbrir : sonidoCerrar
         );
     }
 
-    public void CerrarInventario()
+    public void CerrarOpciones()
     {
-        panelInventario.SetActive(false);
+        panelOpciones.SetActive(false);
+
+        juegoPausado = false;
+
+        Time.timeScale = 1f;
+
+        if (textoPausa != null)
+        {
+            textoPausa.SetActive(false);
+        }
+
+        if (botonPausaImage != null)
+        {
+            botonPausaImage.sprite = iconoPausar1;
+        }
+
+        ReproducirSonido(sonidoCerrar);
+    }
+
+    public void Reanudar()
+    {
+        panelOpciones.SetActive(false);
+
+        juegoPausado = false;
+
+        Time.timeScale = 1f;
+
+        if (textoPausa != null)
+        {
+            textoPausa.SetActive(false);
+        }
+
+        if (botonPausaImage != null)
+        {
+            botonPausaImage.sprite = iconoPausar1;
+        }
+
+        ReproducirSonido(sonidoCerrar);
+    }
+
+    public void AbrirPanelTeclas()
+    {
+        panelOpciones.SetActive(false);
+
+        panelTeclas.SetActive(true);
+
+        ReproducirSonido(sonidoAbrir);
+    }
+
+    public void RegresarAOpciones()
+    {
+        panelTeclas.SetActive(false);
+
+        panelOpciones.SetActive(true);
 
         ReproducirSonido(sonidoCerrar);
     }

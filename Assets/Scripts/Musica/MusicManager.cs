@@ -46,4 +46,17 @@ public class MusicManager : MonoBehaviour
             CambiarMusica(musica);
         }
     }
+
+    public void ReiniciarDatos()
+    {
+        musicaActual = null;
+
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+            audioSource.clip = null;
+        }
+
+        Debug.Log("MusicManager reiniciado");
+    }
 }

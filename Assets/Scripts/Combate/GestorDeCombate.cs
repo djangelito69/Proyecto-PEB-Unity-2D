@@ -58,9 +58,33 @@ public class GestorDeCombate : MonoBehaviour
 
     void Start()
     {
-        // Asegurar que el combate comienza en el estado correcto
-        stateMachine.SetState(CombatState.PlayerTurn);
-        EnviarMensaje("Tu turno");
+        StartCoroutine(IniciarCombate());
+    }
+
+    private IEnumerator IniciarCombate()
+    {
+        yield return new WaitForSeconds(1f);
+
+        bool empiezaJugador =
+            Random.Range(0, 100) < 50;
+
+        if (empiezaJugador)
+        {
+            stateMachine.SetState(CombatState.PlayerTurn);
+
+            EnviarMensaje("¡Empiezas tú!");
+            EnviarMensaje("Tu turno");
+        }
+        else
+        {
+            stateMachine.SetState(CombatState.EnemyTurn);
+
+            EnviarMensaje($"¡{enemigo.Nombre} empieza primero!");
+
+            yield return new WaitForSeconds(1f);
+
+            yield return StartCoroutine(TurnoEnemigoPK());
+        }
     }
 
     private void OnStateMachineChanged(CombatState previousState, CombatState newState)
@@ -258,13 +282,13 @@ public class GestorDeCombate : MonoBehaviour
 
             yield return new WaitForSeconds(0.8f);
 
-            // MATAR ENEMIGO PARA FORZAR VICTORIA
+            GestorEnemigos.instancia?.DestruirEnemigoDelMapa();
+
             enemigo.vidaActual = 0;
 
             FindFirstObjectByType<UICombate>()?.ActualizarUI();
 
             RevisarGanador();
-
             yield break;
         }
 
@@ -296,7 +320,21 @@ public class GestorDeCombate : MonoBehaviour
         Consumible consumible =
             Inventario.instancia.consumibles[index];
 
-        EnviarMensaje($"Usaste {consumible.nombre}");
+        string mensaje = $"Usaste {consumible.nombre}";
+
+        if (consumible.curacionVida > 0)
+        {
+            mensaje +=
+                $" | +{consumible.curacionVida} HP";
+        }
+
+        if (consumible.recuperacionPA > 0)
+        {
+            mensaje +=
+                $" | +{consumible.recuperacionPA} PA";
+        }
+
+        EnviarMensaje(mensaje);
 
         yield return new WaitForSeconds(0.8f);
 

@@ -26,7 +26,8 @@ public class GestorExperiencia : MonoBehaviour
     private int paActualJugador;
 
     // Stats persistentes
-    private DatosCombate statsBase;
+    private DatosCombate statsBase;      // Datos originales del personaje
+    private DatosCombate statsRuntime;   // Datos que cambian con los niveles
     private int vidaActualJugador;
     private bool inicializado = false;
 
@@ -68,16 +69,23 @@ public class GestorExperiencia : MonoBehaviour
         // Obtener datos base del personaje seleccionado
         statsBase = DatosPersonaje.ObtenerDatos(DatosPersonaje.PersonajeSeleccionado);
 
-        if (statsBase == null)
+        // Crear copia independiente (runtime) para modificar con los niveles
+        statsRuntime = new DatosCombate
         {
-            Debug.LogError($"[GestorExperiencia] ❌ ERROR: No se puede obtener datos del personaje '{DatosPersonaje.PersonajeSeleccionado}'.\n" +
-                          "Asegúrate de que DatosPersonaje contiene este personaje.");
-            enabled = false;
-            return;
-        }
+            nombre = statsBase.nombre,
+            vida = statsBase.vida,
+            pa = statsBase.pa,
+            dañoBasico = statsBase.dañoBasico,
+            dañoEspecial = statsBase.dañoEspecial,
+            costoBasico = statsBase.costoBasico,
+            costoEspecial = statsBase.costoEspecial,
+            recuperacionPA = statsBase.recuperacionPA,
+            sprite = statsBase.sprite
+        };
 
-        paActualJugador = statsBase.pa;
-        vidaActualJugador = statsBase.vida;
+        // Usar statsRuntime para inicializar valores actuales
+        paActualJugador = statsRuntime.pa;
+        vidaActualJugador = statsRuntime.vida;
 
         // Calcular XP necesario para siguiente nivel
         CalcularExperienciaParaSiguiente();
@@ -89,21 +97,22 @@ public class GestorExperiencia : MonoBehaviour
         inicializado = true;
 
         Debug.Log($"[GestorExperiencia] ✓ Inicializado correctamente.\n" +
-                 $"Personaje: {statsBase.nombre} | Nivel: {nivelActual} | Vida: {vidaActualJugador}/{statsBase.vida}");
+                 $"Personaje: {statsRuntime.nombre} | Nivel: {nivelActual} | Vida: {vidaActualJugador}/{statsRuntime.vida}");
     }
+
     public int ObtenerPAActual() => paActualJugador;
 
     public void EstablecerPAActual(int pa)
     {
-        if (statsBase == null)
+        if (statsRuntime == null)
         {
-            Debug.LogError("[GestorExperiencia] ❌ No se puede establecer PA: statsBase es null.");
+            Debug.LogError("[GestorExperiencia] ❌ No se puede establecer PA: statsRuntime es null.");
             return;
         }
 
-        paActualJugador = Mathf.Clamp(pa, 0, statsBase.pa);
+        paActualJugador = Mathf.Clamp(pa, 0, statsRuntime.pa);
         OnVidaActualizada?.Invoke(); // si luego haces evento de PA, mejor separarlo
-        Debug.Log($"[PA] Actualizado a: {paActualJugador}/{statsBase.pa}");
+        Debug.Log($"[PA] Actualizado a: {paActualJugador}/{statsRuntime.pa}");
     }
 
     /// <summary>
@@ -153,16 +162,16 @@ public class GestorExperiencia : MonoBehaviour
         experienciaActual -= experienciaParaProximo;
         nivelActual++;
 
-        // Aplicar mejoras de stats
-        statsBase.vida += vidaPorNivel;
-        statsBase.dañoBasico += dañoPorNivel;
-        statsBase.dañoEspecial += (int)(dañoPorNivel * 1.5f);
-        statsBase.recuperacionPA += recoveryPAPorNivel;
+        // Aplicar mejoras de stats a statsRuntime
+        statsRuntime.vida += vidaPorNivel;
+        statsRuntime.dañoBasico += dañoPorNivel;
+        statsRuntime.dañoEspecial += (int)(dañoPorNivel * 1.5f);
+        statsRuntime.recuperacionPA += recoveryPAPorNivel;
 
         // Restaurar vida si está habilitado
         if (restaurarVidaAlSubir)
         {
-            vidaActualJugador = statsBase.vida;
+            vidaActualJugador = statsRuntime.vida;
             OnVidaActualizada?.Invoke();
         }
 
@@ -196,16 +205,16 @@ public class GestorExperiencia : MonoBehaviour
     }
 
     public int ObtenerVidaActual() => vidaActualJugador;
-    public int ObtenerVidaMaxima() => statsBase != null ? statsBase.vida : 0;
+    public int ObtenerVidaMaxima() => statsRuntime != null ? statsRuntime.vida : 0;
     public float ObtenerPorcentajeVida()
     {
-        if (statsBase == null || statsBase.vida == 0) return 0f;
-        return (float)vidaActualJugador / statsBase.vida;
+        if (statsRuntime == null || statsRuntime.vida == 0) return 0f;
+        return (float)vidaActualJugador / statsRuntime.vida;
     }
 
-    public int ObtenerDañoBasico() => statsBase != null ? statsBase.dañoBasico : 0;
-    public int ObtenerDañoEspecial() => statsBase != null ? statsBase.dañoEspecial : 0;
-    public int ObtenerRecuperacionPA() => statsBase != null ? statsBase.recuperacionPA : 0;
+    public int ObtenerDañoBasico() => statsRuntime != null ? statsRuntime.dañoBasico : 0;
+    public int ObtenerDañoEspecial() => statsRuntime != null ? statsRuntime.dañoEspecial : 0;
+    public int ObtenerRecuperacionPA() => statsRuntime != null ? statsRuntime.recuperacionPA : 0;
 
     // ========== SETTERS ==========
 
@@ -214,39 +223,35 @@ public class GestorExperiencia : MonoBehaviour
     /// </summary>
     public void EstablecerVidaActual(int vida)
     {
-        if (statsBase == null)
+        if (statsRuntime == null)
         {
-            Debug.LogError("[GestorExperiencia] ❌ No se puede establecer vida: statsBase es null.");
+            Debug.LogError("[GestorExperiencia] ❌ No se puede establecer vida: statsRuntime es null.");
             return;
         }
 
-        vidaActualJugador = Mathf.Clamp(vida, 0, statsBase.vida);
+        vidaActualJugador = Mathf.Clamp(vida, 0, statsRuntime.vida);
         OnVidaActualizada?.Invoke();
-        Debug.Log($"[VIDA] Actualizada a: {vidaActualJugador}/{statsBase.vida}");
+        Debug.Log($"[VIDA] Actualizada a: {vidaActualJugador}/{statsRuntime.vida}");
     }
 
     public void AñadirVidaMaxima(int cantidad)
     {
-        statsBase.vida += cantidad;
-
+        statsRuntime.vida += cantidad;
         vidaActualJugador += cantidad;
-
         OnVidaActualizada?.Invoke();
     }
 
     public void AñadirPAMaximo(int cantidad)
     {
-        statsBase.pa += cantidad;
-
+        statsRuntime.pa += cantidad;
         paActualJugador += cantidad;
-
         OnVidaActualizada?.Invoke();
     }
 
     public void AñadirDaño(int cantidad)
     {
-        statsBase.dañoBasico += cantidad;
-        statsBase.dañoEspecial += cantidad;
+        statsRuntime.dañoBasico += cantidad;
+        statsRuntime.dañoEspecial += cantidad;
     }
 
     /// <summary>
@@ -254,13 +259,31 @@ public class GestorExperiencia : MonoBehaviour
     /// </summary>
     public DatosCombate ObtenerDatosActuales()
     {
-        if (statsBase == null)
+        if (statsRuntime == null)
         {
-            Debug.LogError("[GestorExperiencia] ❌ No se pueden obtener datos actuales: statsBase es null.");
+            Debug.LogError("[GestorExperiencia] ❌ No se pueden obtener datos actuales: statsRuntime es null.");
             return null;
         }
 
         return new DatosCombate
+        {
+            nombre = statsRuntime.nombre,
+            vida = statsRuntime.vida,
+            pa = statsRuntime.pa,
+            dañoBasico = statsRuntime.dañoBasico,
+            dañoEspecial = statsRuntime.dañoEspecial,
+            costoBasico = statsRuntime.costoBasico,
+            costoEspecial = statsRuntime.costoEspecial,
+            recuperacionPA = statsRuntime.recuperacionPA,
+            sprite = statsRuntime.sprite
+        };
+    }
+
+    public void InicializarPersonaje()
+    {
+        statsBase = DatosPersonaje.ObtenerDatos(DatosPersonaje.PersonajeSeleccionado);
+
+        statsRuntime = new DatosCombate
         {
             nombre = statsBase.nombre,
             vida = statsBase.vida,
@@ -272,6 +295,49 @@ public class GestorExperiencia : MonoBehaviour
             recuperacionPA = statsBase.recuperacionPA,
             sprite = statsBase.sprite
         };
+
+        nivelActual = 1;
+        experienciaActual = 0;
+        experienciaParaProximo = 0;
+
+        vidaActualJugador = statsRuntime.vida;
+        paActualJugador = statsRuntime.pa;
+
+        inicializado = true;
+
+        CalcularExperienciaParaSiguiente();
+    }
+
+    public void ReiniciarDatos()
+    {
+        statsBase = DatosPersonaje.ObtenerDatos(DatosPersonaje.PersonajeSeleccionado);
+
+        statsRuntime = new DatosCombate
+        {
+            nombre = statsBase.nombre,
+            vida = statsBase.vida,
+            pa = statsBase.pa,
+            dañoBasico = statsBase.dañoBasico,
+            dañoEspecial = statsBase.dañoEspecial,
+            costoBasico = statsBase.costoBasico,
+            costoEspecial = statsBase.costoEspecial,
+            recuperacionPA = statsBase.recuperacionPA,
+            sprite = statsBase.sprite
+        };
+
+        nivelActual = 1;
+        experienciaActual = 0;
+        experienciaParaProximo = 0;
+
+        vidaActualJugador = statsRuntime.vida;
+        paActualJugador = statsRuntime.pa;
+
+        inicializado = true; // <- CRÍTICO
+
+        CalcularExperienciaParaSiguiente();
+
+        OnExperienciaActualizada?.Invoke(nivelActual, experienciaActual, experienciaParaProximo);
+        OnVidaActualizada?.Invoke();
     }
 
     // ========== SAVE/LOAD (Futuro) ==========
@@ -289,9 +355,9 @@ public class GestorExperiencia : MonoBehaviour
 
     public DatosGuardados ObtenerDatosParaGuardar()
     {
-        if (statsBase == null)
+        if (statsRuntime == null)
         {
-            Debug.LogError("[GestorExperiencia] ❌ No se pueden obtener datos para guardar: statsBase es null.");
+            Debug.LogError("[GestorExperiencia] ❌ No se pueden obtener datos para guardar: statsRuntime es null.");
             return null;
         }
 
@@ -300,9 +366,9 @@ public class GestorExperiencia : MonoBehaviour
             nivel = nivelActual,
             experienciaActual = experienciaActual,
             vidaActual = vidaActualJugador,
-            vidaMaxima = statsBase.vida,
-            dañoBasico = statsBase.dañoBasico,
-            dañoEspecial = statsBase.dañoEspecial
+            vidaMaxima = statsRuntime.vida,
+            dañoBasico = statsRuntime.dañoBasico,
+            dañoEspecial = statsRuntime.dañoEspecial
         };
     }
 }

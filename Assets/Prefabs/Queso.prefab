@@ -161,3 +161,4 @@ MonoBehaviour:
     puedeUsarseEnCombate: 1
     puedeUsarseFueraDeCombate: 1
   cantidad: 1
+  sonidoRecoger: {fileID: 8300000, guid: ecc64eb3fcfe72e4b97998205c5094e2, type: 3}

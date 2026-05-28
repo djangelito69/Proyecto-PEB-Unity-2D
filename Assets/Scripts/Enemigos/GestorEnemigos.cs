@@ -62,4 +62,17 @@ public class GestorEnemigos : MonoBehaviour
     {
         return datosCombate != null;
     }
+
+    public void ReiniciarDatos()
+    {
+        tipoEnemigo = default;
+
+        datosCombate = null;
+
+        enemigoEnMapa = null;
+
+        EnemigoDerrotado = false;
+
+        Debug.Log("GestorEnemigos reiniciado");
+    }
 }

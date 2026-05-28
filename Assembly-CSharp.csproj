@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Personaje\GestorSelectorPersonaje.cs" />
     <Compile Include="Assets\Scripts\Enemigos\Enemigo.cs" />
     <Compile Include="Assets\Scripts\Personaje\DatosPersonaje.cs" />
+    <Compile Include="Assets\Scripts\Sistema\PartidaManager.cs" />
     <Compile Include="Assets\Scripts\Sistema\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Personaje\PlayerVisual.cs" />
     <Compile Include="Assets\Scripts\Personaje\UISelectorPersonaje.cs" />

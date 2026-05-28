@@ -160,3 +160,4 @@ MonoBehaviour:
     bonusPA: 0
     bonusAtaque: 0
     bonusVelocidad: 3
+  sonidoRecoger: {fileID: 8300000, guid: ecc64eb3fcfe72e4b97998205c5094e2, type: 3}

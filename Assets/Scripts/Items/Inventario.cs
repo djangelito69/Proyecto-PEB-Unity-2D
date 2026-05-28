@@ -224,4 +224,22 @@ public class Inventario : MonoBehaviour
 
         UIInventario.instancia.ActualizarUI();
     }
+
+    public void ReiniciarDatos()
+    {
+        consumibles.Clear();
+
+        for (int i = 0; i < objetos.Length; i++)
+        {
+            objetos[i] = null;
+        }
+
+        if (UIInventario.instancia != null)
+        {
+            UIInventario.instancia.ActualizarUI();
+            UIInventario.instancia.ActualizarUIObjetos();
+        }
+
+        Debug.Log("Inventario reiniciado");
+    }
 }

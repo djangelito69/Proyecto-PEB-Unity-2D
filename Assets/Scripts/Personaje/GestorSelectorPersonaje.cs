@@ -28,7 +28,12 @@ public class GestorSelectorPersonaje : MonoBehaviour
     public void Confirmar()
     {
         DatosPersonaje.ElegirPersonaje(seleccionActual);
-        Debug.Log($"Confirmado: {seleccionActual} → cargando siguiente escena");
+
+        if (GestorExperiencia.instancia != null)
+        {
+            GestorExperiencia.instancia.ReiniciarDatos();
+        }
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

@@ -1,69 +1,91 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class UISelectorPersonaje : MonoBehaviour
 {
-    [Header("Referencia al manager")]
+    [Header("Manager")]
     public GestorSelectorPersonaje gestorSelector;
 
-    [Header("Botones de personaje")]
-    public Button botonGato;
-    public Button botonPerro;
-    public Button botonRaton;
+    [Header("Paneles")]
+    public GameObject panelGato;
+    public GameObject panelPerro;
+    public GameObject panelRaton;
 
-    [Header("Colores de selección")]
-    public Color colorSeleccionado = Color.yellow;
-    public Color colorNormal = Color.white;
+    [Header("Botones panel gato")]
+    public Button botonGatoAPerro;
+    public Button botonGatoARaton;
 
-    [Header("Panel de stats")]
-    public TextMeshProUGUI textoNombre;
-    public TextMeshProUGUI textoStats;
+    [Header("Botones panel perro")]
+    public Button botonPerroAGato;
+    public Button botonPerroARaton;
 
-    private DatosPersonaje.TipoPersonaje seleccionActual = DatosPersonaje.TipoPersonaje.Gato;
+    [Header("Botones panel raton")]
+    public Button botonRatonAGato;
+    public Button botonRatonAPerro;
 
     void Start()
     {
-        botonGato.onClick.AddListener(() => Seleccionar(DatosPersonaje.TipoPersonaje.Gato));
-        botonPerro.onClick.AddListener(() => Seleccionar(DatosPersonaje.TipoPersonaje.Perro));
-        botonRaton.onClick.AddListener(() => Seleccionar(DatosPersonaje.TipoPersonaje.Raton));
-
-        // Mostrar el Gato seleccionado por defecto
-        Seleccionar(DatosPersonaje.TipoPersonaje.Gato);
-    }
-
-    void Seleccionar(DatosPersonaje.TipoPersonaje tipo)
-    {
-        seleccionActual = tipo;
-
-        // Avisar al manager
-        switch (tipo)
+        // BOTONES GATO
+        botonGatoAPerro.onClick.AddListener(() =>
         {
-            case DatosPersonaje.TipoPersonaje.Gato: gestorSelector.SeleccionarGato(); break;
-            case DatosPersonaje.TipoPersonaje.Perro: gestorSelector.SeleccionarPerro(); break;
-            case DatosPersonaje.TipoPersonaje.Raton: gestorSelector.SeleccionarRaton(); break;
-        }
+            MostrarPanelPerro();
+        });
 
-        ActualizarBotones();
-        MostrarStats(tipo);
+        botonGatoARaton.onClick.AddListener(() =>
+        {
+            MostrarPanelRaton();
+        });
+
+        // BOTONES PERRO
+        botonPerroAGato.onClick.AddListener(() =>
+        {
+            MostrarPanelGato();
+        });
+
+        botonPerroARaton.onClick.AddListener(() =>
+        {
+            MostrarPanelRaton();
+        });
+
+        // BOTONES RATON
+        botonRatonAGato.onClick.AddListener(() =>
+        {
+            MostrarPanelGato();
+        });
+
+        botonRatonAPerro.onClick.AddListener(() =>
+        {
+            MostrarPanelPerro();
+        });
+
+        // Panel inicial
+        MostrarPanelGato();
     }
 
-    void ActualizarBotones()
+    public void MostrarPanelGato()
     {
-        botonGato.image.color = seleccionActual == DatosPersonaje.TipoPersonaje.Gato ? colorSeleccionado : colorNormal;
-        botonPerro.image.color = seleccionActual == DatosPersonaje.TipoPersonaje.Perro ? colorSeleccionado : colorNormal;
-        botonRaton.image.color = seleccionActual == DatosPersonaje.TipoPersonaje.Raton ? colorSeleccionado : colorNormal;
+        panelGato.SetActive(true);
+        panelPerro.SetActive(false);
+        panelRaton.SetActive(false);
+
+        gestorSelector.SeleccionarGato();
     }
 
-    void MostrarStats(DatosPersonaje.TipoPersonaje tipo)
+    public void MostrarPanelPerro()
     {
-        DatosCombate datos = DatosPersonaje.ObtenerDatos(tipo);
+        panelGato.SetActive(false);
+        panelPerro.SetActive(true);
+        panelRaton.SetActive(false);
 
-        textoNombre.text = datos.nombre;
+        gestorSelector.SeleccionarPerro();
+    }
 
-        textoStats.text =
-            $"Vida: {datos.vida}\nPA: {datos.pa}\n\n" +
-            $"Ataque básico: {datos.dañoBasico}\n(costo {datos.costoBasico})\n\n" +
-            $"Ataque especial: {datos.dañoEspecial}\n(costo {datos.costoEspecial})";
+    public void MostrarPanelRaton()
+    {
+        panelGato.SetActive(false);
+        panelPerro.SetActive(false);
+        panelRaton.SetActive(true);
+
+        gestorSelector.SeleccionarRaton();
     }
 }

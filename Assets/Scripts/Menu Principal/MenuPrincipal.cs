@@ -1,16 +1,28 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuPrincipal : MonoBehaviour
 {
-    public void Jugar() 
+    [Header("Escenas")]
+    [SerializeField] private string escenaSeleccionPersonaje;
+
+    public void NuevaPartida()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (PartidaManager.instancia != null)
+        {
+            PartidaManager.instancia.NuevaPartida();
+        }
+
+        SceneManager.LoadScene(escenaSeleccionPersonaje);
     }
 
-    public void Salir() 
-        {
+    public void CargarPartida()
+    {
+        Debug.Log("Pantalla de cargar partida");
+    }
+
+    public void Salir()
+    {
         Debug.Log("Saliendo del juego...");
         Application.Quit();
     }
