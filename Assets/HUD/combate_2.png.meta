@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3776e40ba0e0d7f4d9d3d0d408225316
+guid: cfb8e1908d99a0f489f78a0a827258b6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -512476830550465772
-    second: atun_0
+      213: -1444033632730893767
+    second: combate_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: atun_0
+      name: combate_2_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 11
-        width: 26
-        height: 19
+        x: 0
+        y: 0
+        width: 960
+        height: 540
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 413eb6fa90153e8f0800000000000000
-      internalID: -512476830550465772
+      spriteID: 932bb55df03c5fbe0800000000000000
+      internalID: -1444033632730893767
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      atun_0: -512476830550465772
+      combate_2_0: -1444033632730893767
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

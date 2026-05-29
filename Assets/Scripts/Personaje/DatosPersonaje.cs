@@ -19,25 +19,25 @@ public static class DatosPersonaje
                 return new DatosCombate
                 {
                     nombre = "Gato",
-                    vida = 15,
-                    pa = 10,
-                    dañoBasico = 3,
-                    dañoEspecial = 6,
+                    vida = 40,
+                    pa = 15,
+                    dañoBasico = 4,
+                    dañoEspecial = 8,
                     costoBasico = 2,
-                    costoEspecial = 5,
-                    recuperacionPA = 2
+                    costoEspecial = 6,
+                    recuperacionPA = 3
                 };
 
             case TipoPersonaje.Perro:
                 return new DatosCombate
                 {
                     nombre = "Perro",
-                    vida = 20,
-                    pa = 7,
-                    dañoBasico = 4,
-                    dañoEspecial = 7,
+                    vida = 55,
+                    pa = 12,
+                    dañoBasico = 5,
+                    dañoEspecial = 9,
                     costoBasico = 2,
-                    costoEspecial = 5,
+                    costoEspecial = 6,
                     recuperacionPA = 2
                 };
 
@@ -45,13 +45,13 @@ public static class DatosPersonaje
                 return new DatosCombate
                 {
                     nombre = "Ratón",
-                    vida = 10,
-                    pa = 15,
-                    dañoBasico = 2,
-                    dañoEspecial = 8,
+                    vida = 32,
+                    pa = 20,
+                    dañoBasico = 3,
+                    dañoEspecial = 10,
                     costoBasico = 1,
-                    costoEspecial = 4,
-                    recuperacionPA = 3
+                    costoEspecial = 5,
+                    recuperacionPA = 4
                 };
         }
 

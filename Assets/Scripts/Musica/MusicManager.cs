@@ -1,3 +1,4 @@
+﻿// MusicManager.cs
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
@@ -6,7 +7,6 @@ public class MusicManager : MonoBehaviour
 
     [Header("Audio Source")]
     [SerializeField] private AudioSource audioSource;
-
 
     private void Awake()
     {
@@ -21,6 +21,12 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    // ✅ Método público para que el controlador pueda consultar el estado
+    public bool EstaReproduciendo(AudioClip clip)
+    {
+        return audioSource.clip == clip && audioSource.isPlaying;
+    }
+
     public void ReproducirMusica(AudioClip nuevaMusica)
     {
         if (nuevaMusica == null)
@@ -29,14 +35,10 @@ public class MusicManager : MonoBehaviour
             return;
         }
 
-        if (audioSource.clip == nuevaMusica &&
-            audioSource.isPlaying)
-        {
-            return;
-        }
+        // Esta guarda sigue siendo útil como segunda línea de defensa
+        if (audioSource.clip == nuevaMusica && audioSource.isPlaying) return;
 
         audioSource.Stop();
-
         audioSource.clip = nuevaMusica;
         audioSource.Play();
     }

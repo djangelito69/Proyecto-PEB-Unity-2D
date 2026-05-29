@@ -278,6 +278,8 @@ public class GestorDeCombate : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        jugador.RecuperarPA();
+
         if (RevisarGanador())
             yield break;
 

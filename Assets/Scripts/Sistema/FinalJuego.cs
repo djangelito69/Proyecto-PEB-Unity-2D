@@ -15,7 +15,11 @@ public class FinalJuego : MonoBehaviour
     [Header("Configuracion")]
     public string nombreJuego = "MI JUEGO";
 
+    [TextArea]
+    public string[] mensajesFinales;
+
     public float duracionFade = 1f;
+    public float tiempoEntreMensajes = 3f;
 
     private void Start()
     {
@@ -26,24 +30,35 @@ public class FinalJuego : MonoBehaviour
 
     IEnumerator SecuenciaFinal()
     {
-        // Fade inicial
-        yield return StartCoroutine(Fade(1, 0));
+        // Empieza negro
+        fadePanel.color = new Color(0, 0, 0, 1);
 
-        // Primer mensaje
-        textoMensaje.alpha = 0;
-        textoMensaje.text = "Has logrado regresar a casa...";
+        textoTitulo.alpha = 0;
+        textoMensaje.alpha = 1;
 
-        yield return StartCoroutine(FadeTexto(textoMensaje, 0, 1));
+        // Mostrar mensajes
+        foreach (string mensaje in mensajesFinales)
+        {
+            textoMensaje.text = mensaje;
 
-        yield return new WaitForSeconds(2f);
+            // Fade In
+            yield return StartCoroutine(Fade(1, 0));
 
-        yield return StartCoroutine(FadeTexto(textoMensaje, 1, 0));
+            // Esperar
+            yield return new WaitForSeconds(tiempoEntreMensajes);
 
+            // Fade Out
+            yield return StartCoroutine(Fade(0, 1));
+        }
+
+        // Limpiar texto de mensajes
         textoMensaje.text = "";
 
-        // Mostrar titulo
-        textoTitulo.alpha = 0;
+        // Mostrar titulo final
         textoTitulo.text = nombreJuego;
+
+        // Fade In titulo
+        yield return StartCoroutine(Fade(1, 0));
 
         yield return StartCoroutine(FadeTexto(textoTitulo, 0, 1));
 

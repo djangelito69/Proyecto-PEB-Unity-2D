@@ -35,8 +35,19 @@ public class UICombate : MonoBehaviour
     [Header("Imagen enemigo")]
     public Image imagenEnemigo;
 
+    [Header("Fondo combate")]
+    public Image fondoCombate;
+
+    public Sprite fondoBolsaBlanca;
+    public Sprite fondoBolsaNegra;
+    public Sprite fondoBoteBasura;
+    public Sprite fondoCajaCarton;
+    public Sprite fondoBoss;
+
     [Header("Paneles de Daño")]
     public Image panelHUD;
+
+
 
     private List<string> historialLog = new List<string>();
     private const int MAX_LINEAS = 20;
@@ -49,6 +60,8 @@ public class UICombate : MonoBehaviour
         botonAtaqueBasico.onClick.AddListener(OnBasico);
         botonAtaqueEspecial.onClick.AddListener(OnEspecial);
         botonHuir.onClick.AddListener(OnHuir);
+
+        CambiarFondoCombate();
 
         if (gestordecombate == null)
         {
@@ -359,6 +372,38 @@ public class UICombate : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             panelAUsar.color = colorOriginalPanel;
+        }
+    }
+
+    private void CambiarFondoCombate()
+    {
+        if (GestorEnemigos.instancia == null)
+            return;
+
+        DatosEnemigos.TipoEnemigo tipo =
+            GestorEnemigos.instancia.ObtenerTipoEnemigo();
+
+        switch (tipo)
+        {
+            case DatosEnemigos.TipoEnemigo.BolsaBasuraBlanca:
+                fondoCombate.sprite = fondoBolsaBlanca;
+                break;
+
+            case DatosEnemigos.TipoEnemigo.BolsaBasuraNegra:
+                fondoCombate.sprite = fondoBolsaNegra;
+                break;
+
+            case DatosEnemigos.TipoEnemigo.BoteBasura:
+                fondoCombate.sprite = fondoBoteBasura;
+                break;
+
+            case DatosEnemigos.TipoEnemigo.CajaCarton:
+                fondoCombate.sprite = fondoCajaCarton;
+                break;
+
+            case DatosEnemigos.TipoEnemigo.LaCosa:
+                fondoCombate.sprite = fondoBoss;
+                break;
         }
     }
 }

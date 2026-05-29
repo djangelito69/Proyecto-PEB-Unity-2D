@@ -156,9 +156,9 @@ MonoBehaviour:
     descripcion: hola
     icono: {fileID: -7559158464853921083, guid: d6ca6c61a28e3c24591f74263360aeab, type: 3}
     cantidad: 1
-    curacionVida: 3
-    recuperacionPA: 1
+    curacionVida: 12
+    recuperacionPA: 5
     puedeUsarseEnCombate: 1
     puedeUsarseFueraDeCombate: 1
   cantidad: 1
-  sonidoRecoger: {fileID: 8300000, guid: ecc64eb3fcfe72e4b97998205c5094e2, type: 3}
+  sonidoRecoger: {fileID: 8300000, guid: cb0a5e15b5a251948b51a7de78ff90b8, type: 3}

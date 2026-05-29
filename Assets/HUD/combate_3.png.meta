@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 94cf7158acd3b4f4aa46ab0c7123f330
+guid: dc73e7386839d304d87ee50a658b209f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1183196864559163103
-    second: Silph_S.A._exterior_0
+      213: -4994088888949908177
+    second: combate_3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Silph_S.A._exterior_0
+      name: combate_3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 144
-        height: 239
+        width: 960
+        height: 540
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd6a76b874f8b6010800000000000000
-      internalID: 1183196864559163103
+      spriteID: f2d5a658d9e61bab0800000000000000
+      internalID: -4994088888949908177
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Silph_S.A._exterior_0: 1183196864559163103
+      combate_3_0: -4994088888949908177
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

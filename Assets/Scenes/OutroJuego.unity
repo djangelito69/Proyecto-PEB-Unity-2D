@@ -636,7 +636,12 @@ MonoBehaviour:
   panelBotones: {fileID: 377706544}
   fadePanel: {fileID: 985297773}
   nombreJuego: NAIMA
+  mensajesFinales:
+  - "\"\xA1Naima! \xBFEres t\xFA?\""
+  - "\"\xA1Llegaste!\""
+  - Por fin has llegado a casa...
   duracionFade: 1
+  tiempoEntreMensajes: 4
 --- !u!4 &933298177
 Transform:
   m_ObjectHideFlags: 0

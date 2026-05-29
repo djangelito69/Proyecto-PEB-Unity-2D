@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Personaje\PlayerVisual.cs" />
     <Compile Include="Assets\Scripts\Personaje\UISelectorPersonaje.cs" />
     <Compile Include="Assets\Scripts\Combate\Combate.cs" />
+    <Compile Include="Assets\Scripts\Personaje\UIRetratoPersonaje.cs" />
     <Compile Include="Assets\Scripts\Experiencia\GestorExperiencia.cs" />
     <Compile Include="Assets\Scripts\Sistema\CinematicaIntro.cs" />
     <Compile Include="Assets\Scripts\Musica\MusicManager.cs" />

@@ -26,21 +26,25 @@ public class CinematicaIntro : MonoBehaviour
 
     IEnumerator SecuenciaIntro()
     {
-        // Fade In
-        yield return StartCoroutine(Fade(1, 0));
+        // Empieza completamente negro
+        fadePanel.color = new Color(0, 0, 0, 1);
 
-        // Mostrar mensajes
         foreach (string mensaje in mensajes)
         {
+            // Cambiar texto
             textoIntro.text = mensaje;
 
+            // Fade In (de negro a visible)
+            yield return StartCoroutine(Fade(1, 0));
+
+            // Esperar mientras se muestra el mensaje
             yield return new WaitForSeconds(tiempoEntreMensajes);
+
+            // Fade Out (de visible a negro)
+            yield return StartCoroutine(Fade(0, 1));
         }
 
-        // Fade Out
-        yield return StartCoroutine(Fade(0, 1));
-
-        // Cargar mapa
+        // Cargar siguiente escena
         SceneManager.LoadScene(escenaMapa);
     }
 

@@ -1,3 +1,4 @@
+﻿// ControladorMusicaEscena.cs
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,10 +6,10 @@ public class ControladorMusicaEscena : MonoBehaviour
 {
     [SerializeField] private AudioClip musicaEscena;
 
-    private void OnEnable()  // <-- cambia Start por OnEnable
+    private void OnEnable()
     {
         ReproducirMiMusica();
-        SceneManager.sceneLoaded += OnSceneLoaded; // por si acaso
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
@@ -18,20 +19,24 @@ public class ControladorMusicaEscena : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Cuando se descarga combate y el mapa queda activo
         if (scene.name != gameObject.scene.name) return;
         ReproducirMiMusica();
     }
 
     public void ReproducirMiMusica()
     {
-        Debug.Log($"[MUSICA] ReproducirMiMusica llamado en escena: {gameObject.scene.name} | clip: {(musicaEscena != null ? musicaEscena.name : "NULL")}");
-
         if (MusicManager.instancia == null) return;
 
         if (musicaEscena == null)
+        {
             MusicManager.instancia.DetenerMusica();
-        else
-            MusicManager.instancia.ReproducirMusica(musicaEscena);
+            return;
+        }
+
+        // ✅ Verificar AQUÍ antes de llamar al manager
+        // Si ya está sonando el mismo clip, no hacer nada
+        if (MusicManager.instancia.EstaReproduciendo(musicaEscena)) return;
+
+        MusicManager.instancia.ReproducirMusica(musicaEscena);
     }
 }

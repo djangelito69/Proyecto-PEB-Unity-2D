@@ -284,7 +284,7 @@ PrefabInstance:
     - target: {fileID: 2106425096673367388, guid: 17f933c16fc68c241ab34b63e4c5a32c, type: 3}
       propertyPath: musicaEscena
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: a95aca828c65fa94494c63bce93cfe9c, type: 3}
     - target: {fileID: 7115322104569706644, guid: 17f933c16fc68c241ab34b63e4c5a32c, type: 3}
       propertyPath: m_Name
       value: ControladorMusica
@@ -367,8 +367,11 @@ MonoBehaviour:
   fadePanel: {fileID: 985297773}
   escenaMapa: Ciudad_S1
   mensajes:
-  - Te has perdido en un lugar desconocido...
+  - "\"\xA1Naima!...\xBFD\xF3nde te habr\xE1s ido?\""
+  - Estas perdido.
   - Debes encontrar el camino de regreso a casa
+  - Hay muchos enemigos en el camino
+  - "Una bestia ha salido de las alcantarillas y llen\xF3 la ciudad de sus monstruos..."
   duracionFade: 1
   tiempoEntreMensajes: 4
 --- !u!4 &1309959341
